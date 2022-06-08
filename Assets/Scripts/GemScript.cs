@@ -10,17 +10,16 @@ public class GemScript : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Vector3 _finalPosition;
     private bool _showing;
-    private int _nextTouchInx = 0;
     private bool[] _touching = { false, false };
 
-    void Start()
+    void Awake()
     {
         _nextIndex = 0;
         _showing = false;
         _finalPosition = transform.position;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
-        transform.position = transform.position + Vector3.up * 2; //tp nie działa
+        transform.position += Vector3.up * 2; //tp nie działa
     }
 
     void Update()
