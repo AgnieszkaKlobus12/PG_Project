@@ -62,6 +62,24 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OrcJump"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab78ce51-5efa-487d-a615-10013133123d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HumanJump"",
+                    ""type"": ""Button"",
+                    ""id"": ""20800420-88c7-4507-978c-682669c369f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -86,28 +104,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""OrcMove"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""e2062cb9-1b15-46a2-838c-2f8d72a0bdd9"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""OrcMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""320bffee-a40b-4347-ac70-c210eb8bc73a"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""OrcMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -176,28 +172,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""24bd3cdb-6fbd-48c0-b59e-df57abcc5d4c"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""HumanMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""f9d883e5-9093-4fbc-8dd7-d4ce1f369eed"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""HumanMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""left"",
                     ""id"": ""9f73a9d1-111a-400d-bc03-3e8e5269e161"",
                     ""path"": ""<Keyboard>/leftArrow"",
@@ -238,6 +212,50 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""HumanFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f386771-579e-4016-9b91-c951f1293444"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""OrcJump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be911734-2aff-4049-b329-16a8f5ea8e05"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""OrcJump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d67377e-9a64-495c-aa3e-042a049c7166"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""HumanJump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9842d93-d9e3-47fb-a5d3-0c54af93badd"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""HumanJump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -780,6 +798,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""436263ae-3a3c-49ba-9a4e-18db358a19cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -793,28 +820,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""848cf729-c07c-48f6-9871-90d4b88842b6"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""fc139baa-b74f-46c3-aeae-86302e635ed0"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -831,28 +836,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""name"": ""right"",
                     ""id"": ""1af3ab4d-fde5-40ac-84af-ada9bfc212bf"",
                     ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""54122a71-8a63-435b-b58e-4b54c233bd0f"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""9b48f0e8-cf7e-430f-82f4-cf368b9a965e"",
-                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -912,6 +895,39 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edc4ef9b-3528-4e5b-b0c8-9a61cd93424a"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbca8fe3-38df-4209-ba9f-fd4c36a764e7"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dea18094-8246-4068-b928-a807d93ba308"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -987,6 +1003,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Multiplayer_OrcFire = m_Multiplayer.FindAction("OrcFire", throwIfNotFound: true);
         m_Multiplayer_HumanMove = m_Multiplayer.FindAction("HumanMove", throwIfNotFound: true);
         m_Multiplayer_HumanFire = m_Multiplayer.FindAction("HumanFire", throwIfNotFound: true);
+        m_Multiplayer_OrcJump = m_Multiplayer.FindAction("OrcJump", throwIfNotFound: true);
+        m_Multiplayer_HumanJump = m_Multiplayer.FindAction("HumanJump", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1003,6 +1021,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Singleplayer = asset.FindActionMap("Singleplayer", throwIfNotFound: true);
         m_Singleplayer_Move = m_Singleplayer.FindAction("Move", throwIfNotFound: true);
         m_Singleplayer_Fire = m_Singleplayer.FindAction("Fire", throwIfNotFound: true);
+        m_Singleplayer_Jump = m_Singleplayer.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1066,6 +1085,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Multiplayer_OrcFire;
     private readonly InputAction m_Multiplayer_HumanMove;
     private readonly InputAction m_Multiplayer_HumanFire;
+    private readonly InputAction m_Multiplayer_OrcJump;
+    private readonly InputAction m_Multiplayer_HumanJump;
     public struct MultiplayerActions
     {
         private @PlayerActions m_Wrapper;
@@ -1074,6 +1095,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @OrcFire => m_Wrapper.m_Multiplayer_OrcFire;
         public InputAction @HumanMove => m_Wrapper.m_Multiplayer_HumanMove;
         public InputAction @HumanFire => m_Wrapper.m_Multiplayer_HumanFire;
+        public InputAction @OrcJump => m_Wrapper.m_Multiplayer_OrcJump;
+        public InputAction @HumanJump => m_Wrapper.m_Multiplayer_HumanJump;
         public InputActionMap Get() { return m_Wrapper.m_Multiplayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1095,6 +1118,12 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @HumanFire.started -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanFire;
                 @HumanFire.performed -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanFire;
                 @HumanFire.canceled -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanFire;
+                @OrcJump.started -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnOrcJump;
+                @OrcJump.performed -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnOrcJump;
+                @OrcJump.canceled -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnOrcJump;
+                @HumanJump.started -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanJump;
+                @HumanJump.performed -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanJump;
+                @HumanJump.canceled -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanJump;
             }
             m_Wrapper.m_MultiplayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1111,6 +1140,12 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @HumanFire.started += instance.OnHumanFire;
                 @HumanFire.performed += instance.OnHumanFire;
                 @HumanFire.canceled += instance.OnHumanFire;
+                @OrcJump.started += instance.OnOrcJump;
+                @OrcJump.performed += instance.OnOrcJump;
+                @OrcJump.canceled += instance.OnOrcJump;
+                @HumanJump.started += instance.OnHumanJump;
+                @HumanJump.performed += instance.OnHumanJump;
+                @HumanJump.canceled += instance.OnHumanJump;
             }
         }
     }
@@ -1226,12 +1261,14 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private ISingleplayerActions m_SingleplayerActionsCallbackInterface;
     private readonly InputAction m_Singleplayer_Move;
     private readonly InputAction m_Singleplayer_Fire;
+    private readonly InputAction m_Singleplayer_Jump;
     public struct SingleplayerActions
     {
         private @PlayerActions m_Wrapper;
         public SingleplayerActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Singleplayer_Move;
         public InputAction @Fire => m_Wrapper.m_Singleplayer_Fire;
+        public InputAction @Jump => m_Wrapper.m_Singleplayer_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Singleplayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1247,6 +1284,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Fire.started -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnFire;
+                @Jump.started -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_SingleplayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1257,6 +1297,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -1312,6 +1355,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnOrcFire(InputAction.CallbackContext context);
         void OnHumanMove(InputAction.CallbackContext context);
         void OnHumanFire(InputAction.CallbackContext context);
+        void OnOrcJump(InputAction.CallbackContext context);
+        void OnHumanJump(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1330,5 +1375,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
