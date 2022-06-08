@@ -3,12 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Human
+  - Platform
+  - Killzone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
@@ -40,4 +43,28 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2390915887
+    locked: 0
+  - name: Decoration
+    uniqueID: 3619954883
+    locked: 0
+  - name: Enemies
+    uniqueID: 2398767413
+    locked: 0
+  - name: Orc
+    uniqueID: 435267847
+    locked: 0
+  - name: Human
+    uniqueID: 3973044085
+    locked: 0
+  - name: Characters
+    uniqueID: 2072251011
+    locked: 0
+  - name: Platforms
+    uniqueID: 2837175653
+    locked: 0
+  - name: Interactive
+    uniqueID: 2146658631
     locked: 0
