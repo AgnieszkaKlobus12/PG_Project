@@ -112,7 +112,7 @@ public class SetAnimatorParameter : MonoBehaviour
         }
         else
         {
-            setAnimation("ChargedAttack");
+            setAnimation("Idle");
         }
     }
 
@@ -132,7 +132,7 @@ public class SetAnimatorParameter : MonoBehaviour
         }
         else
         {
-            setAnimation("ChargedAttack");
+            setAnimation("Idle");
         }
     }
 
@@ -279,7 +279,6 @@ public class SetAnimatorParameter : MonoBehaviour
 
     void setAnimation(string name)
     {
-        Debug.Log(animator.GetInteger("Anim"));
         switch (name)
         {
             case "Attack":
