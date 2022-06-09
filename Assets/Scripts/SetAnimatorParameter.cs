@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -116,9 +113,7 @@ public class SetAnimatorParameter : MonoBehaviour
             case "Level 2":
                 _jumpEnabled = true;
                 break;
-
         }
-        
     }
 
     void OnDisable()
@@ -259,7 +254,8 @@ public class SetAnimatorParameter : MonoBehaviour
 
     private void PerformJump()
     {
-        if ((!IsGrounded() && _jumps>1) || (!IsGrounded() && !_doubleJumpEnabled) || !_movementEnabled || !_jumpEnabled) return;
+        if ((!IsGrounded() && _jumps > 1) || (!IsGrounded() && !_doubleJumpEnabled) || !_movementEnabled ||
+            !_jumpEnabled) return;
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpPower);
         _jumping = true;
         setAnimation("Jump");
@@ -292,7 +288,7 @@ public class SetAnimatorParameter : MonoBehaviour
         setAnimation("ChargedAttack");
         StartCoroutine(EnableAttack());
     }
-    
+
     private void ChargedAttack(InputAction.CallbackContext context)
     {
         if (_chargedAttackEnabled && _attackEnabled)
@@ -388,5 +384,47 @@ public class SetAnimatorParameter : MonoBehaviour
 
                 break;
         }
+    }
+
+    public void UnlockAttack()
+    {
+        _attackEnabled = true;
+    }
+
+    public void UnlockJump()
+    {
+        _jumpEnabled = true;
+    }
+
+    public void UnlockDoubleJump()
+    {
+        _jumpEnabled = true;
+        _doubleJumpEnabled = true;
+    }
+
+    public void UnlockChargedAttack()
+    {
+        _chargedAttackEnabled = true;
+        _attackEnabled = true;
+    }
+
+    public bool IsJumpEnabled()
+    {
+        return _jumpEnabled;
+    }
+
+    public bool IsDoubleJumpEnabled()
+    {
+        return _doubleJumpEnabled;
+    }
+
+    public bool IsChargedAttackEnabled()
+    {
+        return _chargedAttackEnabled;
+    }
+
+    public bool IsAttackEnabled()
+    {
+        return _attackEnabled;
     }
 }
