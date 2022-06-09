@@ -4,10 +4,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class SetAnimatorParameter : MonoBehaviour
 {
-    private Animator animator;
+    private Animator _animator;
     public string player;
     private bool _movementEnabled;
     private PlayerActions _playerActions;
@@ -15,18 +16,20 @@ public class SetAnimatorParameter : MonoBehaviour
     private bool _jumping;
     private bool _jumpEnabled;
     private bool _doubleJumpEnabled;
+    private bool _chargedAttackEnabled;
     private int _jumps;
     private bool _attackEnabled;
     private Rigidbody2D _rigidbody;
     private CapsuleCollider2D _collider;
-    public float _initialGravityScale;
+    public float initialGravityScale;
     private Vector2 _boxCenter;
     private Vector2 _boxSize;
     private WaitForSeconds _wait;
     public float speed;
     public float jumpPower;
     public float jumpFallGravityMultiplier;
-    private Vector2 lastRespawn;
+    private Vector2 _lastRespawn;
+    public ParticleSystem chargedAttackSystem;
 
     [Header("Ground Check")] public float groundOverlapHeight;
     public LayerMask groundMask;
@@ -37,22 +40,22 @@ public class SetAnimatorParameter : MonoBehaviour
 
     private void Awake()
     {
-        _jumpEnabled = true; //w zależności od poziomu! - to do testów
-        _attackEnabled = true; //w zależności od poziomu! - to do testów
-        _doubleJumpEnabled = true; //w zależności od poziomu! - to do testów
         _jumps = 0;
         _playerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CapsuleCollider2D>();
         _wait = new WaitForSeconds(disableGCTime);
-        animator = GetComponentInChildren<Animator>();
-        animator.SetFloat("X", 0f);
+        _animator = GetComponentInChildren<Animator>();
+        _animator.SetFloat("X", 0f);
         _playerActions.Multiplayer.OrcJump.performed += Jump;
         _playerActions.Singleplayer.Jump.performed += Jump;
         _playerActions.Multiplayer.HumanJump.performed += Jump;
         _playerActions.Multiplayer.OrcFire.performed += Attack;
         _playerActions.Singleplayer.Fire.performed += Attack;
         _playerActions.Multiplayer.HumanFire.performed += Attack;
+        _playerActions.Multiplayer.HumanCharged.performed += ChargedAttack;
+        _playerActions.Multiplayer.OrcCharged.performed += ChargedAttack;
+        _playerActions.Singleplayer.Charged.performed += ChargedAttack;
         _health = PlayerPrefs.GetInt("health");
         if (!PlayerPrefs.HasKey("health"))
         {
@@ -67,7 +70,7 @@ public class SetAnimatorParameter : MonoBehaviour
 
     private void Start()
     {
-        lastRespawn = gameObject.transform.position;
+        _lastRespawn = gameObject.transform.position;
         _movementEnabled = true;
         setAnimation("Idle");
     }
@@ -88,7 +91,34 @@ public class SetAnimatorParameter : MonoBehaviour
 
     void OnEnable()
     {
-        _playerActions.Multiplayer.Enable();
+        _chargedAttackEnabled = false;
+        _jumpEnabled = false;
+        _attackEnabled = false;
+        _doubleJumpEnabled = false;
+        _playerActions.Multiplayer.Enable(); //do menu
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Level 5":
+                _jumpEnabled = true;
+                _attackEnabled = true;
+                _doubleJumpEnabled = true;
+                _chargedAttackEnabled = true;
+                break;
+            case "Level 4":
+                _jumpEnabled = true;
+                _attackEnabled = true;
+                _doubleJumpEnabled = true;
+                break;
+            case "Level 3":
+                _jumpEnabled = true;
+                _attackEnabled = true;
+                break;
+            case "Level 2":
+                _jumpEnabled = true;
+                break;
+
+        }
+        
     }
 
     void OnDisable()
@@ -145,11 +175,11 @@ public class SetAnimatorParameter : MonoBehaviour
         }
         else if (_jumping && _rigidbody.velocity.y < 0f)
         {
-            _rigidbody.gravityScale = _initialGravityScale * jumpFallGravityMultiplier;
+            _rigidbody.gravityScale = initialGravityScale * jumpFallGravityMultiplier;
         }
         else
         {
-            _rigidbody.gravityScale = _initialGravityScale;
+            _rigidbody.gravityScale = initialGravityScale;
         }
     }
 
@@ -179,7 +209,7 @@ public class SetAnimatorParameter : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Respawn"))
         {
-            lastRespawn = other.transform.position;
+            _lastRespawn = other.transform.position;
         }
     }
 
@@ -200,7 +230,7 @@ public class SetAnimatorParameter : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         _movementEnabled = true;
-        _rigidbody.position = lastRespawn;
+        _rigidbody.position = _lastRespawn;
         _health -= 1;
         lives[_health].GetComponent<SpriteRenderer>().sprite = null;
         setAnimation("Idle");
@@ -254,6 +284,32 @@ public class SetAnimatorParameter : MonoBehaviour
         }
     }
 
+    private void PerformChargedAttack()
+    {
+        _movementEnabled = false;
+        _attackEnabled = false;
+        chargedAttackSystem.Play();
+        setAnimation("ChargedAttack");
+        StartCoroutine(EnableAttack());
+    }
+    
+    private void ChargedAttack(InputAction.CallbackContext context)
+    {
+        if (_chargedAttackEnabled && _attackEnabled)
+        {
+            if ((_playerActions.Multiplayer.OrcCharged.triggered || _playerActions.Singleplayer.Charged.triggered) &&
+                player == "Orc")
+            {
+                PerformChargedAttack();
+            }
+            else if (player == "Human" && _playerActions.Multiplayer.enabled &&
+                     _playerActions.Multiplayer.HumanCharged.triggered)
+            {
+                PerformChargedAttack();
+            }
+        }
+    }
+
     private void PerformAttack()
     {
         _movementEnabled = false;
@@ -264,7 +320,7 @@ public class SetAnimatorParameter : MonoBehaviour
 
     private IEnumerator EnableAttack()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.4f);
         _attackEnabled = true;
         _movementEnabled = true;
         setAnimation("Idle");
@@ -282,51 +338,51 @@ public class SetAnimatorParameter : MonoBehaviour
         switch (name)
         {
             case "Attack":
-                if (animator.GetInteger("Anim") != 0)
+                if (_animator.GetInteger("Anim") != 0)
                 {
-                    animator.SetInteger("Anim", 0);
+                    _animator.SetInteger("Anim", 0);
                 }
 
                 break;
             case "ChargedAttack":
-                if (animator.GetInteger("Anim") != 1)
+                if (_animator.GetInteger("Anim") != 1)
                 {
-                    animator.SetInteger("Anim", 1);
+                    _animator.SetInteger("Anim", 1);
                 }
 
                 break;
             case "Dmg":
-                if (animator.GetInteger("Anim") != 2)
+                if (_animator.GetInteger("Anim") != 2)
                 {
-                    animator.SetInteger("Anim", 2);
+                    _animator.SetInteger("Anim", 2);
                 }
 
                 break;
             case "Walk":
-                if (animator.GetInteger("Anim") != 3)
+                if (_animator.GetInteger("Anim") != 3)
                 {
-                    animator.SetInteger("Anim", 3);
+                    _animator.SetInteger("Anim", 3);
                 }
 
                 break;
             case "Die":
-                if (animator.GetInteger("Anim") != 4)
+                if (_animator.GetInteger("Anim") != 4)
                 {
-                    animator.SetInteger("Anim", 4);
+                    _animator.SetInteger("Anim", 4);
                 }
 
                 break;
             case "Jump":
-                if (animator.GetInteger("Anim") != 5)
+                if (_animator.GetInteger("Anim") != 5)
                 {
-                    animator.SetInteger("Anim", 5);
+                    _animator.SetInteger("Anim", 5);
                 }
 
                 break;
             default: //Idle
-                if (animator.GetInteger("Anim") != 6)
+                if (_animator.GetInteger("Anim") != 6)
                 {
-                    animator.SetInteger("Anim", 6);
+                    _animator.SetInteger("Anim", 6);
                 }
 
                 break;
