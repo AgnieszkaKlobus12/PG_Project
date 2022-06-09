@@ -535,9 +535,9 @@ TextureImporter:
       name: Cave_Biome1Decs_15
       rect:
         serializedVersion: 2
-        x: 143
-        y: 112
-        width: 17
+        x: 114
+        y: 96
+        width: 14
         height: 14
       alignment: 1
       pivot: {x: 0, y: 1}
@@ -913,10 +913,10 @@ TextureImporter:
       name: Cave_Biome1Decs_33
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 19
+        x: 146
+        y: 96
+        width: 13
+        height: 14
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
