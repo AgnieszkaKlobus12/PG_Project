@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GemScript : MonoBehaviour
 {
@@ -10,7 +10,6 @@ public class GemScript : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Vector3 _finalPosition;
     private bool _showing;
-    private bool[] _touching = { false, false };
 
     void Awake()
     {
@@ -19,7 +18,7 @@ public class GemScript : MonoBehaviour
         _finalPosition = transform.position;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
-        transform.position += Vector3.up * 2; //tp nie działa
+        transform.position += Vector3.up * 2;
     }
 
     void Update()
@@ -30,27 +29,24 @@ public class GemScript : MonoBehaviour
             _showing = true;
             StartCoroutine(Show());
         }
-
-        if (_touching[0] && _touching[1])
-        {
-            //load next level
-            Debug.Log("next");
-        }
     }
 
-    IEnumerator Show()
+    public IEnumerator Show()
     {
         while (transform.position != _finalPosition)
         {
             transform.position -= Vector3.up * 0.1f;
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(Show());
         }
-        yield return new WaitForSeconds(0.5f);
-        StartCoroutine(Show());
     }
 
     public void Completed()
     {
-        correct[_nextIndex++] = true;
+        if (_nextIndex < correct.Length)
+        {
+            correct[_nextIndex++] = true;
+        }
     }
 
     public void Failed()
@@ -60,40 +56,27 @@ public class GemScript : MonoBehaviour
             correct[--_nextIndex] = false;
         }
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_showing && other.CompareTag("Player"))
+        if (!_showing || (!other.CompareTag("Player") && !other.CompareTag("Human"))) return;
+        switch (SceneManager.GetActiveScene().name)
         {
-            _touching[0] = true;
-        }
-        if (_showing && other.CompareTag("Human"))
-        {
-            _touching[01] = true;
-        }
-    }
-    
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (_showing && other.CompareTag("Player"))
-        {
-            _touching[0] = true;
-        }
-        if (_showing && other.CompareTag("Human"))
-        {
-            _touching[01] = true;
-        }
-    }
-    
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (_showing && other.CompareTag("Player"))
-        {
-            _touching[0] = false;
-        }
-        if (_showing && other.CompareTag("Human"))
-        {
-            _touching[01] = false;
+            case "Level 5":
+                // Final
+                break;
+            case "Level 4":
+                other.GetComponent<SetAnimatorParameter>().UnlockChargedAttack();
+                break;
+            case "Level 3":
+                other.GetComponent<SetAnimatorParameter>().UnlockDoubleJump();
+                break;
+            case "Level 2":
+                other.GetComponent<SetAnimatorParameter>().UnlockAttack();
+                break;
+            case "Level 1":
+                other.GetComponent<SetAnimatorParameter>().UnlockJump();
+                break;
         }
     }
 }

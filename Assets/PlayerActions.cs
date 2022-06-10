@@ -80,6 +80,24 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OrcCharged"",
+                    ""type"": ""Button"",
+                    ""id"": ""370d61f3-dd0c-4332-b702-978ec4cdab3a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HumanCharged"",
+                    ""type"": ""Button"",
+                    ""id"": ""18d5f174-e765-4935-a9fe-97444d2f4198"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,6 +274,50 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""HumanJump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""deae4fb8-d012-42ff-abb5-43643d85ef1a"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""OrcCharged"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""013cb932-eb86-4ba1-9b7c-33dd0cec7325"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""OrcCharged"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dae8752-5de6-4ccc-82d7-b189e5d75d16"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""HumanCharged"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61740375-2499-4977-84e7-42ea67ebb75a"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""HumanCharged"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -807,6 +869,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Charged"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a14c179-8607-45f3-ad3e-6812e7cbcc4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -930,6 +1001,28 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f5be867-30ef-4f21-9f06-a84a8a1656a8"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Charged"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72cb25b9-9116-4f48-9fda-a08342646af4"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Charged"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1005,6 +1098,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Multiplayer_HumanFire = m_Multiplayer.FindAction("HumanFire", throwIfNotFound: true);
         m_Multiplayer_OrcJump = m_Multiplayer.FindAction("OrcJump", throwIfNotFound: true);
         m_Multiplayer_HumanJump = m_Multiplayer.FindAction("HumanJump", throwIfNotFound: true);
+        m_Multiplayer_OrcCharged = m_Multiplayer.FindAction("OrcCharged", throwIfNotFound: true);
+        m_Multiplayer_HumanCharged = m_Multiplayer.FindAction("HumanCharged", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1022,6 +1117,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Singleplayer_Move = m_Singleplayer.FindAction("Move", throwIfNotFound: true);
         m_Singleplayer_Fire = m_Singleplayer.FindAction("Fire", throwIfNotFound: true);
         m_Singleplayer_Jump = m_Singleplayer.FindAction("Jump", throwIfNotFound: true);
+        m_Singleplayer_Charged = m_Singleplayer.FindAction("Charged", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1087,6 +1183,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Multiplayer_HumanFire;
     private readonly InputAction m_Multiplayer_OrcJump;
     private readonly InputAction m_Multiplayer_HumanJump;
+    private readonly InputAction m_Multiplayer_OrcCharged;
+    private readonly InputAction m_Multiplayer_HumanCharged;
     public struct MultiplayerActions
     {
         private @PlayerActions m_Wrapper;
@@ -1097,6 +1195,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @HumanFire => m_Wrapper.m_Multiplayer_HumanFire;
         public InputAction @OrcJump => m_Wrapper.m_Multiplayer_OrcJump;
         public InputAction @HumanJump => m_Wrapper.m_Multiplayer_HumanJump;
+        public InputAction @OrcCharged => m_Wrapper.m_Multiplayer_OrcCharged;
+        public InputAction @HumanCharged => m_Wrapper.m_Multiplayer_HumanCharged;
         public InputActionMap Get() { return m_Wrapper.m_Multiplayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1124,6 +1224,12 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @HumanJump.started -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanJump;
                 @HumanJump.performed -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanJump;
                 @HumanJump.canceled -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanJump;
+                @OrcCharged.started -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnOrcCharged;
+                @OrcCharged.performed -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnOrcCharged;
+                @OrcCharged.canceled -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnOrcCharged;
+                @HumanCharged.started -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanCharged;
+                @HumanCharged.performed -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanCharged;
+                @HumanCharged.canceled -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanCharged;
             }
             m_Wrapper.m_MultiplayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1146,6 +1252,12 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @HumanJump.started += instance.OnHumanJump;
                 @HumanJump.performed += instance.OnHumanJump;
                 @HumanJump.canceled += instance.OnHumanJump;
+                @OrcCharged.started += instance.OnOrcCharged;
+                @OrcCharged.performed += instance.OnOrcCharged;
+                @OrcCharged.canceled += instance.OnOrcCharged;
+                @HumanCharged.started += instance.OnHumanCharged;
+                @HumanCharged.performed += instance.OnHumanCharged;
+                @HumanCharged.canceled += instance.OnHumanCharged;
             }
         }
     }
@@ -1262,6 +1374,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Singleplayer_Move;
     private readonly InputAction m_Singleplayer_Fire;
     private readonly InputAction m_Singleplayer_Jump;
+    private readonly InputAction m_Singleplayer_Charged;
     public struct SingleplayerActions
     {
         private @PlayerActions m_Wrapper;
@@ -1269,6 +1382,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Singleplayer_Move;
         public InputAction @Fire => m_Wrapper.m_Singleplayer_Fire;
         public InputAction @Jump => m_Wrapper.m_Singleplayer_Jump;
+        public InputAction @Charged => m_Wrapper.m_Singleplayer_Charged;
         public InputActionMap Get() { return m_Wrapper.m_Singleplayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1287,6 +1401,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnJump;
+                @Charged.started -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnCharged;
+                @Charged.performed -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnCharged;
+                @Charged.canceled -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnCharged;
             }
             m_Wrapper.m_SingleplayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1300,6 +1417,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Charged.started += instance.OnCharged;
+                @Charged.performed += instance.OnCharged;
+                @Charged.canceled += instance.OnCharged;
             }
         }
     }
@@ -1357,6 +1477,8 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnHumanFire(InputAction.CallbackContext context);
         void OnOrcJump(InputAction.CallbackContext context);
         void OnHumanJump(InputAction.CallbackContext context);
+        void OnOrcCharged(InputAction.CallbackContext context);
+        void OnHumanCharged(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1376,5 +1498,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnCharged(InputAction.CallbackContext context);
     }
 }
