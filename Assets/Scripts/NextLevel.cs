@@ -9,18 +9,24 @@ public class NextLevel : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("Human"))
+        if (!other.CompareTag("Player") && !other.CompareTag("Human")) return;
+        switch (nextSceneName)
         {
-            switch (nextSceneName)
-            {
-                case "Level 2":
-                    if (orc.GetComponent<SetAnimatorParameter>().IsJumpEnabled() &&
-                        human.GetComponent<SetAnimatorParameter>().IsJumpEnabled())
-                    {
-                        SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
-                    }
-                    break;
-            }
+            case "Level 2":
+                if (orc.GetComponent<SetAnimatorParameter>().IsJumpEnabled() &&
+                    human.GetComponent<SetAnimatorParameter>().IsJumpEnabled())
+                {
+                    SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
+                }
+
+                break;
+            case "Level 3":
+                if (orc.GetComponent<SetAnimatorParameter>().IsAttackEnabled() &&
+                    human.GetComponent<SetAnimatorParameter>().IsAttackEnabled())
+                {
+                    SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
+                }
+                break;
         }
     }
 }

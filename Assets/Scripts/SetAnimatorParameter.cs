@@ -37,6 +37,7 @@ public class SetAnimatorParameter : MonoBehaviour
 
     private void Awake()
     {
+        //read data from file
         _jumps = 0;
         _playerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -112,6 +113,7 @@ public class SetAnimatorParameter : MonoBehaviour
                 break;
             case "Level 2":
                 _jumpEnabled = true;
+                jumpPower = 2.5f;
                 break;
         }
     }
@@ -178,7 +180,7 @@ public class SetAnimatorParameter : MonoBehaviour
         }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         var bounds = _collider.bounds;
         _boxCenter = new Vector2(bounds.center.x, bounds.center.y) +
@@ -206,6 +208,10 @@ public class SetAnimatorParameter : MonoBehaviour
         {
             _lastRespawn = other.transform.position;
         }
+        else if (other.gameObject.CompareTag("Killzone"))
+        {
+            Die();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D col)
@@ -213,7 +219,7 @@ public class SetAnimatorParameter : MonoBehaviour
         transform.parent = null;
     }
 
-    void Die()
+    public void Die()
     {
         setAnimation("Die");
         _movementEnabled = false;

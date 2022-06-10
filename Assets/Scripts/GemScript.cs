@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GemScript : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class GemScript : MonoBehaviour
         }
     }
 
-    IEnumerator Show()
+    public IEnumerator Show()
     {
         while (transform.position != _finalPosition)
         {
@@ -42,7 +43,10 @@ public class GemScript : MonoBehaviour
 
     public void Completed()
     {
-        correct[_nextIndex++] = true;
+        if (_nextIndex < correct.Length)
+        {
+            correct[_nextIndex++] = true;
+        }
     }
 
     public void Failed()
@@ -55,9 +59,24 @@ public class GemScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (_showing && (other.CompareTag("Player") || other.CompareTag("Human")))
+        if (!_showing || (!other.CompareTag("Player") && !other.CompareTag("Human"))) return;
+        switch (SceneManager.GetActiveScene().name)
         {
-            other.GetComponent<SetAnimatorParameter>().UnlockJump();
+            case "Level 5":
+                // Final
+                break;
+            case "Level 4":
+                other.GetComponent<SetAnimatorParameter>().UnlockChargedAttack();
+                break;
+            case "Level 3":
+                other.GetComponent<SetAnimatorParameter>().UnlockDoubleJump();
+                break;
+            case "Level 2":
+                other.GetComponent<SetAnimatorParameter>().UnlockAttack();
+                break;
+            case "Level 1":
+                other.GetComponent<SetAnimatorParameter>().UnlockJump();
+                break;
         }
     }
 }
