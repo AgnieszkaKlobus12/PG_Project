@@ -85791,7 +85791,7 @@ GameObject:
   - component: {fileID: 1401448625}
   - component: {fileID: 1401448624}
   m_Layer: 0
-  m_Name: Cave_Biome3Decs_29
+  m_Name: Cave_Biome3Decs_29 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85856,11 +85856,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401448623}
   m_LocalRotation: {x: -0, y: -0, z: 0.045293536, w: 0.9989738}
-  m_LocalPosition: {x: 39.709, y: -0.009, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalPosition: {x: 39.83785, y: 0.008370452, z: 11.929009}
+  m_LocalScale: {x: 0.19999999, y: 0.19999999, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 2073421136}
+  m_RootOrder: 176
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 5.192}
 --- !u!1 &1402918538
 GameObject:
@@ -122823,6 +122823,7 @@ Transform:
   - {fileID: 529243531}
   - {fileID: 1797145997}
   - {fileID: 1687345856}
+  - {fileID: 1401448625}
   m_Father: {fileID: 2011472132}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
