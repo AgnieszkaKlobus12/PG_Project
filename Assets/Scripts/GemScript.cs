@@ -93,7 +93,25 @@ public class GemScript : MonoBehaviour
         }
         if (_showing && other.CompareTag("Human"))
         {
+<<<<<<< Updated upstream
             _touching[01] = false;
+=======
+            case "Level 5":
+                // Final
+                break;
+            case "Level 4":
+                other.GetComponent<PlayerController>().UnlockChargedAttack();
+                break;
+            case "Level 3":
+                other.GetComponent<PlayerController>().UnlockDoubleJump();
+                break;
+            case "Level 2":
+                other.GetComponent<PlayerController>().UnlockAttack();
+                break;
+            case "Level 1":
+                other.GetComponent<PlayerController>().UnlockJump();
+                break;
+>>>>>>> Stashed changes
         }
     }
 }
