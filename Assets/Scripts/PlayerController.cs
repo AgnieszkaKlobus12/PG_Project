@@ -1,18 +1,12 @@
 using System;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-<<<<<<< Updated upstream:Assets/Scripts/SetAnimatorParameter.cs
-    private Animator animator;
-=======
-    private bool _inAttack;
     private Animator _animator;
->>>>>>> Stashed changes:Assets/Scripts/PlayerController.cs
     public string player;
     private bool _movementEnabled;
     private PlayerActions _playerActions;
@@ -20,18 +14,20 @@ public class PlayerController : MonoBehaviour
     private bool _jumping;
     private bool _jumpEnabled;
     private bool _doubleJumpEnabled;
+    private bool _chargedAttackEnabled;
     private int _jumps;
     private bool _attackEnabled;
     private Rigidbody2D _rigidbody;
     private CapsuleCollider2D _collider;
-    public float _initialGravityScale;
+    public float initialGravityScale;
     private Vector2 _boxCenter;
     private Vector2 _boxSize;
     private WaitForSeconds _wait;
     public float speed;
     public float jumpPower;
     public float jumpFallGravityMultiplier;
-    private Vector2 lastRespawn;
+    private Vector2 _lastRespawn;
+    public ParticleSystem chargedAttackSystem;
 
     [Header("Ground Check")] public float groundOverlapHeight;
     public LayerMask groundMask;
@@ -42,23 +38,23 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _jumpEnabled = true; //w zależności od poziomu! - to do testów
-        _attackEnabled = true; //w zależności od poziomu! - to do testów
-        _doubleJumpEnabled = true; //w zależności od poziomu! - to do testów
+        //read data from file
         _jumps = 0;
-        _inAttack = false;
         _playerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CapsuleCollider2D>();
         _wait = new WaitForSeconds(disableGCTime);
-        animator = GetComponentInChildren<Animator>();
-        animator.SetFloat("X", 0f);
+        _animator = GetComponentInChildren<Animator>();
+        _animator.SetFloat("X", 0f);
         _playerActions.Multiplayer.OrcJump.performed += Jump;
         _playerActions.Singleplayer.Jump.performed += Jump;
         _playerActions.Multiplayer.HumanJump.performed += Jump;
         _playerActions.Multiplayer.OrcFire.performed += Attack;
         _playerActions.Singleplayer.Fire.performed += Attack;
         _playerActions.Multiplayer.HumanFire.performed += Attack;
+        _playerActions.Multiplayer.HumanCharged.performed += ChargedAttack;
+        _playerActions.Multiplayer.OrcCharged.performed += ChargedAttack;
+        _playerActions.Singleplayer.Charged.performed += ChargedAttack;
         _health = PlayerPrefs.GetInt("health");
         if (!PlayerPrefs.HasKey("health"))
         {
@@ -73,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        lastRespawn = gameObject.transform.position;
+        _lastRespawn = gameObject.transform.position;
         _movementEnabled = true;
         setAnimation("Idle");
     }
@@ -82,6 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         HandleGravity();
         if (_movementEnabled)
+        {
             if (player == "Orc")
             {
                 OrcMove();
@@ -90,11 +87,37 @@ public class PlayerController : MonoBehaviour
             {
                 HumanMove();
             }
+        }
     }
 
     void OnEnable()
     {
-        _playerActions.Multiplayer.Enable();
+        _chargedAttackEnabled = false;
+        _jumpEnabled = false;
+        _attackEnabled = false;
+        _doubleJumpEnabled = false;
+        _playerActions.Multiplayer.Enable(); //do menu
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Level 5":
+                _jumpEnabled = true;
+                _attackEnabled = true;
+                _doubleJumpEnabled = true;
+                _chargedAttackEnabled = true;
+                break;
+            case "Level 4":
+                _jumpEnabled = true;
+                _attackEnabled = true;
+                _doubleJumpEnabled = true;
+                break;
+            case "Level 3":
+                _jumpEnabled = true;
+                _attackEnabled = true;
+                break;
+            case "Level 2":
+                _jumpEnabled = true;
+                break;
+        }
     }
 
     void OnDisable()
@@ -106,45 +129,39 @@ public class PlayerController : MonoBehaviour
     {
         var moveInput = _playerActions.Multiplayer.OrcMove.ReadValue<Vector2>();
         _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
-        if (!_inAttack)
+        if (moveInput.x > 0)
         {
-            if (moveInput.x > 0)
-            {
-                setAnimation("Walk");
-                GetComponent<SpriteRenderer>().flipX = false;
-            }
-            else if (moveInput.x < 0)
-            {
-                setAnimation("Walk");
-                GetComponent<SpriteRenderer>().flipX = true;
-            }
-            else
-            {
-                setAnimation("Idle");
-            }
+            setAnimation("Walk");
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else if (moveInput.x < 0)
+        {
+            setAnimation("Walk");
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            setAnimation("Idle");
         }
     }
 
     void HumanMove()
     {
-        if (!_inAttack)
+        var moveInput = _playerActions.Multiplayer.HumanMove.ReadValue<Vector2>();
+        _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
+        if (moveInput.x > 0)
         {
-            var moveInput = _playerActions.Multiplayer.HumanMove.ReadValue<Vector2>();
-            _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
-            if (moveInput.x > 0)
-            {
-                setAnimation("Walk");
-                GetComponent<SpriteRenderer>().flipX = false;
-            }
-            else if (moveInput.x < 0)
-            {
-                setAnimation("Walk");
-                GetComponent<SpriteRenderer>().flipX = true;
-            }
-            else
-            {
-                setAnimation("Idle");
-            }
+            setAnimation("Walk");
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else if (moveInput.x < 0)
+        {
+            setAnimation("Walk");
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            setAnimation("Idle");
         }
     }
 
@@ -157,15 +174,15 @@ public class PlayerController : MonoBehaviour
         }
         else if (_jumping && _rigidbody.velocity.y < 0f)
         {
-            _rigidbody.gravityScale = _initialGravityScale * jumpFallGravityMultiplier;
+            _rigidbody.gravityScale = initialGravityScale * jumpFallGravityMultiplier;
         }
         else
         {
-            _rigidbody.gravityScale = _initialGravityScale;
+            _rigidbody.gravityScale = initialGravityScale;
         }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         var bounds = _collider.bounds;
         _boxCenter = new Vector2(bounds.center.x, bounds.center.y) +
@@ -177,7 +194,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("MainCamera"))
         {
             transform.SetParent(collision.gameObject.transform, true);
         }
@@ -191,7 +208,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Respawn"))
         {
-            lastRespawn = other.transform.position;
+            _lastRespawn = other.transform.position;
+        }
+        else if (other.gameObject.CompareTag("Killzone"))
+        {
+            Die();
         }
     }
 
@@ -200,7 +221,7 @@ public class PlayerController : MonoBehaviour
         transform.parent = null;
     }
 
-    void Die()
+    public void Die()
     {
         setAnimation("Die");
         _movementEnabled = false;
@@ -212,7 +233,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         _movementEnabled = true;
-        _rigidbody.position = lastRespawn;
+        _rigidbody.position = _lastRespawn;
         _health -= 1;
         lives[_health].GetComponent<SpriteRenderer>().sprite = null;
         setAnimation("Idle");
@@ -241,7 +262,8 @@ public class PlayerController : MonoBehaviour
 
     private void PerformJump()
     {
-        if ((!IsGrounded() && _jumps>1) || (!IsGrounded() && !_doubleJumpEnabled) || !_movementEnabled || !_jumpEnabled) return;
+        if ((!IsGrounded() && _jumps > 1) || (!IsGrounded() && !_doubleJumpEnabled) || !_movementEnabled ||
+            !_jumpEnabled) return;
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpPower);
         _jumping = true;
         setAnimation("Jump");
@@ -266,11 +288,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream:Assets/Scripts/SetAnimatorParameter.cs
-=======
     private void PerformChargedAttack()
     {
-        _inAttack = true;
         _movementEnabled = false;
         _attackEnabled = false;
         chargedAttackSystem.Play();
@@ -295,10 +314,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
->>>>>>> Stashed changes:Assets/Scripts/PlayerController.cs
     private void PerformAttack()
     {
-        _inAttack = true;
+        _movementEnabled = false;
         _attackEnabled = false;
         setAnimation("Attack");
         StartCoroutine(EnableAttack());
@@ -306,13 +324,9 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator EnableAttack()
     {
-<<<<<<< Updated upstream:Assets/Scripts/SetAnimatorParameter.cs
-        yield return new WaitForSeconds(0.25f);
-=======
-        yield return new WaitForSeconds(1f);
->>>>>>> Stashed changes:Assets/Scripts/PlayerController.cs
+        yield return new WaitForSeconds(0.4f);
         _attackEnabled = true;
-        _inAttack = false;
+        _movementEnabled = true;
         setAnimation("Idle");
     }
 
@@ -328,54 +342,96 @@ public class PlayerController : MonoBehaviour
         switch (name)
         {
             case "Attack":
-                if (animator.GetInteger("Anim") != 0)
+                if (_animator.GetInteger("Anim") != 0)
                 {
-                    animator.SetInteger("Anim", 0);
+                    _animator.SetInteger("Anim", 0);
                 }
 
                 break;
             case "ChargedAttack":
-                if (animator.GetInteger("Anim") != 1)
+                if (_animator.GetInteger("Anim") != 1)
                 {
-                    animator.SetInteger("Anim", 1);
+                    _animator.SetInteger("Anim", 1);
                 }
 
                 break;
             case "Dmg":
-                if (animator.GetInteger("Anim") != 2)
+                if (_animator.GetInteger("Anim") != 2)
                 {
-                    animator.SetInteger("Anim", 2);
+                    _animator.SetInteger("Anim", 2);
                 }
 
                 break;
             case "Walk":
-                if (animator.GetInteger("Anim") != 3)
+                if (_animator.GetInteger("Anim") != 3)
                 {
-                    animator.SetInteger("Anim", 3);
+                    _animator.SetInteger("Anim", 3);
                 }
 
                 break;
             case "Die":
-                if (animator.GetInteger("Anim") != 4)
+                if (_animator.GetInteger("Anim") != 4)
                 {
-                    animator.SetInteger("Anim", 4);
+                    _animator.SetInteger("Anim", 4);
                 }
 
                 break;
             case "Jump":
-                if (animator.GetInteger("Anim") != 5)
+                if (_animator.GetInteger("Anim") != 5)
                 {
-                    animator.SetInteger("Anim", 5);
+                    _animator.SetInteger("Anim", 5);
                 }
 
                 break;
             default: //Idle
-                if (animator.GetInteger("Anim") != 6)
+                if (_animator.GetInteger("Anim") != 6)
                 {
-                    animator.SetInteger("Anim", 6);
+                    _animator.SetInteger("Anim", 6);
                 }
 
                 break;
         }
+    }
+
+    public void UnlockAttack()
+    {
+        _attackEnabled = true;
+    }
+
+    public void UnlockJump()
+    {
+        _jumpEnabled = true;
+    }
+
+    public void UnlockDoubleJump()
+    {
+        _jumpEnabled = true;
+        _doubleJumpEnabled = true;
+    }
+
+    public void UnlockChargedAttack()
+    {
+        _chargedAttackEnabled = true;
+        _attackEnabled = true;
+    }
+
+    public bool IsJumpEnabled()
+    {
+        return _jumpEnabled;
+    }
+
+    public bool IsDoubleJumpEnabled()
+    {
+        return _doubleJumpEnabled;
+    }
+
+    public bool IsChargedAttackEnabled()
+    {
+        return _chargedAttackEnabled;
+    }
+
+    public bool IsAttackEnabled()
+    {
+        return _attackEnabled;
     }
 }
