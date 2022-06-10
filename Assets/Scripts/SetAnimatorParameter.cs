@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -77,6 +78,7 @@ public class SetAnimatorParameter : MonoBehaviour
     {
         HandleGravity();
         if (_movementEnabled)
+        {
             if (player == "Orc")
             {
                 OrcMove();
@@ -85,6 +87,7 @@ public class SetAnimatorParameter : MonoBehaviour
             {
                 HumanMove();
             }
+        }
     }
 
     void OnEnable()
@@ -113,7 +116,6 @@ public class SetAnimatorParameter : MonoBehaviour
                 break;
             case "Level 2":
                 _jumpEnabled = true;
-                jumpPower = 2.5f;
                 break;
         }
     }
@@ -192,7 +194,7 @@ public class SetAnimatorParameter : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("MainCamera"))
         {
             transform.SetParent(collision.gameObject.transform, true);
         }

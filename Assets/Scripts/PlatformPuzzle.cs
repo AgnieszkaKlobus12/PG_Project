@@ -6,7 +6,6 @@ public class PlatformPuzzle : MonoBehaviour
     public float minY;
     public float maxY;
     public float change;
-    public GameObject secondPlatform;
     public GameObject gem;
     private bool _hasPlayer;
     private long _lastTime;

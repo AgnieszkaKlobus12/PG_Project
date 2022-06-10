@@ -18,7 +18,7 @@ public class GemScript : MonoBehaviour
         _finalPosition = transform.position;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
-        transform.position += Vector3.up * 2; //tp nie działa
+        transform.position += Vector3.up * 2;
     }
 
     void Update()
