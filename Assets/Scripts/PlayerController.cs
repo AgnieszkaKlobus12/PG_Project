@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool _chargedAttackEnabled;
     private int _jumps;
     private bool _attackEnabled;
+    private bool _dieEnabled;
     private Rigidbody2D _rigidbody;
     private CapsuleCollider2D _collider;
     public float initialGravityScale;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         //read data from file
         _jumps = 0;
+        _dieEnabled = true;
         _playerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CapsuleCollider2D>();
@@ -223,12 +225,16 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        _movementEnabled = false;
-        _attackEnabled = false;
-        _jumpEnabled = false;
-        setAnimation("Die");
-        _rigidbody.velocity = new Vector2(0, 0);
-        StartCoroutine(AfterDie());
+        if (_dieEnabled)
+        {
+            _dieEnabled = false;
+            _movementEnabled = false;
+            _attackEnabled = false;
+            _jumpEnabled = false;
+            setAnimation("Die");
+            _rigidbody.velocity = new Vector2(0, 0);
+            StartCoroutine(AfterDie());
+        }
     }
 
     IEnumerator AfterDie()
@@ -241,6 +247,7 @@ public class PlayerController : MonoBehaviour
         _health -= 1;
         lives[_health].GetComponent<SpriteRenderer>().sprite = null;
         setAnimation("Idle");
+        _dieEnabled = true;
         if (_health == 0)
         {
             // message.SetActive(true);

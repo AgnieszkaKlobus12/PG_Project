@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9147899134087102571}
   - component: {fileID: 9147899134087102564}
   - component: {fileID: 2882436349372360811}
+  - component: {fileID: 3949205043271930294}
   m_Layer: 0
   m_Name: Gem
   m_TagString: Untagged
@@ -113,3 +114,22 @@ CircleCollider2D:
   m_Offset: {x: -0.006341934, y: 0}
   serializedVersion: 2
   m_Radius: 0.03983307
+--- !u!95 &3949205043271930294
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9147899134087102569}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5d147bc723e2f40679fd21829960e69f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
