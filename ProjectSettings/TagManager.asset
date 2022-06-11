@@ -69,3 +69,6 @@ TagManager:
   - name: Interactive
     uniqueID: 2146658631
     locked: 0
+  - name: Menu
+    uniqueID: 1286081693
+    locked: 0
