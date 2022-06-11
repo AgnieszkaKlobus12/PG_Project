@@ -20,19 +20,19 @@ public class CameraControl : MonoBehaviour
             if (orc.transform.position.x < human.transform.position.x)
             {
                 orc.transform.position = new Vector3(
-                    orc.transform.position.x + (_camera.orthographicSize * _camera.aspect) / 200,
+                    orc.transform.position.x + (_camera.orthographicSize * _camera.aspect) / 300,
                     orc.transform.position.y);
                 human.transform.position = new Vector3(
-                    human.transform.position.x - (_camera.orthographicSize * _camera.aspect) / 200,
+                    human.transform.position.x - (_camera.orthographicSize * _camera.aspect) / 300,
                     human.transform.position.y);
             }
             else
             {
                 orc.transform.position = new Vector3(
-                    orc.transform.position.x - (_camera.orthographicSize * _camera.aspect) / 200,
+                    orc.transform.position.x - (_camera.orthographicSize * _camera.aspect) / 300,
                     orc.transform.position.y);
                 human.transform.position = new Vector3(
-                    human.transform.position.x + (_camera.orthographicSize * _camera.aspect) / 200,
+                    human.transform.position.x + (_camera.orthographicSize * _camera.aspect) / 300,
                     human.transform.position.y);
             }
         }

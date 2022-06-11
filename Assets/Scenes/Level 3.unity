@@ -104766,6 +104766,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3925715896599240618}
     m_Modifications:
+    - target: {fileID: 2115699687826530355, guid: 754d043c264235143b4656ab80c375ff, type: 3}
+      propertyPath: orc
+      value: 
+      objectReference: {fileID: 530842208}
     - target: {fileID: 7447018353077850650, guid: 754d043c264235143b4656ab80c375ff, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -104818,11 +104822,20 @@ PrefabInstance:
       propertyPath: near clip plane
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7447018353077850853, guid: 754d043c264235143b4656ab80c375ff, type: 3}
+      propertyPath: orthographic size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447018353077850853, guid: 754d043c264235143b4656ab80c375ff, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7447018353077850854, guid: 754d043c264235143b4656ab80c375ff, type: 3}
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2115699687826530355, guid: 754d043c264235143b4656ab80c375ff, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 754d043c264235143b4656ab80c375ff, type: 3}
 --- !u!1 &1701846858
 GameObject:

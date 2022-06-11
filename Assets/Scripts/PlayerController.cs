@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -444,5 +443,11 @@ public class PlayerController : MonoBehaviour
     public bool IsAttackEnabled()
     {
         return _attackEnabled;
+    }
+
+    public bool MovementEnabled
+    {
+        get => _movementEnabled;
+        set => _movementEnabled = value;
     }
 }
