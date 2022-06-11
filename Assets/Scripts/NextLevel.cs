@@ -18,7 +18,6 @@ public class NextLevel : MonoBehaviour
                 {
                     SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
                 }
-
                 break;
             case "Level 3":
                 if (orc.GetComponent<PlayerController>().IsAttackEnabled() &&
@@ -30,6 +29,13 @@ public class NextLevel : MonoBehaviour
             case "Level 4":
                 if (orc.GetComponent<PlayerController>().IsDoubleJumpEnabled() &&
                     human.GetComponent<PlayerController>().IsDoubleJumpEnabled())
+                {
+                    SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
+                }
+                break;
+            case "Level 5":
+                if (orc.GetComponent<PlayerController>().IsChargedAttackEnabled() &&
+                    human.GetComponent<PlayerController>().IsChargedAttackEnabled())
                 {
                     SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
                 }

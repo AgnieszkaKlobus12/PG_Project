@@ -194,7 +194,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("MainCamera"))
+        if (collision.gameObject.CompareTag("Platform"))
         {
             transform.SetParent(collision.gameObject.transform, true);
         }
@@ -223,8 +223,10 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        setAnimation("Die");
         _movementEnabled = false;
+        _attackEnabled = false;
+        _jumpEnabled = false;
+        setAnimation("Die");
         _rigidbody.velocity = new Vector2(0, 0);
         StartCoroutine(AfterDie());
     }
@@ -233,6 +235,8 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         _movementEnabled = true;
+        _attackEnabled = true;
+        _jumpEnabled = true;
         _rigidbody.position = _lastRespawn;
         _health -= 1;
         lives[_health].GetComponent<SpriteRenderer>().sprite = null;
