@@ -8,6 +8,7 @@ TagManager:
   - Platform
   - Killzone
   - Gem
+  - Ground
   layers:
   - Default
   - TransparentFX
