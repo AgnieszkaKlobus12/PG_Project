@@ -9,7 +9,6 @@ public class MushroomBossController : MonoBehaviour
     private GameObject _target;
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
-    private BoxCollider2D _collider;
     private GameObject _orc;
     private GameObject _human;
     public float distance;
@@ -26,7 +25,6 @@ public class MushroomBossController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _target = null;
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _collider = GetComponent<BoxCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _orc = GameObject.Find("Orc");
         _human = GameObject.Find("Human");

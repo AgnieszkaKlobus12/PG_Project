@@ -119,7 +119,6 @@ public class PlayerController : MonoBehaviour
                 _jumpEnabled = true;
                 break;
         }
-        _attackEnabled = true; // only for tests
     }
 
     void OnDisable()
