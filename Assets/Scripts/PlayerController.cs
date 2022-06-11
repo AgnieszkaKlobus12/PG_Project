@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -120,6 +119,7 @@ public class PlayerController : MonoBehaviour
                 _jumpEnabled = true;
                 break;
         }
+        _attackEnabled = true; // only for tests
     }
 
     void OnDisable()
@@ -444,5 +444,11 @@ public class PlayerController : MonoBehaviour
     public bool IsAttackEnabled()
     {
         return _attackEnabled;
+    }
+
+    public bool MovementEnabled
+    {
+        get => _movementEnabled;
+        set => _movementEnabled = value;
     }
 }
