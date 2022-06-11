@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class BatController : MonoBehaviour
+public class EasyEnemyController : MonoBehaviour
 {
     private Animator _animator;
 
@@ -22,7 +22,7 @@ public class BatController : MonoBehaviour
             else
             {
                 _animator.SetInteger("Action", 1);
-                col.GetComponent<SetAnimatorParameter>().Die();
+                col.GetComponent<PlayerController>().Die();
             }
         }
     }

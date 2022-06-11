@@ -7,6 +7,7 @@ TagManager:
   - Human
   - Platform
   - Killzone
+  - Gem
   layers:
   - Default
   - TransparentFX

@@ -66,16 +66,16 @@ public class GemScript : MonoBehaviour
                 // Final
                 break;
             case "Level 4":
-                other.GetComponent<SetAnimatorParameter>().UnlockChargedAttack();
+                other.GetComponent<PlayerController>().UnlockChargedAttack();
                 break;
             case "Level 3":
-                other.GetComponent<SetAnimatorParameter>().UnlockDoubleJump();
+                other.GetComponent<PlayerController>().UnlockDoubleJump();
                 break;
             case "Level 2":
-                other.GetComponent<SetAnimatorParameter>().UnlockAttack();
+                other.GetComponent<PlayerController>().UnlockAttack();
                 break;
             case "Level 1":
-                other.GetComponent<SetAnimatorParameter>().UnlockJump();
+                other.GetComponent<PlayerController>().UnlockJump();
                 break;
         }
     }

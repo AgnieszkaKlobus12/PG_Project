@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class SetAnimatorParameter : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private Animator _animator;
     public string player;

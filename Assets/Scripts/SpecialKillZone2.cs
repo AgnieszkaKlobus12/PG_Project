@@ -10,7 +10,7 @@ public class SpecialKillZone2 : MonoBehaviour
         {
             if (!specialLifeZone.GetComponent<SpecialLifeZone>().IsPlayerDown())
             {
-                col.GetComponent<SetAnimatorParameter>().Die();
+                col.GetComponent<PlayerController>().Die();
             }
         }
         else if (col.CompareTag("Human"))
@@ -18,7 +18,7 @@ public class SpecialKillZone2 : MonoBehaviour
             if (!specialLifeZone.GetComponent<SpecialLifeZone>().IsHumanDown())
             {
                 {
-                    col.GetComponent<SetAnimatorParameter>().Die();
+                    col.GetComponent<PlayerController>().Die();
                 }
             }
         }

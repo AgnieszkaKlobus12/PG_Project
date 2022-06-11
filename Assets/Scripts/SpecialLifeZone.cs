@@ -9,7 +9,7 @@ public class SpecialLifeZone : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
-            if (col.gameObject.GetComponent<SetAnimatorParameter>().IsGrounded())
+            if (col.gameObject.GetComponent<PlayerController>().IsGrounded())
             {
                 _PlayerDown = col.gameObject.GetComponent<Rigidbody2D>().velocity.y >= 0;
             }
@@ -20,7 +20,7 @@ public class SpecialLifeZone : MonoBehaviour
         }
         else if (col.gameObject.CompareTag("Human"))
         {
-            if (col.gameObject.GetComponent<SetAnimatorParameter>().IsGrounded())
+            if (col.gameObject.GetComponent<PlayerController>().IsGrounded())
             {
                 _HumanDown = col.gameObject.GetComponent<Rigidbody2D>().velocity.y >= 0;
             }
