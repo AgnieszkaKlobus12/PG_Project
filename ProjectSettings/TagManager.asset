@@ -9,6 +9,7 @@ TagManager:
   - Killzone
   - Gem
   - Ground
+  - Attack
   layers:
   - Default
   - TransparentFX
@@ -48,6 +49,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 2390915887
+    locked: 0
+  - name: Fog
+    uniqueID: 1572184253
     locked: 0
   - name: Decoration
     uniqueID: 3619954883

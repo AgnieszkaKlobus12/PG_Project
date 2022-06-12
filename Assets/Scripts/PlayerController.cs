@@ -23,11 +23,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 _boxCenter;
     private Vector2 _boxSize;
     private WaitForSeconds _wait;
+    private SpriteRenderer _spriteRenderer;
     public float speed;
     public float jumpPower;
     public float jumpFallGravityMultiplier;
     private Vector2 _lastRespawn;
-    public ParticleSystem chargedAttackSystem;
+    public GameObject chargedAttack;
+    private ParticleSystem _chargedAttackSystem;
+    private Animator _chargedAttackAnimator;
+    private CircleCollider2D _chargedAttackCollider;
 
     [Header("Ground Check")] public float groundOverlapHeight;
     public LayerMask groundMask;
@@ -43,7 +47,11 @@ public class PlayerController : MonoBehaviour
         _dieEnabled = true;
         _playerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
+        _chargedAttackSystem = chargedAttack.GetComponent<ParticleSystem>();
+        _chargedAttackAnimator = chargedAttack.GetComponent<Animator>();
+        _chargedAttackCollider = chargedAttack.GetComponent<CircleCollider2D>();
         _collider = GetComponent<CapsuleCollider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _wait = new WaitForSeconds(disableGCTime);
         _animator = GetComponentInChildren<Animator>();
         _animator.SetFloat("X", 0f);
@@ -133,12 +141,12 @@ public class PlayerController : MonoBehaviour
         if (moveInput.x > 0)
         {
             setAnimation("Walk");
-            GetComponent<SpriteRenderer>().flipX = false;
+            _spriteRenderer.flipX = false;
         }
         else if (moveInput.x < 0)
         {
             setAnimation("Walk");
-            GetComponent<SpriteRenderer>().flipX = true;
+            _spriteRenderer.flipX = true;
         }
         else
         {
@@ -153,12 +161,12 @@ public class PlayerController : MonoBehaviour
         if (moveInput.x > 0)
         {
             setAnimation("Walk");
-            GetComponent<SpriteRenderer>().flipX = false;
+            _spriteRenderer.flipX = false;
         }
         else if (moveInput.x < 0)
         {
             setAnimation("Walk");
-            GetComponent<SpriteRenderer>().flipX = true;
+            _spriteRenderer.flipX = true;
         }
         else
         {
@@ -302,7 +310,12 @@ public class PlayerController : MonoBehaviour
     {
         _movementEnabled = false;
         _attackEnabled = false;
-        chargedAttackSystem.Play();
+        chargedAttack.tag = "Player";
+        _chargedAttackSystem.transform.localPosition =
+            _spriteRenderer.flipX ? new Vector3(-3f, 0f) : new Vector3(3f, 0f);
+        _chargedAttackCollider.enabled = true;
+        _chargedAttackAnimator.enabled = true;
+        _chargedAttackSystem.Play();
         setAnimation("ChargedAttack");
         StartCoroutine(EnableAttack());
     }
@@ -328,6 +341,7 @@ public class PlayerController : MonoBehaviour
     {
         _movementEnabled = false;
         _attackEnabled = false;
+        _chargedAttackSystem.Stop();
         setAnimation("Attack");
         StartCoroutine(EnableAttack());
     }
@@ -337,6 +351,9 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         _attackEnabled = true;
         _movementEnabled = true;
+        _chargedAttackCollider.enabled = false;
+        _chargedAttackAnimator.enabled = false;
+        chargedAttack.tag = "Player";
         setAnimation("Idle");
     }
 

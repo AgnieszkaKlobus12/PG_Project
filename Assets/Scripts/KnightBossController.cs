@@ -11,7 +11,6 @@ public class KnightBossController : MonoBehaviour
     public GameObject allLives;
     private GameObject _target;
     public float attackDistance;
-    private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private GameObject _orc;
     public GameObject attackObj;
@@ -33,7 +32,6 @@ public class KnightBossController : MonoBehaviour
         _active = true;
         _animator = GetComponent<Animator>();
         _target = null;
-        _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _orc = GameObject.Find("Orc");
         _human = GameObject.Find("Human");

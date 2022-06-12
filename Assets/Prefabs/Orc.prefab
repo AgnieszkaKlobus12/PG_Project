@@ -4967,6 +4967,8 @@ GameObject:
   - component: {fileID: 8450918417898485973}
   - component: {fileID: 8450918417898485975}
   - component: {fileID: 8450918417898485972}
+  - component: {fileID: 7102325514255240782}
+  - component: {fileID: 1853908382647584999}
   m_Layer: 0
   m_Name: ChargedAttack
   m_TagString: Untagged
@@ -9841,6 +9843,41 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!95 &7102325514255240782
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450918417898485962}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bc82f6d06c4c27f43bb7bebb590329e5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &1853908382647584999
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450918417898485962}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.013366699, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4282837
 --- !u!1 &8450918418094014840
 GameObject:
   m_ObjectHideFlags: 0
@@ -14778,7 +14815,7 @@ MonoBehaviour:
   speed: 2
   jumpPower: 4
   jumpFallGravityMultiplier: 1.1
-  chargedAttackSystem: {fileID: 8450918417898485975}
+  chargedAttack: {fileID: 8450918417898485962}
   groundOverlapHeight: 0.05
   groundMask:
     serializedVersion: 2
