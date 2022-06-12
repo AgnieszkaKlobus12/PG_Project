@@ -24,6 +24,8 @@ public class DialogStart : MonoBehaviour
         _completed = false;
         _orc = GameObject.Find("Orc").GetComponent<PlayerController>();
         _human = GameObject.Find("Human").GetComponent<PlayerController>();
+        _speaker = GameObject.Find("Speaker").GetComponent<TextMeshPro>();
+        _text = GameObject.Find("Text").GetComponent<TextMeshPro>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -34,11 +36,20 @@ public class DialogStart : MonoBehaviour
             _human.MovementEnabled = false;
             NextText();
             dialogCamera.SetActive(true);
+            //zoom
         }
     }
 
     private void NextText()
     {
-        
+        if (texts[_idx] != "PICK")
+        {
+            _speaker.SetText(speakers[_idx]);
+            _text.SetText(texts[_idx++]);
+        }
+        else
+        {
+            
+        }
     }
 }
