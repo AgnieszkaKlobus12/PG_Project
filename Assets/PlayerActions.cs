@@ -98,6 +98,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextText"",
+                    ""type"": ""Button"",
+                    ""id"": ""89cf5234-5eb7-4e21-9379-4318d2bab63a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -318,6 +327,17 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""HumanCharged"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""038b5fb2-d3d9-43a4-83f7-cab6bd38487e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
+                    ""action"": ""NextText"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -853,6 +873,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""NextText"",
+                    ""type"": ""Button"",
+                    ""id"": ""27c4eec3-a028-40c2-982e-a60c91427489"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""524af5c3-ab5a-4b26-b02c-84a496c4c1ed"",
@@ -1023,6 +1052,17 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Charged"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9419a385-e668-4b00-a46f-cb1e034ae396"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
+                    ""action"": ""NextText"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1100,6 +1140,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Multiplayer_HumanJump = m_Multiplayer.FindAction("HumanJump", throwIfNotFound: true);
         m_Multiplayer_OrcCharged = m_Multiplayer.FindAction("OrcCharged", throwIfNotFound: true);
         m_Multiplayer_HumanCharged = m_Multiplayer.FindAction("HumanCharged", throwIfNotFound: true);
+        m_Multiplayer_NextText = m_Multiplayer.FindAction("NextText", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1115,6 +1156,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         // Singleplayer
         m_Singleplayer = asset.FindActionMap("Singleplayer", throwIfNotFound: true);
         m_Singleplayer_Move = m_Singleplayer.FindAction("Move", throwIfNotFound: true);
+        m_Singleplayer_NextText = m_Singleplayer.FindAction("NextText", throwIfNotFound: true);
         m_Singleplayer_Fire = m_Singleplayer.FindAction("Fire", throwIfNotFound: true);
         m_Singleplayer_Jump = m_Singleplayer.FindAction("Jump", throwIfNotFound: true);
         m_Singleplayer_Charged = m_Singleplayer.FindAction("Charged", throwIfNotFound: true);
@@ -1185,6 +1227,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Multiplayer_HumanJump;
     private readonly InputAction m_Multiplayer_OrcCharged;
     private readonly InputAction m_Multiplayer_HumanCharged;
+    private readonly InputAction m_Multiplayer_NextText;
     public struct MultiplayerActions
     {
         private @PlayerActions m_Wrapper;
@@ -1197,6 +1240,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @HumanJump => m_Wrapper.m_Multiplayer_HumanJump;
         public InputAction @OrcCharged => m_Wrapper.m_Multiplayer_OrcCharged;
         public InputAction @HumanCharged => m_Wrapper.m_Multiplayer_HumanCharged;
+        public InputAction @NextText => m_Wrapper.m_Multiplayer_NextText;
         public InputActionMap Get() { return m_Wrapper.m_Multiplayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1230,6 +1274,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @HumanCharged.started -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanCharged;
                 @HumanCharged.performed -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanCharged;
                 @HumanCharged.canceled -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnHumanCharged;
+                @NextText.started -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnNextText;
+                @NextText.performed -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnNextText;
+                @NextText.canceled -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnNextText;
             }
             m_Wrapper.m_MultiplayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1258,6 +1305,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @HumanCharged.started += instance.OnHumanCharged;
                 @HumanCharged.performed += instance.OnHumanCharged;
                 @HumanCharged.canceled += instance.OnHumanCharged;
+                @NextText.started += instance.OnNextText;
+                @NextText.performed += instance.OnNextText;
+                @NextText.canceled += instance.OnNextText;
             }
         }
     }
@@ -1372,6 +1422,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Singleplayer;
     private ISingleplayerActions m_SingleplayerActionsCallbackInterface;
     private readonly InputAction m_Singleplayer_Move;
+    private readonly InputAction m_Singleplayer_NextText;
     private readonly InputAction m_Singleplayer_Fire;
     private readonly InputAction m_Singleplayer_Jump;
     private readonly InputAction m_Singleplayer_Charged;
@@ -1380,6 +1431,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         private @PlayerActions m_Wrapper;
         public SingleplayerActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Singleplayer_Move;
+        public InputAction @NextText => m_Wrapper.m_Singleplayer_NextText;
         public InputAction @Fire => m_Wrapper.m_Singleplayer_Fire;
         public InputAction @Jump => m_Wrapper.m_Singleplayer_Jump;
         public InputAction @Charged => m_Wrapper.m_Singleplayer_Charged;
@@ -1395,6 +1447,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnMove;
+                @NextText.started -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnNextText;
+                @NextText.performed -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnNextText;
+                @NextText.canceled -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnNextText;
                 @Fire.started -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnFire;
@@ -1411,6 +1466,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @NextText.started += instance.OnNextText;
+                @NextText.performed += instance.OnNextText;
+                @NextText.canceled += instance.OnNextText;
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
@@ -1479,6 +1537,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnHumanJump(InputAction.CallbackContext context);
         void OnOrcCharged(InputAction.CallbackContext context);
         void OnHumanCharged(InputAction.CallbackContext context);
+        void OnNextText(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1496,6 +1555,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     public interface ISingleplayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnNextText(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCharged(InputAction.CallbackContext context);
