@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KnightBossController : MonoBehaviour
@@ -11,12 +10,15 @@ public class KnightBossController : MonoBehaviour
     private Animator _animator;
     public GameObject allLives;
     private GameObject _target;
+    public float attackDistance;
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private GameObject _orc;
+    public GameObject attackObj;
     private GameObject _human;
     public float distance;
     private bool _fight;
+    private bool _die;
     private bool _active;
     public GameObject[] lives;
     private int _idx;
@@ -27,6 +29,7 @@ public class KnightBossController : MonoBehaviour
         _collider = GetComponent<CapsuleCollider2D>();
         _idx = lives.Length - 1;
         _fight = true;
+        _die = true;
         _active = true;
         _animator = GetComponent<Animator>();
         _target = null;
@@ -42,12 +45,18 @@ public class KnightBossController : MonoBehaviour
         if (_target != null && _active)
         {
             allLives.SetActive(true);
-            transform.position = Vector2.MoveTowards(transform.position,
-                new Vector2(_target.transform.position.x, transform.position.y),
+            gameObject.transform.position = Vector2.MoveTowards(transform.position,
+                new Vector2(_target.transform.position.x, gameObject.transform.position.y),
                 moveSpeed * Time.deltaTime);
             if (_animator.GetInteger("Action") != 1)
             {
                 _animator.SetInteger("Action", 1);
+            }
+
+            _spriteRenderer.flipX = _target.transform.position.x >= gameObject.transform.position.x;
+            if (Vector2.Distance(transform.position, _target.transform.position) < attackDistance && _fight && _die)
+            {
+                StartCoroutine(Attack());
             }
         }
         else
@@ -59,7 +68,6 @@ public class KnightBossController : MonoBehaviour
             }
         }
 
-        _spriteRenderer.flipX = _rigidbody2D.velocity.x <= 0;
         if (Vector2.Distance(transform.position, _human.transform.position) < distance)
         {
             _target = _human;
@@ -77,9 +85,9 @@ public class KnightBossController : MonoBehaviour
 
         if (!IsGrounded())
         {
-            transform.position = Vector2.MoveTowards(transform.position,
-                new Vector2(transform.position.x, transform.position.y - 0.1f),
-                moveSpeed * Time.deltaTime);
+            gameObject.transform.position = Vector2.MoveTowards(transform.position,
+                new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.1f),
+                moveSpeed * 2 * Time.deltaTime);
         }
     }
 
@@ -87,7 +95,7 @@ public class KnightBossController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
         {
-            if (!_fight || !_active) return;
+            if (!_die || !_active) return;
             if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2)
             {
                 StartCoroutine(Die());
@@ -104,10 +112,18 @@ public class KnightBossController : MonoBehaviour
         OnTriggerEnter2D(other);
     }
 
+    private IEnumerator Attack()
+    {
+        _fight = false;
+        Instantiate(attackObj, transform.position, transform.rotation);
+        yield return new WaitForSeconds(2f);
+        _fight = true;
+    }
+
     private IEnumerator Die()
     {
         _target = null;
-        _fight = false;
+        _die = false;
         lives[_idx].GetComponent<SpriteRenderer>().enabled = false;
         _idx -= 1;
         if (_idx < 0)
@@ -119,8 +135,8 @@ public class KnightBossController : MonoBehaviour
             Destroy(gameObject);
         }
 
-        yield return new WaitForSeconds(1f);
-        _fight = true;
+        yield return new WaitForSeconds(0.5f);
+        _die = true;
     }
 
     private bool IsGrounded()
