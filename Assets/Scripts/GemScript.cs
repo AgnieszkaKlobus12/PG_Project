@@ -26,7 +26,7 @@ public class GemScript : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (correct[correct.Length - 1] && !_showing)
+        if (correct.Length == 0 || correct[correct.Length - 1] && !_showing)
         {
             _spriteRenderer.enabled = true;
             _showing = true;

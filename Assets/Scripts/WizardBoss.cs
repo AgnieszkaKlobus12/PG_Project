@@ -16,11 +16,16 @@ public class WizardBoss : MonoBehaviour
     public float boundXRight;
     private bool _goRight;
     private bool _canDie;
+    public float maxAttackScale;
+    public float minAttackScale;
+    private bool _attackExpanding;
+    public GameObject finalGem;
 
     void Start()
     {
         _idx = lives.Length - 1;
         _attack = true;
+        _attackExpanding = true;
         _canDie = true;
         _active = true;
         _animator = GetComponent<Animator>();
@@ -31,7 +36,7 @@ public class WizardBoss : MonoBehaviour
 
     private void Update()
     {
-        if (_active && _attack)
+        if (_active)
         {
             allLives.SetActive(true);
             if (_goRight)
@@ -61,7 +66,7 @@ public class WizardBoss : MonoBehaviour
                 }
             }
 
-            if (_animator.GetInteger("Action") != 0)
+            if (_animator.GetInteger("Action") != 0 && _canDie)
             {
                 _animator.SetInteger("Action", 0);
             }
@@ -89,9 +94,35 @@ public class WizardBoss : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        _attack = false;
-        yield return new WaitForSeconds(2f);
-        _attack = true;
+        yield return new WaitForSeconds(0.1f);
+        if (_attack)
+        {
+            if (_attackExpanding)
+            {
+                if (attackFog.transform.localScale.x <= maxAttackScale)
+                {
+                    attackFog.transform.localScale =
+                        new Vector3(attackFog.transform.localScale.x + 0.1f, attackFog.transform.localScale.y + 0.1f);
+                }
+                else
+                {
+                    _attackExpanding = false;
+                }
+            }
+            else
+            {
+                if (attackFog.transform.localScale.x >= minAttackScale)
+                {
+                    attackFog.transform.localScale =
+                        new Vector3(attackFog.transform.localScale.x - 0.1f, attackFog.transform.localScale.y - 0.1f);
+                }
+                else
+                {
+                    _attackExpanding = true;
+                }
+            }
+            StartCoroutine(Attack());
+        }
     }
 
     private IEnumerator Die()
@@ -104,11 +135,13 @@ public class WizardBoss : MonoBehaviour
         if (_idx < 0)
         {
             _active = false;
+            Instantiate(finalGem, new Vector3(transform.position.x, 1), transform.rotation);
             yield return new WaitForSeconds(3f);
             Destroy(gameObject);
         }
         yield return new WaitForSeconds(2f);
         _attack = true;
+        StartCoroutine(Attack());
         _canDie = true;
     }
 }
