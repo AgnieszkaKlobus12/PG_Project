@@ -302,6 +302,7 @@ public class PlayerController : MonoBehaviour
     {
         _movementEnabled = false;
         _attackEnabled = false;
+        
         chargedAttackSystem.Play();
         setAnimation("ChargedAttack");
         StartCoroutine(EnableAttack());

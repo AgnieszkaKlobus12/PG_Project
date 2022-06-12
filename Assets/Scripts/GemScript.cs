@@ -50,7 +50,7 @@ public class GemScript : MonoBehaviour
         {
             ind = _nextIndex++;
         }
-        if (ind< correct.Length)
+        if (ind < correct.Length)
         {
             correct[ind] = true;
         }
