@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,12 +8,14 @@ public class GemScript : MonoBehaviour
     public bool[] correct;
 
     private int _nextIndex;
-    private SpriteRenderer _spriteRenderer;
+    protected SpriteRenderer _spriteRenderer;
     private Vector3 _finalPosition;
-    private bool _showing;
+    protected bool _showing;
+    protected List<int> order;
 
     void Awake()
     {
+        order = new List<int>();
         _nextIndex = 0;
         _showing = false;
         _finalPosition = transform.position;
@@ -21,9 +24,9 @@ public class GemScript : MonoBehaviour
         transform.position += Vector3.up * 2;
     }
 
-    void Update()
+    protected virtual void Update()
     {
-        if (correct[correct.Length - 1] && !_showing)
+        if (correct.Length == 0 || correct[correct.Length - 1] && !_showing)
         {
             _spriteRenderer.enabled = true;
             _showing = true;
@@ -31,7 +34,7 @@ public class GemScript : MonoBehaviour
         }
     }
 
-    public IEnumerator Show()
+    protected IEnumerator Show()
     {
         while (transform.position != _finalPosition)
         {
@@ -41,19 +44,28 @@ public class GemScript : MonoBehaviour
         }
     }
 
-    public void Completed()
+    public virtual void Completed(int ind = -1)
     {
-        if (_nextIndex < correct.Length)
+        if (ind == -1)
         {
-            correct[_nextIndex++] = true;
+            ind = _nextIndex++;
+        }
+        if (ind < correct.Length)
+        {
+            correct[ind] = true;
         }
     }
 
-    public void Failed()
+    public virtual void Failed(int ind = -1)
     {
-        if (_nextIndex > 0)
+        if (ind == -1)
         {
-            correct[--_nextIndex] = false;
+            ind = _nextIndex--;
+        }
+
+        if (ind < correct.Length)
+        {
+            correct[ind] = false;
         }
     }
 
