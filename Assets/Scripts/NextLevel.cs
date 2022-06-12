@@ -18,20 +18,25 @@ public class NextLevel : MonoBehaviour
                 {
                     SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
                 }
+
                 break;
             case "Level 3":
                 if (orc.GetComponent<PlayerController>().IsAttackEnabled() &&
-                    human.GetComponent<PlayerController>().IsAttackEnabled())
+                    human.GetComponent<PlayerController>().IsAttackEnabled()&&
+                    GameObject.Find("MrScaryBird") == null)
                 {
                     SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
                 }
+
                 break;
             case "Level 4":
                 if (orc.GetComponent<PlayerController>().IsDoubleJumpEnabled() &&
-                    human.GetComponent<PlayerController>().IsDoubleJumpEnabled())
+                    human.GetComponent<PlayerController>().IsDoubleJumpEnabled() &&
+                    GameObject.Find("PoisonousMushroom") == null)
                 {
                     SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
                 }
+
                 break;
             case "Level 5":
                 if (orc.GetComponent<PlayerController>().IsChargedAttackEnabled() &&
@@ -39,6 +44,7 @@ public class NextLevel : MonoBehaviour
                 {
                     SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
                 }
+
                 break;
         }
     }

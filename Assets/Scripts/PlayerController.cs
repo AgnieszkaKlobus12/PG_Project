@@ -119,7 +119,6 @@ public class PlayerController : MonoBehaviour
                 _jumpEnabled = true;
                 break;
         }
-        _attackEnabled = true; // only for tests
     }
 
     void OnDisable()
@@ -212,7 +211,7 @@ public class PlayerController : MonoBehaviour
         {
             _lastRespawn = other.transform.position;
         }
-        else if (other.gameObject.CompareTag("Killzone"))
+        else if (other.gameObject.CompareTag("Killzone") || other.gameObject.CompareTag("Attack"))
         {
             Die();
         }
