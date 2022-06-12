@@ -11,7 +11,7 @@ public class WizardBoss : MonoBehaviour
     private bool _active;
     public GameObject[] lives;
     private int _idx;
-    public GameObject attackParticle;
+    public GameObject attackFog;
     public float boundXLeft;
     public float boundXRight;
     private bool _goRight;
