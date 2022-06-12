@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _boxCenter;
     private Vector2 _boxSize;
     private WaitForSeconds _wait;
+    private SpriteRenderer _spriteRenderer;
     public float speed;
     public float jumpPower;
     public float jumpFallGravityMultiplier;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
         _playerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CapsuleCollider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _wait = new WaitForSeconds(disableGCTime);
         _animator = GetComponentInChildren<Animator>();
         _animator.SetFloat("X", 0f);
@@ -133,12 +135,12 @@ public class PlayerController : MonoBehaviour
         if (moveInput.x > 0)
         {
             setAnimation("Walk");
-            GetComponent<SpriteRenderer>().flipX = false;
+            _spriteRenderer.flipX = false;
         }
         else if (moveInput.x < 0)
         {
             setAnimation("Walk");
-            GetComponent<SpriteRenderer>().flipX = true;
+            _spriteRenderer.flipX = true;
         }
         else
         {
@@ -153,12 +155,12 @@ public class PlayerController : MonoBehaviour
         if (moveInput.x > 0)
         {
             setAnimation("Walk");
-            GetComponent<SpriteRenderer>().flipX = false;
+            _spriteRenderer.flipX = false;
         }
         else if (moveInput.x < 0)
         {
             setAnimation("Walk");
-            GetComponent<SpriteRenderer>().flipX = true;
+            _spriteRenderer.flipX = true;
         }
         else
         {
@@ -302,7 +304,8 @@ public class PlayerController : MonoBehaviour
     {
         _movementEnabled = false;
         _attackEnabled = false;
-        
+        chargedAttackSystem.transform.localPosition =
+            _spriteRenderer.flipX ? new Vector3(-3f, 0f) : new Vector3(3f, 0f);
         chargedAttackSystem.Play();
         setAnimation("ChargedAttack");
         StartCoroutine(EnableAttack());
@@ -329,6 +332,7 @@ public class PlayerController : MonoBehaviour
     {
         _movementEnabled = false;
         _attackEnabled = false;
+        chargedAttackSystem.Stop();
         setAnimation("Attack");
         StartCoroutine(EnableAttack());
     }
