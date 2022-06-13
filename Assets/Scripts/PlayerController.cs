@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     public string player;
     private bool _movementEnabled;
-    private PlayerActions _playerActions;
+    public PlayerActions playerActions;
     private bool _groundCheckEnabled = true;
     private bool _jumping;
     private bool _jumpEnabled;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         //read data from file
         _jumps = 0;
         _dieEnabled = true;
-        _playerActions = new PlayerActions();
+        playerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
         _chargedAttackSystem = chargedAttack.GetComponent<ParticleSystem>();
         _chargedAttackAnimator = chargedAttack.GetComponent<Animator>();
@@ -55,15 +55,15 @@ public class PlayerController : MonoBehaviour
         _wait = new WaitForSeconds(disableGCTime);
         _animator = GetComponentInChildren<Animator>();
         _animator.SetFloat("X", 0f);
-        _playerActions.Multiplayer.OrcJump.performed += Jump;
-        _playerActions.Singleplayer.Jump.performed += Jump;
-        _playerActions.Multiplayer.HumanJump.performed += Jump;
-        _playerActions.Multiplayer.OrcFire.performed += Attack;
-        _playerActions.Singleplayer.Fire.performed += Attack;
-        _playerActions.Multiplayer.HumanFire.performed += Attack;
-        _playerActions.Multiplayer.HumanCharged.performed += ChargedAttack;
-        _playerActions.Multiplayer.OrcCharged.performed += ChargedAttack;
-        _playerActions.Singleplayer.Charged.performed += ChargedAttack;
+        playerActions.Multiplayer.OrcJump.performed += Jump;
+        playerActions.Singleplayer.Jump.performed += Jump;
+        playerActions.Multiplayer.HumanJump.performed += Jump;
+        playerActions.Multiplayer.OrcFire.performed += Attack;
+        playerActions.Singleplayer.Fire.performed += Attack;
+        playerActions.Multiplayer.HumanFire.performed += Attack;
+        playerActions.Multiplayer.HumanCharged.performed += ChargedAttack;
+        playerActions.Multiplayer.OrcCharged.performed += ChargedAttack;
+        playerActions.Singleplayer.Charged.performed += ChargedAttack;
         _health = PlayerPrefs.GetInt("health");
         if (!PlayerPrefs.HasKey("health"))
         {
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
             {
                 OrcMove();
             }
-            else if (player == "Human" && _playerActions.Multiplayer.enabled)
+            else if (player == "Human" && playerActions.Multiplayer.enabled)
             {
                 HumanMove();
             }
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
         _jumpEnabled = false;
         _attackEnabled = false;
         _doubleJumpEnabled = false;
-        _playerActions.Multiplayer.Enable(); //do menu
+        playerActions.Multiplayer.Enable(); //do menu
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level 5":
@@ -131,12 +131,12 @@ public class PlayerController : MonoBehaviour
 
     void OnDisable()
     {
-        _playerActions.Multiplayer.Disable();
+        playerActions.Multiplayer.Disable();
     }
 
     void OrcMove()
     {
-        var moveInput = _playerActions.Multiplayer.OrcMove.ReadValue<Vector2>();
+        var moveInput = playerActions.Multiplayer.OrcMove.ReadValue<Vector2>();
         _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
         if (moveInput.x > 0)
         {
@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
 
     void HumanMove()
     {
-        var moveInput = _playerActions.Multiplayer.HumanMove.ReadValue<Vector2>();
+        var moveInput = playerActions.Multiplayer.HumanMove.ReadValue<Vector2>();
         _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
         if (moveInput.x > 0)
         {
@@ -266,13 +266,13 @@ public class PlayerController : MonoBehaviour
 
     private void Jump(InputAction.CallbackContext context)
     {
-        if ((_playerActions.Multiplayer.OrcJump.triggered || _playerActions.Singleplayer.Jump.triggered) &&
+        if ((playerActions.Multiplayer.OrcJump.triggered || playerActions.Singleplayer.Jump.triggered) &&
             player == "Orc")
         {
             PerformJump();
         }
-        else if (player == "Human" && _playerActions.Multiplayer.enabled &&
-                 _playerActions.Multiplayer.HumanJump.triggered)
+        else if (player == "Human" && playerActions.Multiplayer.enabled &&
+                 playerActions.Multiplayer.HumanJump.triggered)
         {
             PerformJump();
         }
@@ -293,13 +293,13 @@ public class PlayerController : MonoBehaviour
     {
         if (_attackEnabled)
         {
-            if ((_playerActions.Multiplayer.OrcFire.triggered || _playerActions.Singleplayer.Fire.triggered) &&
+            if ((playerActions.Multiplayer.OrcFire.triggered || playerActions.Singleplayer.Fire.triggered) &&
                 player == "Orc")
             {
                 PerformAttack();
             }
-            else if (player == "Human" && _playerActions.Multiplayer.enabled &&
-                     _playerActions.Multiplayer.HumanFire.triggered)
+            else if (player == "Human" && playerActions.Multiplayer.enabled &&
+                     playerActions.Multiplayer.HumanFire.triggered)
             {
                 PerformAttack();
             }
@@ -324,13 +324,13 @@ public class PlayerController : MonoBehaviour
     {
         if (_chargedAttackEnabled && _attackEnabled)
         {
-            if ((_playerActions.Multiplayer.OrcCharged.triggered || _playerActions.Singleplayer.Charged.triggered) &&
+            if ((playerActions.Multiplayer.OrcCharged.triggered || playerActions.Singleplayer.Charged.triggered) &&
                 player == "Orc")
             {
                 PerformChargedAttack();
             }
-            else if (player == "Human" && _playerActions.Multiplayer.enabled &&
-                     _playerActions.Multiplayer.HumanCharged.triggered)
+            else if (player == "Human" && playerActions.Multiplayer.enabled &&
+                     playerActions.Multiplayer.HumanCharged.triggered)
             {
                 PerformChargedAttack();
             }

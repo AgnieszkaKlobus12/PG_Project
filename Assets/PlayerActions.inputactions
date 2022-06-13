@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "NextText",
+                    "type": "Button",
+                    "id": "89cf5234-5eb7-4e21-9379-4318d2bab63a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -296,6 +305,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "HumanCharged",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "038b5fb2-d3d9-43a4-83f7-cab6bd38487e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad",
+                    "action": "NextText",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -831,6 +851,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "NextText",
+                    "type": "Button",
+                    "id": "27c4eec3-a028-40c2-982e-a60c91427489",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Fire",
                     "type": "Button",
                     "id": "524af5c3-ab5a-4b26-b02c-84a496c4c1ed",
@@ -999,6 +1028,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Charged",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9419a385-e668-4b00-a46f-cb1e034ae396",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad",
+                    "action": "NextText",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
