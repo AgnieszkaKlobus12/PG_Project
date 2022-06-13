@@ -16847,7 +16847,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -28636,7 +28636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1494051742
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31942,6 +31942,10 @@ MonoBehaviour:
   - "It\u2019s lovely! I\u2019ve never seen berries like these before, what are they?"
   - "Ugh, old man, we don\u2019t have time for this."
   choicesIdxs: 0500000012000000
+  speakerObject: {fileID: 0}
+  textGameObject: {fileID: 0}
+  responsePick: {fileID: 0}
+  _picks: []
 --- !u!61 &1633561984
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -34744,7 +34748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1755163909
 Transform:
   m_ObjectHideFlags: 0
