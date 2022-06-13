@@ -321,6 +321,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.80864
       objectReference: {fileID: 0}
+    - target: {fileID: 8359633644005069728, guid: b45e547d88a9f114e87a7b67ee0dfe46, type: 3}
+      propertyPath: m_text
+      value: "Player 1 - you are Klofalaekjarkjaftur the ogre. Use WASD to move.\n\nPlayer
+        2 - you are John the human. Use arrows to move.\nIn single player mode, John
+        is played by the computer.\n\nBoth of you will unlock more skills as you
+        play.\n\nWhen creating a new save file you will be asked to choose a play
+        mode - single player or multi player. You will not be able to change this
+        setting for an already existing save file. \n\nTo advance a cutscene press
+        the left mouse button."
+      objectReference: {fileID: 0}
     - target: {fileID: 8359633644005651002, guid: b45e547d88a9f114e87a7b67ee0dfe46, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
