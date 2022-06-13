@@ -20,6 +20,7 @@ public class DialogStart : MonoBehaviour
 
     public GameObject speakerObject;
     public GameObject textGameObject;
+    public GameObject borders;
     private TextMeshProUGUI _speaker;
     private TextMeshProUGUI _text;
     public GameObject responsePick;
