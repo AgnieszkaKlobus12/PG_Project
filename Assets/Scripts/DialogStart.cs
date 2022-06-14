@@ -12,6 +12,7 @@ public class DialogStart : MonoBehaviour
 
     private int _idx;
 
+    public Camera mainCamera;
     public GameObject dialogCamera;
     public string[] texts;
     public string[] speakers;
@@ -25,6 +26,8 @@ public class DialogStart : MonoBehaviour
     private TextMeshProUGUI _text;
     public GameObject responsePick;
     public GameObject[] _picks;
+
+    private float _orginalCameraSize;
 
     private void Start()
     {
@@ -55,7 +58,8 @@ public class DialogStart : MonoBehaviour
             _started = true;
             NextText();
             dialogCamera.SetActive(true);
-            //TODO zoom in
+            _orginalCameraSize = mainCamera.orthographicSize;
+            mainCamera.orthographicSize = 1.2f;
         }
     }
 
@@ -68,8 +72,10 @@ public class DialogStart : MonoBehaviour
                 _completed = true;
                 _orc.MovementEnabled = true;
                 _human.MovementEnabled = true;
+                _human.GetComponent<Rigidbody2D>().isKinematic = false;
+                _orc.GetComponent<Rigidbody2D>().isKinematic = false;
                 dialogCamera.SetActive(false);
-                //TODO zoom out
+                mainCamera.orthographicSize = _orginalCameraSize;
             }
             else if (texts[_idx] == "Choice")
             {
@@ -77,6 +83,7 @@ public class DialogStart : MonoBehaviour
                 speakerObject.SetActive(false);
                 textGameObject.SetActive(false);
                 int temp = 0;
+                borders.SetActive(false);
                 responsePick.SetActive(true);
                 foreach (string text in choices)
                 {
@@ -95,7 +102,6 @@ public class DialogStart : MonoBehaviour
             {
                 speakerObject.SetActive(true);
                 textGameObject.SetActive(true);
-                Debug.Log("next " + _idx);
                 _speaker.SetText(speakers[_idx]);
                 _text.SetText(texts[_idx++]);
             }
@@ -107,5 +113,12 @@ public class DialogStart : MonoBehaviour
         _idx = newIndex;
         _waitingForChoice = false;
         responsePick.SetActive(false);
+        borders.SetActive(true);
+        var temp = 0;
+        foreach (var text in choices)
+        {
+            _picks[temp++].SetActive(false);
+        }
+        NextText();
     }
 }
