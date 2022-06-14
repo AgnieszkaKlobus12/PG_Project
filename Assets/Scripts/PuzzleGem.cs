@@ -13,12 +13,14 @@ public class PuzzleGem : MonoBehaviour
     {
         _completed = false;
         _animator = GetComponent<Animator>();
+        _animator.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if ((other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human")) && !_completed)
         {
+            Debug.Log("triggered " + number);
             if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2)
             {
                 StartCoroutine(Complete());

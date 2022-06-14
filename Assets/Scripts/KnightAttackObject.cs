@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class KnightAttackObject : MonoBehaviour
 {
+    public float timeToDestroy;
     private Rigidbody2D _rigidbody;
     public float attackSpeed;
     public float rotation;
@@ -12,6 +13,7 @@ public class KnightAttackObject : MonoBehaviour
         attackSpeed = GameObject.Find("BodilessKnight").GetComponent<SpriteRenderer>().flipX
             ? -attackSpeed
             : attackSpeed;
+        Destroy(gameObject, timeToDestroy);
     }
 
     void Update()
@@ -20,11 +22,9 @@ public class KnightAttackObject : MonoBehaviour
         _rigidbody.rotation += rotation;
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!col.gameObject.CompareTag("Enemy"))
-        {
+        if (collision.gameObject.CompareTag("Human") || collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Ground"))
             Destroy(gameObject);
-        }
     }
 }
