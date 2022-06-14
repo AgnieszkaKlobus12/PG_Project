@@ -96,7 +96,7 @@ public class GemScript : MonoBehaviour
         {
             case "Level 5":
                 lives.SetActive(false);
-                win.SetActive(true);
+                //win.SetActive(true);
                 _playerActions.Singleplayer.Disable();
                 _playerActions.Multiplayer.Disable();
                 _playerActions.UI.Enable();
@@ -104,6 +104,8 @@ public class GemScript : MonoBehaviour
             case "Level 4":
                 orc.GetComponent<PlayerController>().UnlockChargedAttack();
                 human.GetComponent<PlayerController>().UnlockChargedAttack();
+                _text.SetText("Klofalaekjarkjaftur - press S to attack with charge.\nJohn - press PgDown to attack with charge.");
+                StartCoroutine(ShowNewSkillView());
                 break;
             case "Level 3":
                 orc.GetComponent<PlayerController>().UnlockDoubleJump();
