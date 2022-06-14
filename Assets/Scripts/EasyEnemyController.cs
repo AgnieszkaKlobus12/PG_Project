@@ -12,6 +12,10 @@ public class EasyEnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.CompareTag("UserAttack"))
+        {
+            _animator.SetInteger("Action", 2);
+        }
         if (col.CompareTag("Player") || col.CompareTag("Human"))
         {
             var playerAct = col.GetComponent<Animator>().GetInteger("Anim");

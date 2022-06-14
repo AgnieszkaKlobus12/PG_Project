@@ -118,6 +118,11 @@ public class BirdBossController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("UserAttack"))
+        {
+            if (!_fight || !_active || !_startedFight) return;
+            _animator.SetInteger("Action", 2);
+        }
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
         {
             if (!_fight || !_active || !_startedFight) return;

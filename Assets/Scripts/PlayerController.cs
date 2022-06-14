@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,19 +15,20 @@ public class PlayerController : MonoBehaviour
     private bool _jumping;
     private bool _jumpEnabled;
     private bool _doubleJumpEnabled;
+    public GameObject attackArea;
     private bool _chargedAttackEnabled;
     private int _jumps;
     private bool _attackEnabled;
     public GameObject lose;
     public GameObject livesObj;
     private bool _dieEnabled;
-    public Rigidbody2D _rigidbody;
+    private Rigidbody2D _rigidbody;
     private CapsuleCollider2D _collider;
     public float initialGravityScale;
     private Vector2 _boxCenter;
     private Vector2 _boxSize;
     private WaitForSeconds _wait;
-    public SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
     public float speed;
     public float jumpPower;
     public float jumpFallGravityMultiplier;
@@ -38,7 +40,6 @@ public class PlayerController : MonoBehaviour
     public int mode;
 
     [Header("Ground Check")] public float groundOverlapHeight;
-    public LayerMask emptyGroundMask;
     public LayerMask groundMask;
     public float disableGCTime;
 
@@ -111,6 +112,12 @@ public class PlayerController : MonoBehaviour
 
     void OnEnable()
     {
+        if (gameObject.CompareTag("Human"))
+        {
+            _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), _health);
+            _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _orc.GetComponent<PlayerController>()._health);
+            _settings.SetLevel(PlayerPrefs.GetInt("Slot"), SceneManager.GetActiveScene().name);
+        }
         _chargedAttackEnabled = false;
         _jumpEnabled = false;
         _attackEnabled = false;
@@ -191,7 +198,15 @@ public class PlayerController : MonoBehaviour
             var x = _orc.transform.position.x < transform.position.x
                 ? +1f
                 : -1f;
-            _rigidbody.velocity = Vector3.Distance(transform.position, _orc.transform.position) > 0.4f
+            var bounds = _collider.bounds;
+            _boxCenter = new Vector2(bounds.center.x - x / 2, bounds.center.y);
+            var groundBox = Physics2D.OverlapBox(_boxCenter, _boxSize, 0f, groundMask);
+            if (groundBox != null && _jumpEnabled)
+            {
+                PerformJump();
+            }
+
+            _rigidbody.velocity = Math.Abs(transform.position.x - _orc.transform.position.x) > 0.4f
                 ? new Vector2(speed * -x, _rigidbody.velocity.y)
                 : new Vector2(0, _rigidbody.velocity.y);
         }
@@ -292,6 +307,7 @@ public class PlayerController : MonoBehaviour
         {
             _rigidbody.position = _lastRespawn;
         }
+
         _health -= 1;
         lives[_health].GetComponent<SpriteRenderer>().sprite = null;
         setAnimation("Idle");
@@ -306,7 +322,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Jump()
+    private void Jump()
     {
         if ((PlayerActions.Multiplayer.OrcJump.triggered || PlayerActions.Singleplayer.Jump.triggered) &&
             player == "Orc")
@@ -320,15 +336,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void PerformJump()
+    public void PerformJump()
     {
-        if ((!IsGrounded() && _jumps > 1) || (!IsGrounded() && !_doubleJumpEnabled) || !_movementEnabled ||
-            !_jumpEnabled) return;
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpPower);
-        _jumping = true;
-        setAnimation("Jump");
-        _jumps++;
-        StartCoroutine(EnableGroundCheckAfterJump());
+        if ((_jumps < 1 || _jumps > 0 && _doubleJumpEnabled) && _movementEnabled &&
+            _jumpEnabled)
+        {
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpPower);
+            _jumping = true;
+            setAnimation("Jump");
+            _jumps++;
+            StartCoroutine(EnableGroundCheckAfterJump());
+        }
     }
 
     private void Attack(InputAction.CallbackContext context)
@@ -385,6 +403,7 @@ public class PlayerController : MonoBehaviour
         _attackEnabled = false;
         _chargedAttackSystem.Stop();
         setAnimation("Attack");
+        attackArea.SetActive(true);
         StartCoroutine(EnableAttack());
     }
 
@@ -393,6 +412,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         _attackEnabled = true;
         _movementEnabled = true;
+        attackArea.SetActive((false));
         _chargedAttackCollider.enabled = false;
         _chargedAttackAnimator.enabled = false;
         chargedAttack.tag = "Player";
@@ -406,7 +426,7 @@ public class PlayerController : MonoBehaviour
         _groundCheckEnabled = true;
     }
 
-    public void setAnimation(string name)
+    private void setAnimation(string name)
     {
         switch (name)
         {

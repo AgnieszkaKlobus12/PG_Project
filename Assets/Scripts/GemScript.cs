@@ -30,12 +30,22 @@ public class GemScript : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (correct.Length == 0 || correct[correct.Length - 1] && !_showing)
+        if (correct.Length == 0 || AllCorrects() && !_showing)
         {
             _spriteRenderer.enabled = true;
             _showing = true;
             StartCoroutine(Show());
         }
+    }
+
+    private bool AllCorrects()
+    {
+        foreach (var c in correct)
+        {
+            if (!c) return false;
+        }
+
+        return true;
     }
 
     protected IEnumerator Show()
