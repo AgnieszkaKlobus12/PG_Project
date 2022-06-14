@@ -8892,11 +8892,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.121
+      value: 26.365
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17
+      value: 0.441
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53233,6 +53233,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1548110537, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
   m_PrefabInstance: {fileID: 859193624}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &859193632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7128740655834743586, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
+  m_PrefabInstance: {fileID: 859193624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &859193633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7022950438443766144, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
+  m_PrefabInstance: {fileID: 859193624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &859506156
 GameObject:
   m_ObjectHideFlags: 0
@@ -74423,6 +74433,81 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1186524539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1186524542}
+  - component: {fileID: 1186524541}
+  - component: {fileID: 1186524540}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1186524540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186524539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+--- !u!114 &1186524541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186524539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &1186524542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186524539}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1186998014
 GameObject:
   m_ObjectHideFlags: 0
@@ -97450,7 +97535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4810282443757883592, guid: 261830c0995a9334b8d820fe61904374, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.8483467
+      value: 2.708
       objectReference: {fileID: 0}
     - target: {fileID: 4810282443757883592, guid: 261830c0995a9334b8d820fe61904374, type: 3}
       propertyPath: m_LocalPosition.z
@@ -98332,11 +98417,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.248
+      value: 26.734001
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.16
+      value: 0.45099998
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -117712,112 +117797,241 @@ PrefabInstance:
       value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[0]
+      value: Okay, so, favourite colour?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[1]
+      value: Green. Mmm, favorite food?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[2]
-      value: End
+      value: "Avocado toast. Very basic, everyone likes it. It's, um, bread with
+        a fruit which doesn't really taste like anything. How about\u2026 If you
+        could be anything for a day - what would you be?"
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[3]
-      value: End
+      value: Moss! I would grow on trees and rocks and I would have tiny little flowers
+        and stretch my leaves towards the sun!
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[4]
-      value: End
+      value: What if something ate you?
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[5]
-      value: End
+      value: Then it would no longer be hungry! ^_^
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[6]
-      value: End
+      value: "Wait, but what if\u2026"
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[7]
-      value: End
+      value: No more questions, it's my turn now! Favourite creature you've seen
+        so far?
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[8]
-      value: End
+      value: Ever or just in your world?
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[9]
-      value: End
+      value: I was thinking of just my world but, sure, can be from yours too.
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[10]
-      value: End
+      value: My dog Max. I adopted him three years ago. Never expected such a small
+        dog could take up so much space in my bed.
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[11]
-      value: End
+      value: A dog is a wolf but nice, yes?
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[12]
-      value: End
+      value: And smaller, yeah. Max is nothing like a wolf, I mean, he's not scary
+        at all.
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[13]
-      value: End
+      value: Wolves aren't scary if you're nice to them ^_^
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[14]
-      value: End
+      value: "Okay, but you'll do the being nice part if we see one. I'd try not
+        to get eaten. Um, next question\u2026 Favourite item of clothing?"
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[15]
-      value: End
+      value: A sword!
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[16]
-      value: End
+      value: That's not an item of clothing. You have to wear something to say it's
+        an item of clothing.
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[17]
-      value: End
+      value: 'Well, who are you to say that we don''t wear swords here? '
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[18]
-      value: End
+      value: Okay, fair. But next time you answer like that I get a point for hardest
+        question.
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[19]
-      value: End
+      value: Yeah, you wish. How many moons are there in your sky?
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[20]
-      value: End
+      value: One. And people landed on it once.
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[21]
-      value: End
+      value: Well, there's a witch that lives on our moons, so.
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[22]
-      value: End
+      value: Was that a question for me or did you just want to brag?
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[23]
-      value: End
+      value: ^_^ Your turn!
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[24]
-      value: End
+      value: Okay, then, when's your birthday?
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[25]
-      value: End
+      value: You mean my hatch day? We hatch from eggs. Third day of summer!
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[26]
-      value: End
+      value: Wait. From eggs? No. Timeout, I need a timeout.
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[27]
-      value: End
+      value: Ha! That's another point for me!
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: texts.Array.data[28]
       value: End
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[0]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[1]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[2]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[3]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[4]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[5]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[6]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[7]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[8]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[9]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[10]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[11]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[12]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[13]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[14]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[15]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[16]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[17]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[18]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[19]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[20]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[21]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[22]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[23]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[24]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[25]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[26]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[27]
+      value: Klofalaekjarkjaftur
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
@@ -128940,6 +129154,22 @@ PrefabInstance:
     m_TransformParent: {fileID: 3925715896599240618}
     m_Modifications:
     - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
+      propertyPath: orc
+      value: 
+      objectReference: {fileID: 530842208}
+    - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
+      propertyPath: win
+      value: 
+      objectReference: {fileID: 859193632}
+    - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
+      propertyPath: human
+      value: 
+      objectReference: {fileID: 1680902440}
+    - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
+      propertyPath: lives
+      value: 
+      objectReference: {fileID: 859193633}
+    - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
       propertyPath: correct.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -129923,14 +130153,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0eadeb91f38cd49967f7fa85f7bca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 888396142}
   mainCamera: {fileID: 110612948}
   dialogCamera: {fileID: 1320603601}
   texts:
-  - test
+  - 'Don''t eat me! '
+  - What? Why would we do that?
+  - You're, like, twice as big as we are.
+  - "Is that\u2026 a human?!"
+  - Yes, but he's really nice! Not at all like the human adventurers from the stories
+    my parents always used to tell me.
+  - Tell me, human, do you like mushrooms?
+  - What?
+  - You heard me.
+  - "Well\u2026 yeah, I think so."
+  - You must die then.
+  - What?!
+  - Where he's from they eat creatures like me. I've seen it with my own two eyes.
+    They cook us and eat us like it's nothing, like we don't feel anything. He's
+    awful!
+  - Absolutely he is not! He's a great person and he is my friend!
+  - I'm your friend? But um, not important right now.
+  - I have nothing against you, little ogress. You may go wherever you please. But
+    this human - I cannot let him go. I must avenge my family.
+  - Don't worry, Jabba. I'm not going anywhere.
+  - It's John, but I appreciate the sentiment. We're not going down easy, you big
+    mushroom!
   - End
   speakers:
-  - test
+  - Poisonous Mushroom
+  - Klofalaekjarkjaftur
+  - John
+  - Poisonous Mushroom
+  - Klofalaekjarkjaftur
+  - Poisonous Mushroom
+  - John
+  - Poisonous Mushroom
+  - John
+  - Poisonous Mushroom
+  - Klofalaekjarkjaftur
+  - Poisonous Mushroom
+  - Klofalaekjarkjaftur
+  - John
+  - Poisonous Mushroom
+  - Klofalaekjarkjaftur
+  - John
   - 
   choices: []
   choicesIdxs: 
