@@ -93,7 +93,7 @@ public class DialogStart : MonoBehaviour
                     _picks[temp++].GetComponentInChildren<TextMeshProUGUI>().text = text;
                 }
             }
-            else if (texts[_idx] == "Live--")
+            else if (texts[_idx] == "Life--")
             {
                 _orc.Die();
                 _human.Die();
