@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private bool _chargedAttackEnabled;
     private int _jumps;
     private bool _attackEnabled;
+    public GameObject lose;
+    public GameObject livesObj;
     private bool _dieEnabled;
     private Rigidbody2D _rigidbody;
     private CapsuleCollider2D _collider;
@@ -279,7 +281,11 @@ public class PlayerController : MonoBehaviour
         _dieEnabled = true;
         if (_health == 0)
         {
-            //TODO kill/win screen, back to menu after click  
+            livesObj.SetActive(false);
+            lose.SetActive(true);
+            PlayerActions.Singleplayer.Disable();
+            PlayerActions.Multiplayer.Disable();
+            PlayerActions.UI.Enable();
         }
     }
 

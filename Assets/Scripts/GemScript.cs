@@ -6,15 +6,20 @@ using UnityEngine.SceneManagement;
 public class GemScript : MonoBehaviour
 {
     public bool[] correct;
-
+    public GameObject win;
+    public GameObject lives;
     private int _nextIndex;
+    private PlayerActions _playerActions;
     protected SpriteRenderer _spriteRenderer;
     private Vector3 _finalPosition;
     protected bool _showing;
     protected List<int> order;
+    private int _picked;
 
     void Awake()
     {
+        _playerActions = new PlayerActions();
+        _picked = 0;
         order = new List<int>();
         _nextIndex = 0;
         _showing = false;
@@ -72,10 +77,15 @@ public class GemScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!_showing || (!other.CompareTag("Player") && !other.CompareTag("Human"))) return;
+        _picked += 1;
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level 5":
-                // TODO win screen, same as in player controller
+                lives.SetActive(false);
+                win.SetActive(true);
+                _playerActions.Singleplayer.Disable();
+                _playerActions.Multiplayer.Disable();
+                _playerActions.UI.Enable();
                 break;
             case "Level 4":
                 other.GetComponent<PlayerController>().UnlockChargedAttack();
@@ -90,5 +100,17 @@ public class GemScript : MonoBehaviour
                 other.GetComponent<PlayerController>().UnlockJump();
                 break;
         }
+
+        if (_picked >= 2)
+        {
+            _showing = true;
+            _spriteRenderer.enabled = false;
+        }
     }
+
+    public void ToMenu()
+    {
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+    }
+    
 }
