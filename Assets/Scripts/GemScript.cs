@@ -108,6 +108,8 @@ public class GemScript : MonoBehaviour
             case "Level 3":
                 orc.GetComponent<PlayerController>().UnlockDoubleJump();
                 human.GetComponent<PlayerController>().UnlockDoubleJump();
+                _text.SetText("Both of you can now double jump.");
+                StartCoroutine(ShowNewSkillView());
                 break;
             case "Level 2":
                 orc.GetComponent<PlayerController>().UnlockAttack();
