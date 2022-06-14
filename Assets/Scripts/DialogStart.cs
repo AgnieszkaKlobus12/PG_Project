@@ -1,11 +1,12 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogStart : MonoBehaviour
 {
-    private bool _completed;
     private bool _started;
+    private bool _completed;
     private bool _waitingForChoice;
     private PlayerController _orc;
     private PlayerController _human;
@@ -27,26 +28,25 @@ public class DialogStart : MonoBehaviour
     public GameObject responsePick;
     public GameObject[] _picks;
 
-    private float _orginalCameraSize;
+    private float _originalCameraSize;
 
     private void Start()
     {
-        _idx = 0;
-        _started = false;
         _completed = false;
-        _waitingForChoice = false;
         _orc = GameObject.Find("Orc").GetComponent<PlayerController>();
         _human = GameObject.Find("Human").GetComponent<PlayerController>();
         _speaker = speakerObject.GetComponent<TextMeshProUGUI>();
         _text = textGameObject.GetComponent<TextMeshProUGUI>();
-        _orc.PlayerActions.Singleplayer.NextText.performed += ctx => NextText();
-        _orc.PlayerActions.Multiplayer.NextText.performed += ctx => NextText();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (!_completed && (col.CompareTag("Human") || col.CompareTag("Player")))
         {
+            _idx = 0;
+            _waitingForChoice = false;
+            _orc.PlayerActions.Singleplayer.NextText.performed += ctx => NextText();
+            _orc.PlayerActions.Multiplayer.NextText.performed += ctx => NextText();
             _orc.MovementEnabled = false;
             _human.MovementEnabled = false;
             _orc.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
@@ -58,7 +58,7 @@ public class DialogStart : MonoBehaviour
             _started = true;
             NextText();
             dialogCamera.SetActive(true);
-            _orginalCameraSize = mainCamera.orthographicSize;
+            _originalCameraSize = mainCamera.orthographicSize;
             mainCamera.orthographicSize = 1.2f;
         }
     }
@@ -69,13 +69,14 @@ public class DialogStart : MonoBehaviour
         {
             if (texts[_idx] == "End")
             {
-                _completed = true;
                 _orc.MovementEnabled = true;
                 _human.MovementEnabled = true;
                 _human.GetComponent<Rigidbody2D>().isKinematic = false;
                 _orc.GetComponent<Rigidbody2D>().isKinematic = false;
                 dialogCamera.SetActive(false);
-                mainCamera.orthographicSize = _orginalCameraSize;
+                mainCamera.orthographicSize = _originalCameraSize;
+                _completed = true;
+                gameObject.GetComponent<DialogStart>().enabled = false;
             }
             else if (texts[_idx] == "Choice")
             {
@@ -92,11 +93,14 @@ public class DialogStart : MonoBehaviour
                     _picks[temp].GetComponentInChildren<Button>().onClick.AddListener(() => Pick(choicesIdxs[helper]));
                     _picks[temp++].GetComponentInChildren<TextMeshProUGUI>().text = text;
                 }
+                _orc.PlayerActions.Singleplayer.Disable();
+                _orc.PlayerActions.Multiplayer.Disable();
+                _orc.PlayerActions.UI.Enable();
             }
             else if (texts[_idx] == "Life--")
             {
-                _orc.Die();
-                _human.Die();
+                _orc.Die(false);
+                _human.Die(false);
             }
             else
             {
@@ -119,6 +123,9 @@ public class DialogStart : MonoBehaviour
         {
             _picks[temp++].SetActive(false);
         }
+        _orc.PlayerActions.Singleplayer.Enable();
+        _orc.PlayerActions.Multiplayer.Enable();
+        _orc.PlayerActions.UI.Disable();
         NextText();
     }
 }

@@ -249,7 +249,7 @@ public class PlayerController : MonoBehaviour
         transform.parent = null;
     }
 
-    public void Die()
+    public void Die(bool back = true)
     {
         if (_dieEnabled)
         {
@@ -259,17 +259,20 @@ public class PlayerController : MonoBehaviour
             _jumpEnabled = false;
             setAnimation("Die");
             _rigidbody.velocity = new Vector2(0, 0);
-            StartCoroutine(AfterDie());
+            StartCoroutine(AfterDie(back));
         }
     }
 
-    IEnumerator AfterDie()
+    IEnumerator AfterDie(bool back = true)
     {
         yield return new WaitForSeconds(2f);
         _movementEnabled = true;
         _attackEnabled = true;
         _jumpEnabled = true;
-        _rigidbody.position = _lastRespawn;
+        if (back)
+        {
+            _rigidbody.position = _lastRespawn;
+        }
         _health -= 1;
         lives[_health].GetComponent<SpriteRenderer>().sprite = null;
         setAnimation("Idle");
