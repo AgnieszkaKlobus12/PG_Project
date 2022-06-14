@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private Animator _animator;
     public string player;
+    public GameObject _orc;
     private bool _movementEnabled;
     public PlayerActions PlayerActions;
     private bool _groundCheckEnabled = true;
@@ -19,13 +20,13 @@ public class PlayerController : MonoBehaviour
     public GameObject lose;
     public GameObject livesObj;
     private bool _dieEnabled;
-    private Rigidbody2D _rigidbody;
+    public Rigidbody2D _rigidbody;
     private CapsuleCollider2D _collider;
     public float initialGravityScale;
     private Vector2 _boxCenter;
     private Vector2 _boxSize;
     private WaitForSeconds _wait;
-    private SpriteRenderer _spriteRenderer;
+    public SpriteRenderer _spriteRenderer;
     public float speed;
     public float jumpPower;
     public float jumpFallGravityMultiplier;
@@ -34,9 +35,10 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem _chargedAttackSystem;
     private Animator _chargedAttackAnimator;
     private CircleCollider2D _chargedAttackCollider;
-    private int _mode;
+    public int mode;
 
     [Header("Ground Check")] public float groundOverlapHeight;
+    public LayerMask emptyGroundMask;
     public LayerMask groundMask;
     public float disableGCTime;
 
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
     {
         _settings = new Settings();
         _jumps = 0;
+        _orc = GameObject.Find("Orc");
         _dieEnabled = true;
         PlayerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -60,9 +63,9 @@ public class PlayerController : MonoBehaviour
         _wait = new WaitForSeconds(disableGCTime);
         _animator = GetComponentInChildren<Animator>();
         _animator.SetFloat("X", 0f);
-        PlayerActions.Multiplayer.OrcJump.performed += Jump;
-        PlayerActions.Singleplayer.Jump.performed += Jump;
-        PlayerActions.Multiplayer.HumanJump.performed += Jump;
+        PlayerActions.Multiplayer.OrcJump.performed += ctx => Jump();
+        PlayerActions.Singleplayer.Jump.performed += ctx => Jump();
+        PlayerActions.Multiplayer.HumanJump.performed += ctx => Jump();
         PlayerActions.Multiplayer.OrcFire.performed += Attack;
         PlayerActions.Singleplayer.Fire.performed += Attack;
         PlayerActions.Multiplayer.HumanFire.performed += Attack;
@@ -76,6 +79,7 @@ public class PlayerController : MonoBehaviour
         {
             _health = 3;
         }
+
         for (var i = _health; i < lives.Length; i++)
         {
             lives[i].GetComponent<SpriteRenderer>().sprite = null;
@@ -114,12 +118,12 @@ public class PlayerController : MonoBehaviour
         if (_settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer")
         {
             PlayerActions.Multiplayer.Enable();
-            _mode = 2;
+            mode = 2;
         }
         else
         {
             PlayerActions.Singleplayer.Enable();
-            _mode = 1;
+            mode = 1;
         }
 
         switch (SceneManager.GetActiveScene().name)
@@ -147,14 +151,14 @@ public class PlayerController : MonoBehaviour
 
     void OnDisable()
     {
-        _mode = 0;
+        mode = 0;
         PlayerActions.Singleplayer.Disable();
         PlayerActions.Multiplayer.Disable();
     }
 
     void OrcMove()
     {
-        var moveInput = _mode == 1
+        var moveInput = mode == 1
             ? PlayerActions.Singleplayer.Move.ReadValue<Vector2>()
             : PlayerActions.Multiplayer.OrcMove.ReadValue<Vector2>();
 
@@ -177,29 +181,34 @@ public class PlayerController : MonoBehaviour
 
     void HumanMove()
     {
-        if (_mode == 1)
+        if (mode == 2)
         {
             var moveInput = PlayerActions.Multiplayer.HumanMove.ReadValue<Vector2>();
             _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
-            if (moveInput.x > 0)
-            {
-                setAnimation("Walk");
-                _spriteRenderer.flipX = false;
-            }
-            else if (moveInput.x < 0)
-            {
-                setAnimation("Walk");
-                _spriteRenderer.flipX = true;
-            }
-            else
-            {
-                setAnimation("Idle");
-            }
+        }
+        else if (mode == 1)
+        {
+            var x = _orc.transform.position.x < transform.position.x
+                ? +1f
+                : -1f;
+            _rigidbody.velocity = Vector3.Distance(transform.position, _orc.transform.position) > 0.4f
+                ? new Vector2(speed * -x, _rigidbody.velocity.y)
+                : new Vector2(0, _rigidbody.velocity.y);
+        }
+
+        if (_rigidbody.velocity.x > 0)
+        {
+            setAnimation("Walk");
+            _spriteRenderer.flipX = false;
+        }
+        else if (_rigidbody.velocity.x < 0)
+        {
+            setAnimation("Walk");
+            _spriteRenderer.flipX = true;
         }
         else
         {
-            //todo John control
-            
+            setAnimation("Idle");
         }
     }
 
@@ -297,7 +306,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jump(InputAction.CallbackContext context)
+    public void Jump()
     {
         if ((PlayerActions.Multiplayer.OrcJump.triggered || PlayerActions.Singleplayer.Jump.triggered) &&
             player == "Orc")
@@ -397,7 +406,7 @@ public class PlayerController : MonoBehaviour
         _groundCheckEnabled = true;
     }
 
-    void setAnimation(string name)
+    public void setAnimation(string name)
     {
         switch (name)
         {
