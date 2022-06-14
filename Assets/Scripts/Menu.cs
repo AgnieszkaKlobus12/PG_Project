@@ -9,19 +9,11 @@ public class Menu : MonoBehaviour
     public GameObject @continue;
     public GameObject newGame;
 
-    public TextMeshProUGUI slot1Mode;
-    public TextMeshProUGUI slot1Level;
-    public TextMeshProUGUI slot2Mode;
-    public TextMeshProUGUI slot2Level;
-    public TextMeshProUGUI slot3Mode;
-    public TextMeshProUGUI slot3Level;
+    public TextMeshProUGUI[] continueSlotsMode;
+    public TextMeshProUGUI[] continueSlotsLevel;
 
-    public TextMeshProUGUI save1Mode;
-    public TextMeshProUGUI save1Level;
-    public TextMeshProUGUI save2Mode;
-    public TextMeshProUGUI save2Level;
-    public TextMeshProUGUI save3Mode;
-    public TextMeshProUGUI save3Level;
+    public TextMeshProUGUI[] newSlotsMode;
+    public TextMeshProUGUI[] newSlotsLevel;
 
     private Settings _settings;
 
@@ -42,42 +34,45 @@ public class Menu : MonoBehaviour
         var level3 = _settings.GetLevel(3);
         if (mode1 != "empty")
         {
-            slot1Mode.text = "Mode: " + mode1;
-            slot1Level.text = "Level: " + level1;
+            continueSlotsMode[0].text = "Mode: " + mode1;
+            continueSlotsLevel[0].text = "Level: " + level1;
         }
         else
         {
-            slot1Mode.text = "empty";
-            slot1Level.text = "empty";
+            continueSlotsMode[0].text = "empty";
+            continueSlotsLevel[0].text = "empty";
         }
 
         if (mode2 != "empty")
         {
-            slot2Mode.text = "Mode: " + mode2;
-            slot2Level.text = "Level: " + level2;
+            continueSlotsMode[1].text = "Mode: " + mode2;
+            continueSlotsLevel[1].text = "Level: " + level2;
         }
         else
         {
-            slot2Mode.text = "empty";
-            slot2Level.text = "empty";
+            continueSlotsMode[1].text = "empty";
+            continueSlotsLevel[1].text = "empty";
         }
 
         if (mode3 != "empty")
         {
-            slot3Mode.text = "Mode: " + mode3;
-            slot3Level.text = "Level: " + level3;
+            continueSlotsMode[2].text = "Mode: " + mode3;
+            continueSlotsLevel[2].text = "Level: " + level3;
         }
         else
         {
-            slot3Mode.text = "empty";
-            slot3Level.text = "empty";
+            continueSlotsMode[2].text = "empty";
+            continueSlotsLevel[2].text = "empty";
         }
     }
 
     public void OnSlot(int slot)
     {
-        PlayerPrefs.SetInt("Slot", slot);
-        SceneManager.LoadScene(_settings.GetLevel(slot), LoadSceneMode.Single);
+        if (_settings.GetLevel(slot) != "empty")
+        {
+            PlayerPrefs.SetInt("Slot", slot);
+            SceneManager.LoadScene(_settings.GetLevel(slot), LoadSceneMode.Single);
+        }
     }
 
     public void OnNewGame()
@@ -92,35 +87,35 @@ public class Menu : MonoBehaviour
         var level3 = _settings.GetLevel(3);
         if (mode1 != "empty")
         {
-            save1Mode.text = "Mode: " + mode1;
-            save1Level.text = "Level: " + level1;
+            newSlotsMode[0].text = "Mode: " + mode1;
+            newSlotsLevel[0].text = "Level: " + level1;
         }
         else
         {
-            save1Mode.text = "empty";
-            save1Level.text = "empty";
+            newSlotsMode[0].text = "empty";
+            newSlotsLevel[0].text = "empty";
         }
 
         if (mode2 != "empty")
         {
-            save2Mode.text = "Mode: " + mode2;
-            save2Level.text = "Level: " + level2;
+            newSlotsMode[1].text = "Mode: " + mode2;
+            newSlotsLevel[1].text = "Level: " + level2;
         }
         else
         {
-            save2Mode.text = "empty";
-            save2Level.text = "empty";
+            newSlotsMode[1].text = "empty";
+            newSlotsLevel[1].text = "empty";
         }
 
         if (mode3 != "empty")
         {
-            save3Mode.text = "Mode: " + mode3;
-            save3Level.text = "Level: " + level3;
+            newSlotsMode[2].text = "Mode: " + mode3;
+            newSlotsLevel[2].text = "Level: " + level3;
         }
         else
         {
-            save3Mode.text = "empty";
-            save3Level.text = "empty";
+            newSlotsMode[2].text = "empty";
+            newSlotsLevel[2].text = "empty";
         }
     }
 
@@ -148,14 +143,19 @@ public class Menu : MonoBehaviour
         newGame.SetActive(false);
     }
 
-
     public void PickSlot(int slot)
     {
+        _settings.SetHumanLives(slot, 3);
+        _settings.SetOrcLives(slot, 3);
         PlayerPrefs.SetInt("Slot", slot);
     }
 
     public void StartNewMode(int mode)
     {
         SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
+        if (mode == 1)
+            _settings.SetMode(PlayerPrefs.GetInt("Slot"), "singleplayer");
+        else
+            _settings.SetMode(PlayerPrefs.GetInt("Slot"), "multiplayer");
     }
 }

@@ -2995,11 +2995,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 77.71
+      value: 69.851006
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.41
+      value: 0.092999876
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8065,11 +8065,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 77.99999
+      value: 70.141
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4100001
+      value: 0.093
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30445,6 +30445,10 @@ PrefabInstance:
       value: John and Klofalaekjarkjaftur should both go to Earth
       objectReference: {fileID: 0}
     - target: {fileID: 2777252854931746469, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
+      propertyPath: choicesIdxs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777252854931746469, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
       propertyPath: speakers.Array.data[0]
       value: Klofalaekjarkjaftur
       objectReference: {fileID: 0}
@@ -30492,13 +30496,25 @@ PrefabInstance:
       propertyPath: speakers.Array.data[11]
       value: John
       objectReference: {fileID: 0}
+    - target: {fileID: 2777252854931746469, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
+      propertyPath: choicesIdxs.Array.data[0]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777252854931746469, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
+      propertyPath: choicesIdxs.Array.data[1]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777252854931746469, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
+      propertyPath: choicesIdxs.Array.data[2]
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 8042207726384074145, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
       propertyPath: m_RootOrder
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8042207726384074145, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 91.37
+      value: 88.81
       objectReference: {fileID: 0}
     - target: {fileID: 8042207726384074145, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
       propertyPath: m_LocalPosition.y

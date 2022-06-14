@@ -115,7 +115,7 @@ public class WizardBoss : MonoBehaviour
             if (!_attack || !_active || !_startedFight) return;
             if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2 && _canDie)
             {
-                StartCoroutine(Die());
+                StartCoroutine(WizardDie());
             }
         }
     }
@@ -159,7 +159,7 @@ public class WizardBoss : MonoBehaviour
         }
     }
 
-    private IEnumerator Die()
+    private IEnumerator WizardDie()
     {
         _canDie = false;
         _attack = false;
@@ -173,7 +173,6 @@ public class WizardBoss : MonoBehaviour
             yield return new WaitForSeconds(3f);
             Destroy(gameObject);
         }
-
         yield return new WaitForSeconds(2f);
         _attack = true;
         StartCoroutine(Attack());
