@@ -5949,6 +5949,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &305462096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6480383042246598520, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
+  m_PrefabInstance: {fileID: 305462083}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &320202791
 GameObject:
   m_ObjectHideFlags: 0
@@ -8286,6 +8291,18 @@ PrefabInstance:
     - target: {fileID: 4203025158364548848, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
       propertyPath: m_Name
       value: Puzzlestate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203025158364548850, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203025158364548850, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203025158364548850, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -675012413
       objectReference: {fileID: 0}
     - target: {fileID: 4203025158364548851, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
       propertyPath: m_RootOrder
@@ -18047,11 +18064,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.96
+      value: 6.335
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.791
+      value: -1.622
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27939,6 +27956,10 @@ PrefabInstance:
       value: CutsceneStart
       objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 305462096}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: borders
       value: 
       objectReference: {fileID: 230811320}
@@ -32928,6 +32949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a0eadeb91f38cd49967f7fa85f7bca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 305462096}
   mainCamera: {fileID: 1079223425}
   dialogCamera: {fileID: 1755163908}
   texts:
@@ -39466,11 +39488,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.24
+      value: 6.0550003
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.791
+      value: -1.622
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -45226,6 +45248,18 @@ PrefabInstance:
     - target: {fileID: 4203025158364548848, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
       propertyPath: m_Name
       value: Puzzlestate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203025158364548850, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203025158364548850, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203025158364548850, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -675012413
       objectReference: {fileID: 0}
     - target: {fileID: 4203025158364548851, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
       propertyPath: m_RootOrder
