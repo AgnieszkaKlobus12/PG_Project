@@ -70,6 +70,10 @@ public class PlayerController : MonoBehaviour
         _health = gameObject.CompareTag("Player")
             ? _settings.GetOrcLives(PlayerPrefs.GetInt("Slot"))
             : _settings.GetHumanLives(PlayerPrefs.GetInt("Slot"));
+        if (_health == 0)
+        {
+            _health = 3;
+        }
         for (var i = _health; i < lives.Length; i++)
         {
             lives[i].GetComponent<SpriteRenderer>().sprite = null;
