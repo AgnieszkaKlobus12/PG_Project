@@ -20,6 +20,8 @@ public class WizardBoss : MonoBehaviour
     public float minAttackScale;
     private bool _attackExpanding;
     public GameObject finalGem;
+    public GameObject targetStart;
+    private bool _startedFight;
 
     void Start()
     {
@@ -27,51 +29,82 @@ public class WizardBoss : MonoBehaviour
         _attack = true;
         _attackExpanding = true;
         _canDie = true;
-        _active = true;
+        _active = false;
+        _startedFight = false;
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         allLives.SetActive(false);
-        StartCoroutine(Attack());
+        attackFog.SetActive(false);
+
     }
 
     private void Update()
     {
-        if (_active)
+        if (!_active)
         {
-            allLives.SetActive(true);
-            if (_goRight)
+            _active = !gameObject.GetComponent<DialogStart>().enabled;
+        }
+        else
+        {
+            if (!_startedFight)
             {
-                if (transform.position.x >= boundXRight)
+                allLives.SetActive(true);
+                if (transform.position.x < targetStart.transform.position.x)
                 {
-                    _goRight = false;
+                    transform.position = Vector2.MoveTowards(transform.position,
+                        new Vector2(targetStart.transform.position.x + 2f, transform.position.y),
+                        moveSpeed * Time.deltaTime);
+                    _goRight = true;
+                    _spriteRenderer.flipX = !_goRight;
+                    if (_animator.GetInteger("Action") != 1)
+                    {
+                        _animator.SetInteger("Action", 1);
+                    }
                 }
                 else
                 {
-                    gameObject.transform.position = Vector2.MoveTowards(transform.position,
-                        new Vector2(transform.position.x + 1f, gameObject.transform.position.y),
-                        moveSpeed * Time.deltaTime);
+                    _startedFight = true;
+                    attackFog.SetActive(true);
+                    StartCoroutine(Attack());
                 }
             }
             else
             {
-                if (transform.position.x <= boundXLeft)
+                allLives.SetActive(true);
+                if (_goRight)
                 {
-                    _goRight = true;
+                    if (transform.position.x >= boundXRight)
+                    {
+                        _goRight = false;
+                    }
+                    else
+                    {
+                        gameObject.transform.position = Vector2.MoveTowards(transform.position,
+                            new Vector2(transform.position.x + 1f, gameObject.transform.position.y),
+                            moveSpeed * Time.deltaTime);
+                    }
                 }
                 else
                 {
-                    gameObject.transform.position = Vector2.MoveTowards(transform.position,
-                        new Vector2(transform.position.x - 1f, transform.position.y),
-                        moveSpeed * Time.deltaTime);
+                    if (transform.position.x <= boundXLeft)
+                    {
+                        _goRight = true;
+                    }
+                    else
+                    {
+                        gameObject.transform.position = Vector2.MoveTowards(transform.position,
+                            new Vector2(transform.position.x - 1f, transform.position.y),
+                            moveSpeed * Time.deltaTime);
+                    }
                 }
-            }
 
-            if (_animator.GetInteger("Action") != 0 && _canDie)
-            {
-                _animator.SetInteger("Action", 0);
-            }
+                if (_animator.GetInteger("Action") != 1 && _canDie)
+                {
+                    _animator.SetInteger("Action", 1);
+                }
 
-            _spriteRenderer.flipX = !_goRight;
+                _spriteRenderer.flipX = !_goRight;
+            }
         }
     }
 
@@ -79,7 +112,7 @@ public class WizardBoss : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
         {
-            if (!_attack || !_active) return;
+            if (!_attack || !_active || !_startedFight) return;
             if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2 && _canDie)
             {
                 StartCoroutine(Die());
@@ -121,6 +154,7 @@ public class WizardBoss : MonoBehaviour
                     _attackExpanding = true;
                 }
             }
+
             StartCoroutine(Attack());
         }
     }
@@ -129,7 +163,7 @@ public class WizardBoss : MonoBehaviour
     {
         _canDie = false;
         _attack = false;
-        _animator.SetInteger("Action", 1);
+        _animator.SetInteger("Action", 2);
         lives[_idx].GetComponent<SpriteRenderer>().enabled = false;
         _idx -= 1;
         if (_idx < 0)
@@ -139,6 +173,7 @@ public class WizardBoss : MonoBehaviour
             yield return new WaitForSeconds(3f);
             Destroy(gameObject);
         }
+
         yield return new WaitForSeconds(2f);
         _attack = true;
         StartCoroutine(Attack());
