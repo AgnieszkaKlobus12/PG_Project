@@ -39765,6 +39765,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 389311838}
+    - target: {fileID: 1718828231239573413, guid: f072f26c100848246810ee8cf61801b3, type: 3}
+      propertyPath: activeSprite
+      value: 
+      objectReference: {fileID: 7637614873100429697, guid: f7b37b91088c7d44b98c5e710477bd39, type: 3}
     - target: {fileID: 5227404052129482440, guid: f072f26c100848246810ee8cf61801b3, type: 3}
       propertyPath: m_Name
       value: Puzzle (1)
@@ -98213,6 +98217,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 389311838}
+    - target: {fileID: 1718828231239573413, guid: f072f26c100848246810ee8cf61801b3, type: 3}
+      propertyPath: activeSprite
+      value: 
+      objectReference: {fileID: 7637614873100429697, guid: f7b37b91088c7d44b98c5e710477bd39, type: 3}
     - target: {fileID: 5227404052129482440, guid: f072f26c100848246810ee8cf61801b3, type: 3}
       propertyPath: m_Name
       value: Puzzle (1)
