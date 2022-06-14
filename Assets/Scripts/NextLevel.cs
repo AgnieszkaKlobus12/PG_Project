@@ -23,9 +23,7 @@ public class NextLevel : MonoBehaviour
                 break;
             case "Level 3":
                 if (orc.GetComponent<PlayerController>().IsAttackEnabled() &&
-                    human.GetComponent<PlayerController>().IsAttackEnabled() &&
-                    (GameObject.Find("MrScaryBird") == null ||
-                     GameObject.Find("MrScaryBird").AddComponent<BirdBossController>().friendly))
+                    human.GetComponent<PlayerController>().IsAttackEnabled())
                 {
                     SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
                 }

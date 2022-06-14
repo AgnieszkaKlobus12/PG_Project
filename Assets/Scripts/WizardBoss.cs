@@ -35,7 +35,6 @@ public class WizardBoss : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         allLives.SetActive(false);
         attackFog.SetActive(false);
-
     }
 
     private void Update()
@@ -110,14 +109,19 @@ public class WizardBoss : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
+        if (other.gameObject.CompareTag("UserAttack"))
         {
             if (!_attack || !_active || !_startedFight) return;
-            if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2 && _canDie)
-            {
-                StartCoroutine(Die());
-            }
+            StartCoroutine(Die());
         }
+        // else if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
+        // {
+        //     if (!_attack || !_active || !_startedFight) return;
+        //     if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2 && _canDie)
+        //     {
+        //         StartCoroutine(Die());
+        //     }
+        // }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -135,7 +139,8 @@ public class WizardBoss : MonoBehaviour
                 if (attackFog.transform.localScale.x <= maxAttackScale)
                 {
                     attackFog.transform.localScale =
-                        new Vector3(attackFog.transform.localScale.x + 0.1f, attackFog.transform.localScale.y + 0.1f);
+                        new Vector3(attackFog.transform.localScale.x + 0.1f,
+                            attackFog.transform.localScale.y + 0.1f);
                 }
                 else
                 {
@@ -147,7 +152,8 @@ public class WizardBoss : MonoBehaviour
                 if (attackFog.transform.localScale.x >= minAttackScale)
                 {
                     attackFog.transform.localScale =
-                        new Vector3(attackFog.transform.localScale.x - 0.1f, attackFog.transform.localScale.y - 0.1f);
+                        new Vector3(attackFog.transform.localScale.x - 0.1f,
+                            attackFog.transform.localScale.y - 0.1f);
                 }
                 else
                 {
@@ -166,6 +172,7 @@ public class WizardBoss : MonoBehaviour
         _animator.SetInteger("Action", 2);
         lives[_idx].GetComponent<SpriteRenderer>().enabled = false;
         _idx -= 1;
+        attackFog.transform.localScale = new Vector3(minAttackScale, minAttackScale);
         if (_idx < 0)
         {
             _active = false;
@@ -173,7 +180,6 @@ public class WizardBoss : MonoBehaviour
             yield return new WaitForSeconds(3f);
             Destroy(gameObject);
         }
-
         yield return new WaitForSeconds(2f);
         _attack = true;
         StartCoroutine(Attack());

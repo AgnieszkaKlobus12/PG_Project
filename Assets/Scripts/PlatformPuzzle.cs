@@ -27,9 +27,9 @@ public class PlatformPuzzle : MonoBehaviour
         {
             gem.GetComponent<GemScript>().Failed(number);
         }
-
         if (gameObject.transform.position.y > minY && !_hasPlayer &&
-            DateTimeOffset.Now.ToUnixTimeMilliseconds() - _lastTime > 1000)
+            DateTimeOffset.Now.ToUnixTimeMilliseconds() - _lastTime > 1000 &&
+            new Settings().GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer")
         {
             Lower(change);
         }

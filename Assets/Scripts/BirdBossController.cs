@@ -28,6 +28,7 @@ public class BirdBossController : MonoBehaviour
     {
         friendly = true;
         _idx = lives.Length - 1;
+        allLives.SetActive(false);
         _fight = true;
         _startedFight = false;
         _active = false;
@@ -38,7 +39,6 @@ public class BirdBossController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _orc = GameObject.Find("Orc");
         _human = GameObject.Find("Human");
-        allLives.SetActive(false);
     }
 
     private void Update()
@@ -47,7 +47,7 @@ public class BirdBossController : MonoBehaviour
         {
             _active = !gameObject.GetComponent<DialogStart>().enabled;
         }
-        else if(!friendly)
+        else if (!friendly)
         {
             if (!_startedFight)
             {
@@ -125,6 +125,7 @@ public class BirdBossController : MonoBehaviour
             if (!_fight || !_active || !_startedFight) return;
             _animator.SetInteger("Action", 2);
         }
+
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
         {
             if (!_fight || !_active || !_startedFight) return;

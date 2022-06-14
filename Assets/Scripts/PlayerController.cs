@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 _lastRespawn;
     public GameObject chargedAttack;
     private ParticleSystem _chargedAttackSystem;
-    private Animator _chargedAttackAnimator;
     private CircleCollider2D _chargedAttackCollider;
     public int mode;
     
@@ -59,7 +58,6 @@ public class PlayerController : MonoBehaviour
         PlayerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
         _chargedAttackSystem = chargedAttack.GetComponent<ParticleSystem>();
-        _chargedAttackAnimator = chargedAttack.GetComponent<Animator>();
         _chargedAttackCollider = chargedAttack.GetComponent<CircleCollider2D>();
         _collider = GetComponent<CapsuleCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -98,7 +96,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(_jumpEnabled);
         HandleGravity();
         if (_movementEnabled)
         {
@@ -380,7 +377,6 @@ public class PlayerController : MonoBehaviour
         _chargedAttackSystem.transform.localPosition =
             _spriteRenderer.flipX ? new Vector3(-3f, 0f) : new Vector3(3f, 0f);
         _chargedAttackCollider.enabled = true;
-        _chargedAttackAnimator.enabled = true;
         _chargedAttackSystem.Play();
         setAnimation("ChargedAttack");
         StartCoroutine(EnableAttack());
@@ -420,7 +416,6 @@ public class PlayerController : MonoBehaviour
         _movementEnabled = true;
         attackArea.SetActive((false));
         _chargedAttackCollider.enabled = false;
-        _chargedAttackAnimator.enabled = false;
         chargedAttack.tag = "Player";
         setAnimation("Idle");
     }
