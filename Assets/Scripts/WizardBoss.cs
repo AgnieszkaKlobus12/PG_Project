@@ -165,7 +165,7 @@ public class WizardBoss : MonoBehaviour
         }
     }
 
-    private IEnumerator Die()
+    private IEnumerator WizardDie()
     {
         _canDie = false;
         _attack = false;
