@@ -550,6 +550,7 @@ public class PlayerController : MonoBehaviour
 
     public void EnableMovements()
     {
+        _movementEnabled = true;
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level 5":
