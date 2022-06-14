@@ -295,9 +295,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator AfterDie(bool back = true)
     {
         yield return new WaitForSeconds(2f);
-        _movementEnabled = true;
-        _attackEnabled = true;
-        _jumpEnabled = true;
+        EnableMovements();
         if (back)
         {
             _orc.GetComponent<Rigidbody2D>().position = _lastRespawn;
