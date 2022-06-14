@@ -15,13 +15,16 @@ public class MushroomBossController : MonoBehaviour
     private bool _fight;
     private bool _active;
     public GameObject[] lives;
+    public GameObject targetStart;
+    private bool _startedFight;
     private int _idx;
 
     void Start()
     {
+        _startedFight = false;
         _idx = lives.Length - 1;
         _fight = true;
-        _active = true;
+        _active = false;
         _animator = GetComponent<Animator>();
         _target = null;
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -33,39 +36,66 @@ public class MushroomBossController : MonoBehaviour
 
     private void Update()
     {
-        if (!_active) return;
-        if (_target != null)
+        if (!_active)
         {
-            allLives.SetActive(true);
-            transform.position = Vector2.MoveTowards(transform.position,
-                new Vector2(_target.transform.position.x, transform.position.y),
-                moveSpeed * Time.deltaTime);
-            if (_animator.GetInteger("Action") != 3)
-            {
-                _animator.SetInteger("Action", 3);
-            }
+            _active = !gameObject.GetComponent<DialogStart>().enabled;
         }
         else
         {
-            allLives.SetActive(false);
-            if (_animator.GetInteger("Action") != 0)
+            if (!_startedFight)
             {
-                _animator.SetInteger("Action", 0);
+                allLives.SetActive(true);
+                if (transform.position.x < targetStart.transform.position.x)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position,
+                        new Vector2(targetStart.transform.position.x + 2f, transform.position.y),
+                        moveSpeed * Time.deltaTime);
+                    if (_animator.GetInteger("Action") != 3)
+                    {
+                        _animator.SetInteger("Action", 3);
+                    }
+                }
+                else
+                {
+                    _startedFight = true;
+                }
             }
-        }
+            else
+            {
+                if (_target != null)
+                {
+                    allLives.SetActive(true);
+                    transform.position = Vector2.MoveTowards(transform.position,
+                        new Vector2(_target.transform.position.x, transform.position.y),
+                        moveSpeed * Time.deltaTime);
+                    if (_animator.GetInteger("Action") != 3)
+                    {
+                        _animator.SetInteger("Action", 3);
+                    }
+                }
+                else
+                {
+                    allLives.SetActive(false);
+                    if (_animator.GetInteger("Action") != 0)
+                    {
+                        _animator.SetInteger("Action", 0);
+                    }
+                }
 
-        _spriteRenderer.flipX = _rigidbody2D.velocity.x <= 0;
-        if (Vector2.Distance(transform.position, _human.transform.position) < distance)
-        {
-            _target = _human;
-        }
-        else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
-        {
-            _target = _orc;
-        }
-        else
-        {
-            _target = null;
+                _spriteRenderer.flipX = _rigidbody2D.velocity.x <= 0;
+                if (Vector2.Distance(transform.position, _human.transform.position) < distance)
+                {
+                    _target = _human;
+                }
+                else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
+                {
+                    _target = _orc;
+                }
+                else
+                {
+                    _target = null;
+                }
+            }
         }
     }
 
@@ -73,7 +103,7 @@ public class MushroomBossController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
         {
-            if (!_fight || !_active) return;
+            if (!_fight || !_active || !_startedFight) return;
             if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2)
             {
                 StartCoroutine(Die());
