@@ -12,6 +12,8 @@ TagManager:
   - Attack
   - Jump
   - UserAttack
+  - jumpJohn
+  - stayJohn
   layers:
   - Default
   - TransparentFX
@@ -21,7 +23,7 @@ TagManager:
   - UI
   - Overlay
   - EmptyGround
-  - 
+  - Attack
   - 
   - 
   - 

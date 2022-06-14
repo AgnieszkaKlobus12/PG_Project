@@ -36,7 +36,7 @@ public class PuzzleGem : MonoBehaviour
         _completed = true;
         _animator.enabled = true;
         gem.GetComponent<GemAdvanced>().Completed(number);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(7f);
         gem.GetComponent<GemAdvanced>().Failed(number);
         _completed = false;
         _animator.enabled = false;

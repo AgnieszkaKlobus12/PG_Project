@@ -103,7 +103,7 @@ public class MushroomBossController : MonoBehaviour
         if (other.CompareTag("UserAttack"))
         {
             if (!_fight || !_active || !_startedFight) return;
-            _animator.SetInteger("Action", 2);
+            StartCoroutine(Die());
         }
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
         {

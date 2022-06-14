@@ -14863,22 +14863,17 @@ MonoBehaviour:
   attackArea: {fileID: 3324308917335672461}
   lose: {fileID: 0}
   livesObj: {fileID: 0}
-  _rigidbody: {fileID: 0}
   initialGravityScale: 1
-  _spriteRenderer: {fileID: 0}
   speed: 2
   jumpPower: 4
   jumpFallGravityMultiplier: 1.1
   chargedAttack: {fileID: 8450918417898485962}
   mode: 0
   groundOverlapHeight: 0.05
-  emptyGroundMask:
-    serializedVersion: 2
-    m_Bits: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  disableGCTime: 0.5
+  disableGCTime: 0.3
   lives:
   - {fileID: 0}
   - {fileID: 0}

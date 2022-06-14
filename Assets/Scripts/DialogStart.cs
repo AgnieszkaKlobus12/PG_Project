@@ -28,7 +28,6 @@ public class DialogStart : MonoBehaviour
     public GameObject responsePick;
     public GameObject[] _picks;
 
-    private float _originalCameraSize;
     private Settings _settings;
 
     private void Start()
@@ -62,7 +61,6 @@ public class DialogStart : MonoBehaviour
             _started = true;
             NextText();
             dialogCamera.SetActive(true);
-            _originalCameraSize = mainCamera.orthographicSize;
             mainCamera.orthographicSize = 1.2f;
         }
     }
@@ -78,7 +76,7 @@ public class DialogStart : MonoBehaviour
                 _human.GetComponent<Rigidbody2D>().isKinematic = false;
                 _orc.GetComponent<Rigidbody2D>().isKinematic = false;
                 dialogCamera.SetActive(false);
-                mainCamera.orthographicSize = _originalCameraSize;
+                mainCamera.orthographicSize = 2f;
                 _completed = true;
                 _started = false;
                 slider.SetActive(true);
