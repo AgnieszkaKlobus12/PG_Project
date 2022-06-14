@@ -1691,11 +1691,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.684
+      value: 35.246
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.763
+      value: -0.8169999
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9285,11 +9285,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 35.971
+      value: 35.533
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.763
+      value: -0.817
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30199,6 +30199,223 @@ PrefabInstance:
     - target: {fileID: 6442887260433671291, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: m_Offset.y
       value: 0.017965257
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 471203797}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: borders
+      value: 
+      objectReference: {fileID: 714949804}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 446148303}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: dialogCamera
+      value: 
+      objectReference: {fileID: 714949805}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: responsePick
+      value: 
+      objectReference: {fileID: 714949801}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakerObject
+      value: 
+      objectReference: {fileID: 714949803}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: textGameObject
+      value: 
+      objectReference: {fileID: 714949802}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.size
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.size
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[0]
+      value: So what are you gonna do when you get back?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[1]
+      value: I dunno. I guess I haven't thought about it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[2]
+      value: Okay, then think about it now!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[3]
+      value: Well first of all, I don't know how much time has passed. Probably gonna
+        have to call my boss, which I'm not very excited about. She's probably gonna
+        fire me.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[4]
+      value: No! Sorry, I mean, I meant fun things. Are you gonna do something fun?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[5]
+      value: Walk my dog? Go on a date with Tim, probably. I don't know if I should
+        tell him about you and all this, what do you think?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[6]
+      value: Is he cool?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[7]
+      value: Yeah, he's really cool ^_^
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[8]
+      value: Then you should! Come on, ask me what I would do if I came to your world.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[9]
+      value: Haha, okay, what would you do if you came to Earth?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[10]
+      value: "Okay, I would\u2026 No, wait, maybe you guess. What would I do if I
+        came to your world?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[11]
+      value: Watch TV all day? You remember TV? The magic box with moving images
+        I told you about?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[12]
+      value: Nooo, why would I do that? That sounds really boring.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[13]
+      value: People like watching TV, you know.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[14]
+      value: "People are boring. Okay, I'll tell you. I would buy the\u2026 the cream
+        ice?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[15]
+      value: Ice cream.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[16]
+      value: Yes, cream ice. And I would look at the washing machine. The one for
+        cleaning your things.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[17]
+      value: The washing machine? Why would you want to look at that that?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[18]
+      value: It goes zoom. Wouldn't you want to watch it go zoom with me? And eat
+        creamy ice?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[19]
+      value: Yeah, honestly, I would. We could watch the washing machine go zoom.
+        With Tim too, maybe?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[20]
+      value: Yes, of course. And your nice wolf too ^_^
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[21]
+      value: End
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[0]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[1]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[2]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[3]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[4]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[5]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[6]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[7]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[8]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[9]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[10]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[11]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[12]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[13]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[14]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[15]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[16]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[17]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[18]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[19]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[20]
+      value: Klofalaekjarkjaftur
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
@@ -58665,10 +58882,48 @@ MonoBehaviour:
   mainCamera: {fileID: 446148303}
   dialogCamera: {fileID: 714949805}
   texts:
-  - test
+  - "Look at me\u2026 No body anymore\u2026 Just this armour\u2026 I look terrible.
+    Not even like a person anymore."
+  - Hello! My name is Klofalaekjarkjaftur and this is my companion, the human! What's
+    your name?
+  - "It's been so long\u2026 I don't even remember anymore."
+  - What are you doing here?
+  - Feeling bad about myself. And reminiscing about the past, but mostly feeling
+    bad about myself. While reminiscing about the past.
+  - What happened to you?
+  - "I was a human once\u2026 a long time ago. I looked just like this human companion
+    of yours. I think I had\u2026 maybe ginger hair? Or maybe blonde? I don't remember
+    what my body looked like."
+  - What happened to your body?
+  - "It was all so long ago\u2026 I think I still had my body when I came here. Then,
+    the more time I spent here, the less body I had\u2026 I think my arms went first.
+    I had lovely arms. With five fingers. Really good arms, believe me."
+  - Will I lose my body too?
+  - Maybe. Who knows. Mine looked just like yours and I lost it. But speaking of
+    bodies, you seem to have two of your very own. I actually like them very much.
+  - "Javid, I think we should go\u2026 I have a weird feeling about this."
+  - You see, if I had a body I could maybe drink this water. Or sleep. I could even
+    eat something, imagine that! Won't you lend me your bodies for just a little
+    bit?
+  - "Sorry, I don't think we can\u2026 Klofalaekjarkjaftur, let's go."
+  - Okay, fine! Have it your way! I'll just take your bodies myself!
   - End
   speakers:
-  - test
+  - Bodiless Knight
+  - Klofalaekjarkjaftur
+  - Bodiless Knight
+  - John
+  - Bodiless Knight
+  - Klofalaekjarkjaftur
+  - Bodiless Knight
+  - John
+  - Bodiless Knight
+  - John
+  - Bodiless Knight
+  - Klofalaekjarkjaftur
+  - Bodiless Knight
+  - John
+  - Bodiless Knight
   - 
   choices: []
   choicesIdxs: 
