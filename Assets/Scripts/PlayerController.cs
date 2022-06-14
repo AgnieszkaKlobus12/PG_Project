@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     public string player;
     private bool _movementEnabled;
-    public PlayerActions playerActions;
+    public PlayerActions PlayerActions;
     private bool _groundCheckEnabled = true;
     private bool _jumping;
     private bool _jumpEnabled;
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem _chargedAttackSystem;
     private Animator _chargedAttackAnimator;
     private CircleCollider2D _chargedAttackCollider;
+    private int _mode;
 
     [Header("Ground Check")] public float groundOverlapHeight;
     public LayerMask groundMask;
@@ -40,12 +41,14 @@ public class PlayerController : MonoBehaviour
     [Header("Lives")] private int _health;
     public GameObject[] lives;
 
+    private Settings _settings;
+
     private void Awake()
     {
-        //read data from file
+        _settings = new Settings();
         _jumps = 0;
         _dieEnabled = true;
-        playerActions = new PlayerActions();
+        PlayerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
         _chargedAttackSystem = chargedAttack.GetComponent<ParticleSystem>();
         _chargedAttackAnimator = chargedAttack.GetComponent<Animator>();
@@ -55,21 +58,18 @@ public class PlayerController : MonoBehaviour
         _wait = new WaitForSeconds(disableGCTime);
         _animator = GetComponentInChildren<Animator>();
         _animator.SetFloat("X", 0f);
-        playerActions.Multiplayer.OrcJump.performed += Jump;
-        playerActions.Singleplayer.Jump.performed += Jump;
-        playerActions.Multiplayer.HumanJump.performed += Jump;
-        playerActions.Multiplayer.OrcFire.performed += Attack;
-        playerActions.Singleplayer.Fire.performed += Attack;
-        playerActions.Multiplayer.HumanFire.performed += Attack;
-        playerActions.Multiplayer.HumanCharged.performed += ChargedAttack;
-        playerActions.Multiplayer.OrcCharged.performed += ChargedAttack;
-        playerActions.Singleplayer.Charged.performed += ChargedAttack;
-        _health = PlayerPrefs.GetInt("health");
-        if (!PlayerPrefs.HasKey("health"))
-        {
-            _health = lives.Length;
-        }
-
+        PlayerActions.Multiplayer.OrcJump.performed += Jump;
+        PlayerActions.Singleplayer.Jump.performed += Jump;
+        PlayerActions.Multiplayer.HumanJump.performed += Jump;
+        PlayerActions.Multiplayer.OrcFire.performed += Attack;
+        PlayerActions.Singleplayer.Fire.performed += Attack;
+        PlayerActions.Multiplayer.HumanFire.performed += Attack;
+        PlayerActions.Multiplayer.HumanCharged.performed += ChargedAttack;
+        PlayerActions.Multiplayer.OrcCharged.performed += ChargedAttack;
+        PlayerActions.Singleplayer.Charged.performed += ChargedAttack;
+        _health = gameObject.CompareTag("Player")
+            ? _settings.GetOrcLives(PlayerPrefs.GetInt("Slot"))
+            : _settings.GetHumanLives(PlayerPrefs.GetInt("Slot"));
         for (var i = _health; i < lives.Length; i++)
         {
             lives[i].GetComponent<SpriteRenderer>().sprite = null;
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
             {
                 OrcMove();
             }
-            else if (player == "Human" && playerActions.Multiplayer.enabled)
+            else if (player == "Human" && PlayerActions.Multiplayer.enabled)
             {
                 HumanMove();
             }
@@ -105,7 +105,17 @@ public class PlayerController : MonoBehaviour
         _jumpEnabled = false;
         _attackEnabled = false;
         _doubleJumpEnabled = false;
-        playerActions.Multiplayer.Enable(); //do menu
+        if (_settings.GetMode(PlayerPrefs.GetInt("Slot")) == "singleplayer")
+        {
+            PlayerActions.Singleplayer.Enable();
+            _mode = 1;
+        }
+        else
+        {
+            PlayerActions.Multiplayer.Enable();
+            _mode = 2;
+        }
+
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level 5":
@@ -131,12 +141,17 @@ public class PlayerController : MonoBehaviour
 
     void OnDisable()
     {
-        playerActions.Multiplayer.Disable();
+        _mode = 0;
+        PlayerActions.Singleplayer.Disable();
+        PlayerActions.Multiplayer.Disable();
     }
 
     void OrcMove()
     {
-        var moveInput = playerActions.Multiplayer.OrcMove.ReadValue<Vector2>();
+        var moveInput = _mode == 1
+            ? PlayerActions.Singleplayer.Move.ReadValue<Vector2>()
+            : PlayerActions.Multiplayer.OrcMove.ReadValue<Vector2>();
+
         _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
         if (moveInput.x > 0)
         {
@@ -156,7 +171,7 @@ public class PlayerController : MonoBehaviour
 
     void HumanMove()
     {
-        var moveInput = playerActions.Multiplayer.HumanMove.ReadValue<Vector2>();
+        var moveInput = PlayerActions.Multiplayer.HumanMove.ReadValue<Vector2>();
         _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
         if (moveInput.x > 0)
         {
@@ -257,22 +272,19 @@ public class PlayerController : MonoBehaviour
         _dieEnabled = true;
         if (_health == 0)
         {
-            // message.SetActive(true);
-            // message.transform.GetChild(1).gameObject.SetActive(true);
-            // message.transform.GetComponentInChildren<Close>().newScene = "Level 1";
-            // PlayerPrefs.SetInt("health", lives.Length);
+            //TODO kill/win screen, back to menu after click  
         }
     }
 
     private void Jump(InputAction.CallbackContext context)
     {
-        if ((playerActions.Multiplayer.OrcJump.triggered || playerActions.Singleplayer.Jump.triggered) &&
+        if ((PlayerActions.Multiplayer.OrcJump.triggered || PlayerActions.Singleplayer.Jump.triggered) &&
             player == "Orc")
         {
             PerformJump();
         }
-        else if (player == "Human" && playerActions.Multiplayer.enabled &&
-                 playerActions.Multiplayer.HumanJump.triggered)
+        else if (player == "Human" && PlayerActions.Multiplayer.enabled &&
+                 PlayerActions.Multiplayer.HumanJump.triggered)
         {
             PerformJump();
         }
@@ -293,13 +305,13 @@ public class PlayerController : MonoBehaviour
     {
         if (_attackEnabled)
         {
-            if ((playerActions.Multiplayer.OrcFire.triggered || playerActions.Singleplayer.Fire.triggered) &&
+            if ((PlayerActions.Multiplayer.OrcFire.triggered || PlayerActions.Singleplayer.Fire.triggered) &&
                 player == "Orc")
             {
                 PerformAttack();
             }
-            else if (player == "Human" && playerActions.Multiplayer.enabled &&
-                     playerActions.Multiplayer.HumanFire.triggered)
+            else if (player == "Human" && PlayerActions.Multiplayer.enabled &&
+                     PlayerActions.Multiplayer.HumanFire.triggered)
             {
                 PerformAttack();
             }
@@ -324,13 +336,13 @@ public class PlayerController : MonoBehaviour
     {
         if (_chargedAttackEnabled && _attackEnabled)
         {
-            if ((playerActions.Multiplayer.OrcCharged.triggered || playerActions.Singleplayer.Charged.triggered) &&
+            if ((PlayerActions.Multiplayer.OrcCharged.triggered || PlayerActions.Singleplayer.Charged.triggered) &&
                 player == "Orc")
             {
                 PerformChargedAttack();
             }
-            else if (player == "Human" && playerActions.Multiplayer.enabled &&
-                     playerActions.Multiplayer.HumanCharged.triggered)
+            else if (player == "Human" && PlayerActions.Multiplayer.enabled &&
+                     PlayerActions.Multiplayer.HumanCharged.triggered)
             {
                 PerformChargedAttack();
             }

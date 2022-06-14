@@ -36,8 +36,8 @@ public class DialogStart : MonoBehaviour
         _human = GameObject.Find("Human").GetComponent<PlayerController>();
         _speaker = speakerObject.GetComponent<TextMeshProUGUI>();
         _text = textGameObject.GetComponent<TextMeshProUGUI>();
-        _orc.playerActions.Singleplayer.NextText.performed += ctx => NextText();
-        _orc.playerActions.Multiplayer.NextText.performed += ctx => NextText();
+        _orc.PlayerActions.Singleplayer.NextText.performed += ctx => NextText();
+        _orc.PlayerActions.Multiplayer.NextText.performed += ctx => NextText();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
