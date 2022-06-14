@@ -27,7 +27,9 @@ public class DialogStart : MonoBehaviour
     private TextMeshProUGUI _text;
     public GameObject responsePick;
     public GameObject[] _picks;
-    
+
+    private Settings _settings;
+
     private void Start()
     {
         _completed = false;
@@ -35,6 +37,8 @@ public class DialogStart : MonoBehaviour
         _human = GameObject.Find("Human").GetComponent<PlayerController>();
         _speaker = speakerObject.GetComponent<TextMeshProUGUI>();
         _text = textGameObject.GetComponent<TextMeshProUGUI>();
+        _settings = new Settings();
+
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -82,6 +86,7 @@ public class DialogStart : MonoBehaviour
                 dialogCamera.SetActive(false);
                 mainCamera.orthographicSize = 2f;
                 _completed = true;
+                _started = false;
                 slider.SetActive(true);
                 gameObject.GetComponent<DialogStart>().enabled = false;
             }
@@ -116,10 +121,41 @@ public class DialogStart : MonoBehaviour
             }
             else
             {
-                speakerObject.SetActive(true);
-                textGameObject.SetActive(true);
-                _speaker.SetText(speakers[_idx]);
-                _text.SetText(texts[_idx++]);
+                if (texts[_idx] == "Choice")
+                {
+                    _waitingForChoice = true;
+                    speakerObject.SetActive(false);
+                    textGameObject.SetActive(false);
+                    int temp = 0;
+                    borders.SetActive(false);
+                    responsePick.SetActive(true);
+                    foreach (string text in choices)
+                    {
+                        var helper = temp;
+                        _picks[temp].SetActive(true);
+                        _picks[temp].GetComponent<Button>().onClick.AddListener(() => Pick(choicesIdxs[helper]));
+                        _picks[temp++].GetComponentInChildren<TextMeshProUGUI>().text = text;
+                    }
+                    _orc.PlayerActions.Singleplayer.Disable();
+                    _orc.PlayerActions.Multiplayer.Disable();
+                    _orc.PlayerActions.UI.Enable();
+                }
+                else
+                {
+                    if (texts[_idx] == "Life--")
+                    {
+                        _orc.Die(false);
+                        _human.Die(false);
+                        _idx++;
+                    }
+                    else
+                    {
+                        speakerObject.SetActive(true);
+                        textGameObject.SetActive(true);
+                        _speaker.SetText(speakers[_idx]);
+                        _text.SetText(texts[_idx++]);
+                    }
+                }
             }
         }
     }
@@ -133,10 +169,13 @@ public class DialogStart : MonoBehaviour
         var temp = 0;
         foreach (var text in choices)
         {
+            _picks[temp].GetComponent<Button>().onClick.RemoveAllListeners();
             _picks[temp++].SetActive(false);
         }
-        _orc.PlayerActions.Singleplayer.Enable();
-        _orc.PlayerActions.Multiplayer.Enable();
+        if (_settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer")
+            _orc.PlayerActions.Multiplayer.Enable();
+        else
+            _orc.PlayerActions.Singleplayer.Enable();
         _orc.PlayerActions.UI.Disable();
         NextText();
     }
