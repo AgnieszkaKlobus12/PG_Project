@@ -45,7 +45,7 @@ public class Settings
             1 => _humanLives1,
             2 => _humanLives2,
             3 => _humanLives3,
-            _ => -1
+            _ => 3
         };
     }
 
@@ -56,7 +56,7 @@ public class Settings
             1 => _orcLives1,
             2 => _orcLives2,
             3 => _orcLives3,
-            _ => -1
+            _ => 3
         };
     }
 

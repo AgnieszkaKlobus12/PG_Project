@@ -75,7 +75,7 @@ public class GemScript : MonoBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level 5":
-                // Final
+                // TODO win screen, same as in player controller
                 break;
             case "Level 4":
                 other.GetComponent<PlayerController>().UnlockChargedAttack();
