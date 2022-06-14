@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
             {
                 OrcMove();
             }
-            else if (player == "Human" && PlayerActions.Multiplayer.enabled)
+            else if (player == "Human")
             {
                 HumanMove();
             }
@@ -111,15 +111,15 @@ public class PlayerController : MonoBehaviour
         _jumpEnabled = false;
         _attackEnabled = false;
         _doubleJumpEnabled = false;
-        if (_settings.GetMode(PlayerPrefs.GetInt("Slot")) == "singleplayer")
-        {
-            PlayerActions.Singleplayer.Enable();
-            _mode = 1;
-        }
-        else
+        if (_settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer")
         {
             PlayerActions.Multiplayer.Enable();
             _mode = 2;
+        }
+        else
+        {
+            PlayerActions.Singleplayer.Enable();
+            _mode = 1;
         }
 
         switch (SceneManager.GetActiveScene().name)
@@ -177,21 +177,29 @@ public class PlayerController : MonoBehaviour
 
     void HumanMove()
     {
-        var moveInput = PlayerActions.Multiplayer.HumanMove.ReadValue<Vector2>();
-        _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
-        if (moveInput.x > 0)
+        if (_mode == 1)
         {
-            setAnimation("Walk");
-            _spriteRenderer.flipX = false;
-        }
-        else if (moveInput.x < 0)
-        {
-            setAnimation("Walk");
-            _spriteRenderer.flipX = true;
+            var moveInput = PlayerActions.Multiplayer.HumanMove.ReadValue<Vector2>();
+            _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
+            if (moveInput.x > 0)
+            {
+                setAnimation("Walk");
+                _spriteRenderer.flipX = false;
+            }
+            else if (moveInput.x < 0)
+            {
+                setAnimation("Walk");
+                _spriteRenderer.flipX = true;
+            }
+            else
+            {
+                setAnimation("Idle");
+            }
         }
         else
         {
-            setAnimation("Idle");
+            //todo John control
+            
         }
     }
 

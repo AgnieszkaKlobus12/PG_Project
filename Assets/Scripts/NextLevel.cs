@@ -6,6 +6,7 @@ public class NextLevel : MonoBehaviour
     public string nextSceneName;
     public GameObject orc;
     public GameObject human;
+    public Settings Settings;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -44,7 +45,6 @@ public class NextLevel : MonoBehaviour
                 {
                     SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
                 }
-
                 break;
         }
     }
