@@ -8393,6 +8393,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4203025158364548844, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
+      propertyPath: activeSprite
+      value: 
+      objectReference: {fileID: -6824210185934471467, guid: f7b37b91088c7d44b98c5e710477bd39, type: 3}
+    - target: {fileID: 4203025158364548844, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
       propertyPath: leftCollider
       value: 
       objectReference: {fileID: 1239189646}
@@ -45579,6 +45583,10 @@ PrefabInstance:
       propertyPath: rotationIdx
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4203025158364548844, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
+      propertyPath: activeSprite
+      value: 
+      objectReference: {fileID: -6824210185934471467, guid: f7b37b91088c7d44b98c5e710477bd39, type: 3}
     - target: {fileID: 4203025158364548844, guid: 54defb8ee68cb244684be049bffc023e, type: 3}
       propertyPath: leftCollider
       value: 

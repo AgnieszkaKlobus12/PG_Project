@@ -7,6 +7,7 @@ public class StatueScript : MonoBehaviour
     public bool flipX;
     public GameObject gem;
     public int rotationIdx;
+    public Sprite activeSprite;
     private bool _completed;
     private Settings Settings;
     private SpriteRenderer _spriteRenderer;
@@ -28,8 +29,8 @@ public class StatueScript : MonoBehaviour
         {
             gem.GetComponent<GemScript>().Completed();
             _completed = true;
-            if (Settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer" ||
-                Settings.GetMode(PlayerPrefs.GetInt("Slot")) == "empty" && other.CompareTag("Player"))
+            gameObject.GetComponent<SpriteRenderer>().sprite = activeSprite;
+            if (Settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer" || Settings.GetMode(PlayerPrefs.GetInt("Slot")) == "empty" && other.CompareTag("Player"))
             {
                 _perm = true;
             }
