@@ -118109,6 +118109,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1320603600}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: EndScreen
+      value: 
+      objectReference: {fileID: 859193632}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 110612948}
@@ -130584,3 +130588,4 @@ MonoBehaviour:
   borders: {fileID: 1320603600}
   responsePick: {fileID: 1320603597}
   _picks: []
+  EndScreen: {fileID: 859193632}

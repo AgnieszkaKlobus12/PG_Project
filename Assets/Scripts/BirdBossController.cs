@@ -22,9 +22,11 @@ public class BirdBossController : MonoBehaviour
     private bool _startedFight;
     public GameObject[] lives;
     private int _idx;
+    public bool friendly;
 
     void Start()
     {
+        friendly = true;
         _idx = lives.Length - 1;
         _fight = true;
         _startedFight = false;
@@ -45,7 +47,7 @@ public class BirdBossController : MonoBehaviour
         {
             _active = !gameObject.GetComponent<DialogStart>().enabled;
         }
-        else
+        else if(!friendly)
         {
             if (!_startedFight)
             {
