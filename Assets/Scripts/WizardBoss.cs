@@ -114,14 +114,15 @@ public class WizardBoss : MonoBehaviour
             if (!_attack || !_active || !_startedFight) return;
             StartCoroutine(Die());
         }
-        // else if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
-        // {
-        //     if (!_attack || !_active || !_startedFight) return;
-        //     if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2 && _canDie)
-        //     {
-        //         StartCoroutine(Die());
-        //     }
-        // }
+        else if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
+        {
+            if (!_attack || !_active || !_startedFight) return;
+            if ((other.gameObject.GetComponent<Animator>() == null ||
+                other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2) && _canDie)
+            {
+                StartCoroutine(Die());
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -168,6 +169,7 @@ public class WizardBoss : MonoBehaviour
     private IEnumerator Die()
     {
         _canDie = false;
+        attackFog.SetActive(false);
         _attack = false;
         _animator.SetInteger("Action", 2);
         lives[_idx].GetComponent<SpriteRenderer>().enabled = false;
@@ -180,8 +182,10 @@ public class WizardBoss : MonoBehaviour
             yield return new WaitForSeconds(3f);
             Destroy(gameObject);
         }
+
         yield return new WaitForSeconds(2f);
         _attack = true;
+        attackFog.SetActive(true);
         StartCoroutine(Attack());
         _canDie = true;
     }

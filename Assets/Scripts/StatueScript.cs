@@ -30,7 +30,9 @@ public class StatueScript : MonoBehaviour
             gem.GetComponent<GemScript>().Completed();
             _completed = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = activeSprite;
-            if (Settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer" || Settings.GetMode(PlayerPrefs.GetInt("Slot")) == "empty" && other.CompareTag("Player"))
+            if (Settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer" ||
+                Settings.GetMode(PlayerPrefs.GetInt("Slot")) == "empty" &&
+                (other.CompareTag("Player") || other.CompareTag("Human")))
             {
                 _perm = true;
             }
@@ -82,6 +84,7 @@ public class StatueScript : MonoBehaviour
                 rightCollider.enabled = false;
             }
         }
+
         StartCoroutine(turn());
     }
 }
