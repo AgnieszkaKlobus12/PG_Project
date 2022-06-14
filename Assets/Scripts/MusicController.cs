@@ -24,6 +24,7 @@ public class MusicController : MonoBehaviour
         _audioSource.volume = slider.value;
         PlayerPrefs.SetFloat("MusicVolume", slider.value);
     }
+
     void OnApplicationQuit()
     {
         PlayerPrefs.DeleteKey("MusicVolume");
