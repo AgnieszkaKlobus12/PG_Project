@@ -91,8 +91,6 @@ public class DialogStart : MonoBehaviour
                 foreach (string text in choices)
                 {
                     var helper = temp;
-                    Debug.Log("pick should get assigned");
-                    Debug.Log(temp);
                     _picks[temp].SetActive(true);
                     _picks[temp].GetComponent<Button>().onClick.AddListener(() => Pick(choicesIdxs[helper]));
                     _picks[temp++].GetComponentInChildren<TextMeshProUGUI>().text = text;
@@ -118,7 +116,6 @@ public class DialogStart : MonoBehaviour
 
     public void Pick(int newIndex)
     {
-        Debug.Log("Pick called");
         _idx = newIndex;
         _waitingForChoice = false;
         responsePick.SetActive(false);
