@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +12,7 @@ public class DialogStart : MonoBehaviour
 
     private int _idx;
 
+    public GameObject slider;
     public Camera mainCamera;
     public GameObject dialogCamera;
     public string[] texts;
@@ -43,6 +43,7 @@ public class DialogStart : MonoBehaviour
     {
         if (!_completed && (col.CompareTag("Human") || col.CompareTag("Player")))
         {
+            slider.SetActive(false);
             _idx = 0;
             _waitingForChoice = false;
             _orc.PlayerActions.Singleplayer.NextText.performed += ctx => NextText();
@@ -76,6 +77,7 @@ public class DialogStart : MonoBehaviour
                 dialogCamera.SetActive(false);
                 mainCamera.orthographicSize = _originalCameraSize;
                 _completed = true;
+                slider.SetActive(true);
                 gameObject.GetComponent<DialogStart>().enabled = false;
             }
             else if (texts[_idx] == "Choice")

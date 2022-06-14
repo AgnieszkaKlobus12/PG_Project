@@ -21,15 +21,20 @@ public class KnightBossController : MonoBehaviour
     private bool _active;
     public GameObject[] lives;
     private int _idx;
+    private Rigidbody2D _rigidbody2D;
     public GameObject smokeParticle;
+    public GameObject targetStart;
+    private bool _startedFight;
 
     void Start()
     {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CapsuleCollider2D>();
         _idx = lives.Length - 1;
         _fight = true;
         _die = true;
-        _active = true;
+        _active = false;
+        _startedFight = false;
         _animator = GetComponent<Animator>();
         _target = null;
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -40,52 +45,83 @@ public class KnightBossController : MonoBehaviour
 
     private void Update()
     {
-        if (_target != null && _active)
+        if (!_active)
         {
-            allLives.SetActive(true);
-            gameObject.transform.position = Vector2.MoveTowards(transform.position,
-                new Vector2(_target.transform.position.x, gameObject.transform.position.y),
-                moveSpeed * Time.deltaTime);
-            if (_animator.GetInteger("Action") != 1)
-            {
-                _animator.SetInteger("Action", 1);
-            }
-
-            _spriteRenderer.flipX = _target.transform.position.x >= gameObject.transform.position.x;
-            if (Vector2.Distance(transform.position, _target.transform.position) < attackDistance && _fight && _die)
-            {
-                StartCoroutine(Attack());
-            }
+            _active = !gameObject.GetComponent<DialogStart>().enabled;
         }
         else
         {
-            allLives.SetActive(false);
-            if (_animator.GetInteger("Action") != 0)
+            if (!_startedFight)
             {
-                _animator.SetInteger("Action", 0);
+                allLives.SetActive(true);
+                if (transform.position.x < targetStart.transform.position.x)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position,
+                        new Vector2(targetStart.transform.position.x + 2f, transform.position.y),
+                        moveSpeed * Time.deltaTime);
+                    _spriteRenderer.flipX = transform.position.x < targetStart.transform.position.x;
+                    if (_animator.GetInteger("Action") != 1)
+                    {
+                        _animator.SetInteger("Action", 1);
+                    }
+                }
+                else
+                {
+                    _startedFight = true;
+                }
             }
-        }
+            else
+            {
+                if (_target != null)
+                {
+                    allLives.SetActive(true);
+                    gameObject.transform.position = Vector2.MoveTowards(transform.position,
+                        new Vector2(_target.transform.position.x, transform.position.y),
+                        moveSpeed * Time.deltaTime);
+                    if (_animator.GetInteger("Action") != 1)
+                    {
+                        _animator.SetInteger("Action", 1);
+                    }
 
-        if (Vector2.Distance(transform.position, _human.transform.position) < distance)
-        {
-            _target = _human;
-            _active = true;
-        }
-        else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
-        {
-            _target = _orc;
-            _active = true;
-        }
-        else
-        {
-            _target = null;
-        }
+                    _spriteRenderer.flipX = _target.transform.position.x >= gameObject.transform.position.x;
+                    if (Vector2.Distance(transform.position, _target.transform.position) < attackDistance && _fight &&
+                        _die)
+                    {
+                        StartCoroutine(Attack());
+                    }
+                }
+                else
+                {
+                    allLives.SetActive(false);
+                    if (_animator.GetInteger("Action") != 0)
+                    {
+                        _animator.SetInteger("Action", 0);
+                    }
+                }
 
-        if (!IsGrounded())
-        {
-            gameObject.transform.position = Vector2.MoveTowards(transform.position,
-                new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.1f),
-                moveSpeed * 2 * Time.deltaTime);
+                if (Vector2.Distance(transform.position, _human.transform.position) < distance)
+                {
+                    _target = _human;
+                    _active = true;
+                }
+                else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
+                {
+                    _target = _orc;
+                    _active = true;
+                }
+                else
+                {
+                    _target = null;
+                }
+                _spriteRenderer.flipX = transform.position.x < _target.transform.position.x;
+
+                if (!IsGrounded())
+                {
+                    gameObject.transform.position = Vector2.MoveTowards(transform.position,
+                        new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 0.1f),
+                        moveSpeed * 2 * Time.deltaTime);
+                }
+            }
         }
     }
 
@@ -93,7 +129,7 @@ public class KnightBossController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
         {
-            if (!_die || !_active) return;
+            if (!_die || !_active|| !_startedFight) return;
             if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2)
             {
                 StartCoroutine(Die());

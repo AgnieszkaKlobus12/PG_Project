@@ -8,6 +8,7 @@ public class BirdBossController : MonoBehaviour
     private Animator _animator;
     public GameObject allLives;
     private GameObject _target;
+    public GameObject targetStart;
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _collider;
@@ -18,6 +19,7 @@ public class BirdBossController : MonoBehaviour
     public float groundOverlapHeight;
     private bool _fight;
     private bool _active;
+    private bool _startedFight;
     public GameObject[] lives;
     private int _idx;
 
@@ -25,7 +27,8 @@ public class BirdBossController : MonoBehaviour
     {
         _idx = lives.Length - 1;
         _fight = true;
-        _active = true;
+        _startedFight = false;
+        _active = false;
         _animator = GetComponent<Animator>();
         _target = null;
         _rigidbody2D = GetComponent<Rigidbody2D>();
@@ -38,50 +41,78 @@ public class BirdBossController : MonoBehaviour
 
     private void Update()
     {
-        if (!_active) return;
-        if (_target != null)
+        if (!_active)
         {
-            allLives.SetActive(true);
-            transform.position = Vector2.MoveTowards(transform.position,
-                new Vector2(_target.transform.position.x, _target.transform.position.y),
-                moveSpeed * Time.deltaTime);
-            if (_animator.GetInteger("Action") != 1)
-            {
-                _animator.SetInteger("Action", 1);
-            }
+            _active = !gameObject.GetComponent<DialogStart>().enabled;
         }
         else
         {
-            allLives.SetActive(false);
-            if (!IsGrounded())
+            if (!_startedFight)
             {
-                if (_animator.GetInteger("Action") != 1)
+                allLives.SetActive(true);
+                if (transform.position.x < targetStart.transform.position.x ||
+                    transform.position.y < targetStart.transform.position.y)
                 {
-                    _animator.SetInteger("Action", 1);
+                    transform.position = Vector2.MoveTowards(transform.position,
+                        new Vector2(targetStart.transform.position.x + 2f, targetStart.transform.position.y + 2f),
+                        moveSpeed * Time.deltaTime);
+                    if (_animator.GetInteger("Action") != 1)
+                    {
+                        _animator.SetInteger("Action", 1);
+                    }
+                }
+                else
+                {
+                    _startedFight = true;
+                }
+            }
+            else
+            {
+                if (_target != null)
+                {
+                    allLives.SetActive(true);
+                    transform.position = Vector2.MoveTowards(transform.position,
+                        new Vector2(_target.transform.position.x, _target.transform.position.y),
+                        moveSpeed * Time.deltaTime);
+                    if (_animator.GetInteger("Action") != 1)
+                    {
+                        _animator.SetInteger("Action", 1);
+                    }
+                }
+                else
+                {
+                    allLives.SetActive(false);
+                    if (!IsGrounded())
+                    {
+                        if (_animator.GetInteger("Action") != 1)
+                        {
+                            _animator.SetInteger("Action", 1);
+                        }
+
+                        transform.position = Vector2.MoveTowards(transform.position,
+                            new Vector2(transform.position.x, transform.position.y - 1f),
+                            moveSpeed * Time.deltaTime);
+                    }
+                    else if (_animator.GetInteger("Action") != 0)
+                    {
+                        _animator.SetInteger("Action", 0);
+                    }
                 }
 
-                transform.position = Vector2.MoveTowards(transform.position,
-                    new Vector2(transform.position.x, transform.position.y - 1f),
-                    moveSpeed * Time.deltaTime);
+                _spriteRenderer.flipX = _rigidbody2D.velocity.x <= 0;
+                if (Vector2.Distance(transform.position, _human.transform.position) < distance)
+                {
+                    _target = _human;
+                }
+                else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
+                {
+                    _target = _orc;
+                }
+                else
+                {
+                    _target = null;
+                }
             }
-            else if (_animator.GetInteger("Action") != 0)
-            {
-                _animator.SetInteger("Action", 0);
-            }
-        }
-
-        _spriteRenderer.flipX = _rigidbody2D.velocity.x <= 0;
-        if (Vector2.Distance(transform.position, _human.transform.position) < distance)
-        {
-            _target = _human;
-        }
-        else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
-        {
-            _target = _orc;
-        }
-        else
-        {
-            _target = null;
         }
     }
 
@@ -89,7 +120,7 @@ public class BirdBossController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
         {
-            if (!_fight || !_active) return;
+            if (!_fight || !_active || !_startedFight) return;
             if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2)
             {
                 StartCoroutine(Die());
