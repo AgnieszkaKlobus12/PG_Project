@@ -6,12 +6,14 @@ public class CameraControl : MonoBehaviour
     private GameObject _orc;
     private GameObject _human;
     private Camera _camera;
+    private Settings _settings;
 
     private void Start()
     {
         _camera = gameObject.GetComponent<Camera>();
         _orc = GameObject.Find("Orc");
         _human = GameObject.Find("Human");
+        _settings = new Settings();
     }
 
     void Update()
@@ -39,7 +41,14 @@ public class CameraControl : MonoBehaviour
             }
         }
 
-        gameObject.transform.position = new Vector3((_orc.transform.position.x + _human.transform.position.x) / 2,
-            (_orc.transform.position.y + _human.transform.position.y) / 2);
+        if (_settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer")
+        {
+            gameObject.transform.position = new Vector3((_orc.transform.position.x + _human.transform.position.x) / 2,
+                (_orc.transform.position.y + _human.transform.position.y) / 2);
+        }
+        else
+        {
+            gameObject.transform.position = _orc.transform.position;
+        }
     }
 }

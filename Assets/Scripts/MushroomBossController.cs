@@ -18,6 +18,8 @@ public class MushroomBossController : MonoBehaviour
     public GameObject targetStart;
     private bool _startedFight;
     private int _idx;
+    public GameObject DontGoThere;
+    public GameObject DontGoThere2;
 
     void Start()
     {
@@ -62,7 +64,21 @@ public class MushroomBossController : MonoBehaviour
             }
             else
             {
-                if (_target != null && transform.position.x < targetStart.transform.position.x)
+                if (Vector2.Distance(transform.position, _human.transform.position) < distance)
+                {
+                    _target = _human;
+                }
+                else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
+                {
+                    _target = _orc;
+                }
+                else
+                {
+                    _target = null;
+                }
+
+                if (_target != null && transform.position.x < DontGoThere.transform.position.x &&
+                    transform.position.x > DontGoThere2.transform.position.x)
                 {
                     allLives.SetActive(true);
                     transform.position = Vector2.MoveTowards(transform.position,
@@ -81,19 +97,7 @@ public class MushroomBossController : MonoBehaviour
                     }
                 }
 
-                _spriteRenderer.flipX = _rigidbody2D.velocity.x <= 0;
-                if (Vector2.Distance(transform.position, _human.transform.position) < distance)
-                {
-                    _target = _human;
-                }
-                else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
-                {
-                    _target = _orc;
-                }
-                else
-                {
-                    _target = null;
-                }
+                _spriteRenderer.flipX = _target.transform.position.x <= transform.position.x;
             }
         }
     }
@@ -105,15 +109,17 @@ public class MushroomBossController : MonoBehaviour
             if (!_fight || !_active || !_startedFight) return;
             StartCoroutine(Die());
         }
+
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
         {
-            if (!_fight || !_active || !_startedFight) return;
             if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2)
             {
+                if (!_fight || !_active || !_startedFight) return;
                 StartCoroutine(Die());
             }
             else
             {
+                if (!_fight || !_active || !_startedFight) return;
                 StartCoroutine(Kill());
                 other.gameObject.GetComponent<PlayerController>().Die(); // Kill
             }
@@ -144,11 +150,14 @@ public class MushroomBossController : MonoBehaviour
         _idx -= 1;
         if (_idx < 0)
         {
-            _animator.SetInteger("Action", 2);
-            _active = false;
+            _animator.SetInteger("Action", 1);
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
         }
-
-        yield return new WaitForSeconds(1.5f);
-        _fight = true;
+        else
+        {
+            yield return new WaitForSeconds(1f);
+            _fight = true;
+        }
     }
 }

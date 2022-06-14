@@ -51,7 +51,11 @@ public class DialogStart : MonoBehaviour
             _orc.PlayerActions.Singleplayer.NextText.performed += ctx => NextText();
             _orc.PlayerActions.Multiplayer.NextText.performed += ctx => NextText();
             _orc.MovementEnabled = false;
+            _orc.JumpEnabled = false;
+            _orc.AttackEnabled = false;
             _human.MovementEnabled = false;
+            _human.JumpEnabled = false;
+            _human.AttackEnabled = false;
             _orc.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
             _human.GetComponent<Rigidbody2D>().velocity =  new Vector2(0,0);
             _human.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -72,7 +76,11 @@ public class DialogStart : MonoBehaviour
             if (texts[_idx] == "End")
             {
                 _orc.MovementEnabled = true;
+                _orc.JumpEnabled = true;
+                _orc.AttackEnabled = true;
                 _human.MovementEnabled = true;
+                _human.JumpEnabled = true;
+                _human.AttackEnabled = true;
                 _human.GetComponent<Rigidbody2D>().isKinematic = false;
                 _orc.GetComponent<Rigidbody2D>().isKinematic = false;
                 dialogCamera.SetActive(false);
@@ -81,6 +89,35 @@ public class DialogStart : MonoBehaviour
                 _started = false;
                 slider.SetActive(true);
                 gameObject.GetComponent<DialogStart>().enabled = false;
+            }
+            else if (texts[_idx] == "Choice")
+            {
+                _waitingForChoice = true;
+                speakerObject.SetActive(false);
+                textGameObject.SetActive(false);
+                int temp = 0;
+                borders.SetActive(false);
+                responsePick.SetActive(true);
+                foreach (string text in choices)
+                {
+                    var helper = temp;
+                    _picks[temp].SetActive(true);
+                    _picks[temp].GetComponent<Button>().onClick.AddListener(() => Pick(choicesIdxs[helper]));
+                    _picks[temp++].GetComponentInChildren<TextMeshProUGUI>().text = text;
+                }
+                _orc.PlayerActions.Singleplayer.Disable();
+                _orc.PlayerActions.Multiplayer.Disable();
+                _orc.PlayerActions.UI.Enable();
+            }
+            else if (texts[_idx] == "Life--")
+            {
+                _orc.Die(false);
+                _human.Die(false);
+            }
+            else if (texts[_idx] == "Life++")
+            {
+                _orc.AddLife();
+                _human.AddLife();
             }
             else
             {

@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     private Animator _animator;
     public string player;
-    public GameObject _orc;
+    private GameObject _orc;
+    private GameObject _human;
     private bool _movementEnabled;
     public PlayerActions PlayerActions;
     private bool _groundCheckEnabled = true;
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private Animator _chargedAttackAnimator;
     private CircleCollider2D _chargedAttackCollider;
     public int mode;
-
+    
     [Header("Ground Check")] public float groundOverlapHeight;
     public LayerMask groundMask;
     public float disableGCTime;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
         _settings = new Settings();
         _jumps = 0;
         _orc = GameObject.Find("Orc");
+        _human = GameObject.Find("Human");
         _dieEnabled = true;
         PlayerActions = new PlayerActions();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -272,7 +274,8 @@ public class PlayerController : MonoBehaviour
         if (mode == 1 && other.CompareTag("jumpJohn") && gameObject.CompareTag("Human"))
         {
             PerformJump();
-        }else if (mode == 1 && other.CompareTag("stayJohn") && gameObject.CompareTag("Human"))
+        }
+        else if (mode == 1 && other.CompareTag("stayJohn") && gameObject.CompareTag("Human"))
         {
             gameObject.isStatic = true;
         }
@@ -289,6 +292,12 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit2D(Collision2D col)
     {
         transform.parent = null;
+    }
+
+    public void AddLife()
+    {
+        _health++;
+        lives[_health].GetComponent<SpriteRenderer>().enabled = true;
     }
 
     public void Die(bool back = true)
@@ -313,11 +322,12 @@ public class PlayerController : MonoBehaviour
         _jumpEnabled = true;
         if (back)
         {
-            _rigidbody.position = _lastRespawn;
+            _orc.GetComponent<Rigidbody2D>().position = _lastRespawn;
+            _human.GetComponent<Rigidbody2D>().position = _lastRespawn;
         }
 
         _health -= 1;
-        lives[_health].GetComponent<SpriteRenderer>().sprite = null;
+        lives[_health].GetComponent<SpriteRenderer>().enabled = false;
         setAnimation("Idle");
         _dieEnabled = true;
         if (_health == 0)
@@ -344,7 +354,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void PerformJump()
+    private void PerformJump()
     {
         if ((_jumps < 1 || _jumps > 0 && _doubleJumpEnabled && _jumps < 2) && _movementEnabled &&
             _jumpEnabled)
@@ -536,5 +546,17 @@ public class PlayerController : MonoBehaviour
     {
         get => _movementEnabled;
         set => _movementEnabled = value;
+    }
+
+    public bool JumpEnabled
+    {
+        get => _jumpEnabled;
+        set => _jumpEnabled = value;
+    }
+
+    public bool AttackEnabled
+    {
+        get => _attackEnabled;
+        set => _attackEnabled = value;
     }
 }
