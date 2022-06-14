@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour
     public void AddLife()
     {
         _health++;
-        lives[_health].GetComponent<SpriteRenderer>().enabled = true;
+        lives[_health-1].GetComponent<SpriteRenderer>().enabled = true;
     }
 
     public void Die(bool back = true)
