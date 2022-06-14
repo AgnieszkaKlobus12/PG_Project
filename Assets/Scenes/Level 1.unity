@@ -5610,11 +5610,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2986222321917831792, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.6901
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2986222321917831792, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 165.0246
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 3072200607897183858, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
       propertyPath: m_RootOrder
@@ -5703,7 +5703,7 @@ PrefabInstance:
     - target: {fileID: 5043754013068829861, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 618081352}
+      objectReference: {fileID: 8455340624007934458}
     - target: {fileID: 5043754013068829861, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -12373,17 +12373,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &618081352 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8455340624466091441, guid: a09aa5551ec368f43a87c9998165bd8b, type: 3}
-  m_PrefabInstance: {fileID: 8455340624007934457}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8880b01508c9d043a73f2de8ca272eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &626461033
 GameObject:
   m_ObjectHideFlags: 0
@@ -19690,6 +19679,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &982256903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7200699836001839801, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
+  m_PrefabInstance: {fileID: 305462083}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &983920901
 GameObject:
   m_ObjectHideFlags: 0
@@ -25920,11 +25914,11 @@ PrefabInstance:
     - target: {fileID: 1699593814521002544, guid: d603df39ba0545f4baf1afb70930e936, type: 3}
       propertyPath: orc
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1888482147}
     - target: {fileID: 1699593814521002544, guid: d603df39ba0545f4baf1afb70930e936, type: 3}
       propertyPath: human
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 923087424}
     - target: {fileID: 1699593814521002546, guid: d603df39ba0545f4baf1afb70930e936, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -45787,6 +45781,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4305708018892529164, guid: a09aa5551ec368f43a87c9998165bd8b, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 1723261327}
     - target: {fileID: 8455340624466091441, guid: a09aa5551ec368f43a87c9998165bd8b, type: 3}
       propertyPath: slider
       value: 
@@ -45845,6 +45843,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a09aa5551ec368f43a87c9998165bd8b, type: 3}
+--- !u!114 &8455340624007934458 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4305708018892529164, guid: a09aa5551ec368f43a87c9998165bd8b, type: 3}
+  m_PrefabInstance: {fileID: 8455340624007934457}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8880b01508c9d043a73f2de8ca272eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9147899133995817852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45868,6 +45877,14 @@ PrefabInstance:
       propertyPath: lives
       value: 
       objectReference: {fileID: 305462093}
+    - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
+      propertyPath: newSkill
+      value: 
+      objectReference: {fileID: 982256903}
+    - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
+      propertyPath: timeToHideView
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9147899134087102569, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
       propertyPath: m_Name
       value: Gem
