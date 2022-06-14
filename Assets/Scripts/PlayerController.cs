@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
             _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _orc.GetComponent<PlayerController>()._health);
             _settings.SetLevel(PlayerPrefs.GetInt("Slot"), SceneManager.GetActiveScene().name);
         }
+
         _chargedAttackEnabled = false;
         _jumpEnabled = false;
         _attackEnabled = false;
@@ -201,7 +202,7 @@ public class PlayerController : MonoBehaviour
             var bounds = _collider.bounds;
             _boxCenter = new Vector2(bounds.center.x - x / 2, bounds.center.y);
             var groundBox = Physics2D.OverlapBox(_boxCenter, _boxSize, 0f, groundMask);
-            if (groundBox != null && _jumpEnabled)
+            if (groundBox != null)
             {
                 PerformJump();
             }
@@ -268,7 +269,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Respawn"))
+        if (mode == 1 && other.CompareTag("jumpJohn") && gameObject.CompareTag("Human"))
+        {
+            PerformJump();
+        }else if (mode == 1 && other.CompareTag("stayJohn") && gameObject.CompareTag("Human"))
+        {
+            gameObject.isStatic = true;
+        }
+        else if (other.gameObject.CompareTag("Respawn"))
         {
             _lastRespawn = other.transform.position;
         }
@@ -338,7 +346,7 @@ public class PlayerController : MonoBehaviour
 
     public void PerformJump()
     {
-        if ((_jumps < 1 || _jumps > 0 && _doubleJumpEnabled) && _movementEnabled &&
+        if ((_jumps < 1 || _jumps > 0 && _doubleJumpEnabled && _jumps < 2) && _movementEnabled &&
             _jumpEnabled)
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpPower);

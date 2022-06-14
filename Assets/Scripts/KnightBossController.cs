@@ -19,6 +19,7 @@ public class KnightBossController : MonoBehaviour
     private bool _fight;
     private bool _die;
     private bool _active;
+    public GameObject stayJohn;
     public GameObject[] lives;
     private int _idx;
     private Rigidbody2D _rigidbody2D;
@@ -103,17 +104,19 @@ public class KnightBossController : MonoBehaviour
                 {
                     _target = _human;
                     _active = true;
+                    _spriteRenderer.flipX = transform.position.x < _target.transform.position.x;
+
                 }
                 else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
                 {
                     _target = _orc;
                     _active = true;
+                    _spriteRenderer.flipX = transform.position.x < _target.transform.position.x;
                 }
                 else
                 {
                     _target = null;
                 }
-                _spriteRenderer.flipX = transform.position.x < _target.transform.position.x;
 
                 if (!IsGrounded())
                 {
@@ -150,7 +153,7 @@ public class KnightBossController : MonoBehaviour
     {
         _fight = false;
         Instantiate(attackObj, transform.position, transform.rotation);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         _fight = true;
     }
 
@@ -165,7 +168,9 @@ public class KnightBossController : MonoBehaviour
             _spriteRenderer.enabled = false;
             smokeParticle.GetComponent<ParticleSystem>().Play();
             _active = false;
-            yield return new WaitForSeconds(3f);
+            Destroy(stayJohn);
+            GameObject.Find("Human").isStatic = false;
+            yield return new WaitForSeconds(4f);
             Destroy(gameObject);
         }
 
