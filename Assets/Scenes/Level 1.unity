@@ -18051,7 +18051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8
+      value: 0.791
       objectReference: {fileID: 0}
     - target: {fileID: 2463102837497001953, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27962,6 +27962,244 @@ PrefabInstance:
       propertyPath: textGameObject
       value: 
       objectReference: {fileID: 424239203}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.size
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.size
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[0]
+      value: Click to advance the cutscene.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[1]
+      value: Hey! Wait! I'm not gonna hurt you, please don't be afraid!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[2]
+      value: My mother told me not to talk to humans. Where is the rest of your group?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[3]
+      value: My what? I'm here all alone. I don't even know where here is! Please
+        help me. Do you know which way is New York?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[4]
+      value: I only know Old York and it's that way. But I don't think you'll be
+        welcome there, it's an ogre village.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[5]
+      value: Is that what you are? An ogre?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[6]
+      value: Yes, can't you see?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[7]
+      value: 'Sorry, I''ve never seen an ogre before. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[8]
+      value: How come? Aren't you an ogre hunter?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[9]
+      value: "What? I'm an accountant. I didn't know ogres existed until\u2026 ten
+        seconds ago. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[10]
+      value: Okay. You don't seem that bad. I don't know what an accountant is, but
+        it doesn't sound very scary. I'm Klofalaekjarkjaftur. What's your name?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[11]
+      value: Klofalaekjarkjaftur? That's an unusual name, don't you think? I'm John.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[12]
+      value: That's your name and you think mine is unusual? You're pretty odd, human.
+        Why are you out here?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[13]
+      value: "I don't know! I just\u2026 woke up here. Tried to talk to someone,
+        but everyone I met ran away from me."
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[14]
+      value: Yes, we don't like humans here. They say human adventurers used the
+        Five Great Crystals to travel here and hunt ogres and other creatures.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[15]
+      value: Sorry, human adventurers travelled here?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[16]
+      value: Yes, using the Five Great Crystals. You've never heard this story? Have
+        you been living under a rock?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[17]
+      value: "I think we have different stories where I'm from. Like\u2026 Cinderella?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[18]
+      value: That sounds like a kind of food.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[19]
+      value: Certainly not any kind of food I've ever tried. Anyway, do you think
+        I could use these crystals to travel back home?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[20]
+      value: Well, I suppose that makes sense. The adventurers always left somehow.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[21]
+      value: Do you know where I can find them? The crystals?
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[22]
+      value: I think they are hidden in the woods somewhere. After the Great War
+        we hid them so they can never be used to harm us again.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[23]
+      value: I won't do that, I promise. I just want to go home.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[24]
+      value: Okay, I'll help you.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[25]
+      value: Really? Thank you.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[26]
+      value: Yeah. Nobody should be in the woods alone.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: texts.Array.data[27]
+      value: End
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[1]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[2]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[3]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[4]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[5]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[6]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[7]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[8]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[9]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[10]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[11]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[12]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[13]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[14]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[15]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[16]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[17]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[18]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[19]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[20]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[21]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[22]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[23]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[24]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[25]
+      value: John
+      objectReference: {fileID: 0}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: speakers.Array.data[26]
+      value: Klofalaekjarkjaftur
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
 --- !u!4 &1448303427 stripped
@@ -39232,7 +39470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8
+      value: 0.791
       objectReference: {fileID: 0}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -41856,7 +42094,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.48253345, y: -1.4548348}
+  m_Offset: {x: 0.48253345, y: -1.4809494}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -41867,7 +42105,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2632008, y: 0.40426135}
+  m_Size: {x: 1.2632008, y: 0.29771376}
   m_EdgeRadius: 0
 --- !u!95 &1992172995
 Animator:
