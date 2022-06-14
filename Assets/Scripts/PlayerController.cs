@@ -112,6 +112,12 @@ public class PlayerController : MonoBehaviour
 
     void OnEnable()
     {
+        if (gameObject.CompareTag("Human"))
+        {
+            _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), _health);
+            _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _orc.GetComponent<PlayerController>()._health);
+            _settings.SetLevel(PlayerPrefs.GetInt("Slot"), SceneManager.GetActiveScene().name);
+        }
         _chargedAttackEnabled = false;
         _jumpEnabled = false;
         _attackEnabled = false;
@@ -193,7 +199,7 @@ public class PlayerController : MonoBehaviour
                 ? +1f
                 : -1f;
             var bounds = _collider.bounds;
-            _boxCenter = new Vector2(bounds.center.x - x/2, bounds.center.y);
+            _boxCenter = new Vector2(bounds.center.x - x / 2, bounds.center.y);
             var groundBox = Physics2D.OverlapBox(_boxCenter, _boxSize, 0f, groundMask);
             if (groundBox != null && _jumpEnabled)
             {
