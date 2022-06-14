@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(IsGrounded());
         HandleGravity();
         if (_movementEnabled)
         {

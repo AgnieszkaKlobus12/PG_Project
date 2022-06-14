@@ -30,7 +30,7 @@ public class CompleteThirdPuzzle : MonoBehaviour
 
     void Update()
     {
-        if (correct[correct.Length - 1] && !_completed)
+        if (AllCorrects() && !_completed)
         {
             _completed = true;
             StartCoroutine(Show());
@@ -74,12 +74,26 @@ public class CompleteThirdPuzzle : MonoBehaviour
         }
     }
 
-    public void Completed()
+    public virtual void Completed(int ind = -1)
     {
-        if (_nextIndex < correct.Length)
+        if (ind == -1)
         {
-            correct[_nextIndex++] = true;
+            ind = _nextIndex++;
         }
+        if (ind < correct.Length)
+        {
+            correct[ind] = true;
+        }
+    }
+    
+    private bool AllCorrects()
+    {
+        foreach (var c in correct)
+        {
+            if (!c) return false;
+        }
+
+        return true;
     }
     
 }

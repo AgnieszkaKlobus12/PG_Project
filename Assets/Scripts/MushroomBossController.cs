@@ -62,7 +62,7 @@ public class MushroomBossController : MonoBehaviour
             }
             else
             {
-                if (_target != null)
+                if (_target != null && transform.position.x < targetStart.transform.position.x)
                 {
                     allLives.SetActive(true);
                     transform.position = Vector2.MoveTowards(transform.position,
@@ -75,7 +75,6 @@ public class MushroomBossController : MonoBehaviour
                 }
                 else
                 {
-                    allLives.SetActive(false);
                     if (_animator.GetInteger("Action") != 0)
                     {
                         _animator.SetInteger("Action", 0);
@@ -101,6 +100,11 @@ public class MushroomBossController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("UserAttack"))
+        {
+            if (!_fight || !_active || !_startedFight) return;
+            _animator.SetInteger("Action", 2);
+        }
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human"))
         {
             if (!_fight || !_active || !_startedFight) return;

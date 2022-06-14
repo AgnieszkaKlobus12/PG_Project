@@ -8,6 +8,7 @@ public class StatueThirdLevel : MonoBehaviour
     public GameObject target;
     public int rotationIdx;
     private bool _completed;
+    public int nr;
     private readonly float[] _rotations = { 0, 180f };
 
     void Start()
@@ -18,7 +19,9 @@ public class StatueThirdLevel : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") == 0 && !_completed)
+
+        if (other.CompareTag("UserAttack") ||
+            other.gameObject.GetComponent<Animator>().GetInteger("Anim") == 0 && !_completed)
         {
             if (target.CompareTag("Gem"))
             {
@@ -26,8 +29,9 @@ public class StatueThirdLevel : MonoBehaviour
             }
             else
             {
-                target.GetComponent<CompleteThirdPuzzle>().Completed();
+                target.GetComponent<CompleteThirdPuzzle>().Completed(nr);
             }
+
             _completed = true;
         }
     }
