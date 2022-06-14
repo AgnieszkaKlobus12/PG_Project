@@ -102,43 +102,31 @@ public class DialogStart : MonoBehaviour
             {
                 _orc.Die(false);
                 _human.Die(false);
+                _idx++;
             }
             else if (texts[_idx] == "Life++")
             {
                 _orc.AddLife();
                 _human.AddLife();
-            }else if (texts[_idx] == "Fight")
+                _idx++;
+            }
+            else if (texts[_idx] == "Fight")
             {
                 GameObject.Find("MrScaryBird").GetComponent<BirdBossController>().friendly = false;
-                End();
-            }else if (texts[_idx] == "Friendly")
-            {
-                GameObject.Find("MrScaryBird").GetComponent<BirdBossController>().friendly = true;
-                End();
-            }else if (texts[_idx] == "FinalEnd")
-            {
-                EndScreen.SetActive(true);
+                _idx++;
                 End();
             }
-            else if (texts[_idx] == "Choice")
+            else if (texts[_idx] == "Friendly")
             {
-                _waitingForChoice = true;
-                speakerObject.SetActive(false);
-                textGameObject.SetActive(false);
-                int temp = 0;
-                borders.SetActive(false);
-                responsePick.SetActive(true);
-                foreach (string text in choices)
-                {
-                    var helper = temp;
-                    _picks[temp].SetActive(true);
-                    _picks[temp].GetComponent<Button>().onClick.AddListener(() => Pick(choicesIdxs[helper]));
-                    _picks[temp++].GetComponentInChildren<TextMeshProUGUI>().text = text;
-                }
-
-                _orc.PlayerActions.Singleplayer.Disable();
-                _orc.PlayerActions.Multiplayer.Disable();
-                _orc.PlayerActions.UI.Enable();
+                GameObject.Find("MrScaryBird").GetComponent<BirdBossController>().friendly = true;
+                _idx++;
+                End();
+            }
+            else if (texts[_idx] == "FinalEnd")
+            {
+                EndScreen.SetActive(true);
+                _idx++;
+                End();
             }
             else
             {
