@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(_jumpEnabled);
         HandleGravity();
         if (_movementEnabled)
         {
@@ -136,27 +137,7 @@ public class PlayerController : MonoBehaviour
             mode = 1;
         }
 
-        switch (SceneManager.GetActiveScene().name)
-        {
-            case "Level 5":
-                _jumpEnabled = true;
-                _attackEnabled = true;
-                _doubleJumpEnabled = true;
-                _chargedAttackEnabled = true;
-                break;
-            case "Level 4":
-                _jumpEnabled = true;
-                _attackEnabled = true;
-                _doubleJumpEnabled = true;
-                break;
-            case "Level 3":
-                _jumpEnabled = true;
-                _attackEnabled = true;
-                break;
-            case "Level 2":
-                _jumpEnabled = true;
-                break;
-        }
+        EnableMovements();
     }
 
     void OnDisable()
@@ -325,8 +306,15 @@ public class PlayerController : MonoBehaviour
             _orc.GetComponent<Rigidbody2D>().position = _lastRespawn;
             _human.GetComponent<Rigidbody2D>().position = _lastRespawn;
         }
-
         _health -= 1;
+        if (gameObject.CompareTag("Player"))
+        {
+            _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), _health);
+        }
+        else
+        {
+            _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _health);
+        }
         lives[_health].GetComponent<SpriteRenderer>().enabled = false;
         setAnimation("Idle");
         _dieEnabled = true;
@@ -558,5 +546,42 @@ public class PlayerController : MonoBehaviour
     {
         get => _attackEnabled;
         set => _attackEnabled = value;
+    }
+
+    public void EnableMovements()
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Level 5":
+                _jumpEnabled = true;
+                _attackEnabled = true;
+                _doubleJumpEnabled = true;
+                _chargedAttackEnabled = true;
+                break;
+            case "Level 4":
+                _jumpEnabled = true;
+                _attackEnabled = true;
+                _doubleJumpEnabled = true;
+                _chargedAttackEnabled = false;
+                break;
+            case "Level 3":
+                _jumpEnabled = true;
+                _attackEnabled = true;
+                _doubleJumpEnabled = false;
+                _chargedAttackEnabled = false;
+                break;
+            case "Level 2":
+                _jumpEnabled = true;
+                _attackEnabled = false;
+                _doubleJumpEnabled = false;
+                _chargedAttackEnabled = false;
+                break;
+            case "Level 1":
+                _jumpEnabled = false;
+                _attackEnabled = false;
+                _doubleJumpEnabled = false;
+                _chargedAttackEnabled = false;
+                break;
+        }
     }
 }

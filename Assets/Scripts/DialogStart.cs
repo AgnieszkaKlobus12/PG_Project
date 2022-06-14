@@ -161,12 +161,8 @@ public class DialogStart : MonoBehaviour
 
     private void End()
     {
-        _orc.MovementEnabled = true;
-        _orc.JumpEnabled = true;
-        _orc.AttackEnabled = true;
-        _human.MovementEnabled = true;
-        _human.JumpEnabled = true;
-        _human.AttackEnabled = true;
+        _orc.EnableMovements();
+        _human.EnableMovements();
         _human.GetComponent<Rigidbody2D>().isKinematic = false;
         _orc.GetComponent<Rigidbody2D>().isKinematic = false;
         dialogCamera.SetActive(false);
