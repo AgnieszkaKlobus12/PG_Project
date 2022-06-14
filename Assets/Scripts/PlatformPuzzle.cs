@@ -6,6 +6,7 @@ public class PlatformPuzzle : MonoBehaviour
     public float minY;
     public float maxY;
     public float change;
+    public int number;
     public GameObject gem;
     private bool _hasPlayer;
     private long _lastTime;
@@ -20,11 +21,11 @@ public class PlatformPuzzle : MonoBehaviour
     {
         if (gameObject.transform.position.y >= maxY - 0.2f)
         {
-            gem.GetComponent<GemScript>().Completed();
+            gem.GetComponent<GemScript>().Completed(number);
         }
         else
         {
-            gem.GetComponent<GemScript>().Failed();
+            gem.GetComponent<GemScript>().Failed(number);
         }
 
         if (gameObject.transform.position.y > minY && !_hasPlayer &&

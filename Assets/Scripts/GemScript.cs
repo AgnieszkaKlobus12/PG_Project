@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GemScript : MonoBehaviour
 {
+    public GameObject orc, human;
     public bool[] correct;
     public GameObject win;
     public GameObject lives;
@@ -14,12 +15,10 @@ public class GemScript : MonoBehaviour
     private Vector3 _finalPosition;
     protected bool _showing;
     protected List<int> order;
-    private int _picked;
 
     void Awake()
     {
         _playerActions = new PlayerActions();
-        _picked = 0;
         order = new List<int>();
         _nextIndex = 0;
         _showing = false;
@@ -77,7 +76,6 @@ public class GemScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!_showing || (!other.CompareTag("Player") && !other.CompareTag("Human"))) return;
-        _picked += 1;
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level 5":
@@ -88,24 +86,24 @@ public class GemScript : MonoBehaviour
                 _playerActions.UI.Enable();
                 break;
             case "Level 4":
-                other.GetComponent<PlayerController>().UnlockChargedAttack();
+                orc.GetComponent<PlayerController>().UnlockChargedAttack();
+                human.GetComponent<PlayerController>().UnlockChargedAttack();
                 break;
             case "Level 3":
-                other.GetComponent<PlayerController>().UnlockDoubleJump();
+                orc.GetComponent<PlayerController>().UnlockDoubleJump();
+                human.GetComponent<PlayerController>().UnlockDoubleJump();
                 break;
             case "Level 2":
-                other.GetComponent<PlayerController>().UnlockAttack();
+                orc.GetComponent<PlayerController>().UnlockAttack();
+                human.GetComponent<PlayerController>().UnlockAttack();
                 break;
             case "Level 1":
-                other.GetComponent<PlayerController>().UnlockJump();
+                orc.GetComponent<PlayerController>().UnlockJump();
+                human.GetComponent<PlayerController>().UnlockJump();
                 break;
         }
-
-        if (_picked >= 2)
-        {
-            _showing = true;
-            _spriteRenderer.enabled = false;
-        }
+        _showing = true;
+        _spriteRenderer.enabled = false;
     }
 
     public void ToMenu()

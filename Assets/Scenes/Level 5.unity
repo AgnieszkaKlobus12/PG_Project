@@ -3054,6 +3054,11 @@ PrefabInstance:
       objectReference: {fileID: 1704105994}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
+--- !u!1 &177029115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2463102837497001959, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
+  m_PrefabInstance: {fileID: 177029114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &181572945
 GameObject:
   m_ObjectHideFlags: 0
@@ -8465,6 +8470,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1853908382647584999, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
+--- !u!1 &521705763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8450918418774010402, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
+  m_PrefabInstance: {fileID: 521705762}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &523803109
 GameObject:
   m_ObjectHideFlags: 0
@@ -31583,9 +31593,17 @@ PrefabInstance:
       value: Final Gem - Final Cutscene Here
       objectReference: {fileID: 0}
     - target: {fileID: 8042207726384074159, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
+      propertyPath: orc
+      value: 
+      objectReference: {fileID: 521705763}
+    - target: {fileID: 8042207726384074159, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
       propertyPath: win
       value: 
       objectReference: {fileID: 2094118860}
+    - target: {fileID: 8042207726384074159, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
+      propertyPath: human
+      value: 
+      objectReference: {fileID: 177029115}
     - target: {fileID: 8042207726384074159, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
       propertyPath: lives
       value: 

@@ -91,8 +91,10 @@ public class DialogStart : MonoBehaviour
                 foreach (string text in choices)
                 {
                     var helper = temp;
+                    Debug.Log("pick should get assigned");
+                    Debug.Log(temp);
                     _picks[temp].SetActive(true);
-                    _picks[temp].GetComponentInChildren<Button>().onClick.AddListener(() => Pick(choicesIdxs[helper]));
+                    _picks[temp].GetComponent<Button>().onClick.AddListener(() => Pick(choicesIdxs[helper]));
                     _picks[temp++].GetComponentInChildren<TextMeshProUGUI>().text = text;
                 }
                 _orc.PlayerActions.Singleplayer.Disable();
@@ -114,8 +116,9 @@ public class DialogStart : MonoBehaviour
         }
     }
 
-    private void Pick(int newIndex)
+    public void Pick(int newIndex)
     {
+        Debug.Log("Pick called");
         _idx = newIndex;
         _waitingForChoice = false;
         responsePick.SetActive(false);

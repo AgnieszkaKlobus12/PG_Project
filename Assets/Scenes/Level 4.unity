@@ -25005,9 +25005,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7869940402804944444, guid: cbe9baca1d4456e4dad33e5630178b97, type: 3}
+      propertyPath: orc
+      value: 
+      objectReference: {fileID: 110131289}
+    - target: {fileID: 7869940402804944444, guid: cbe9baca1d4456e4dad33e5630178b97, type: 3}
       propertyPath: win
       value: 
       objectReference: {fileID: 2049031261}
+    - target: {fileID: 7869940402804944444, guid: cbe9baca1d4456e4dad33e5630178b97, type: 3}
+      propertyPath: human
+      value: 
+      objectReference: {fileID: 415080749}
     - target: {fileID: 7869940402804944444, guid: cbe9baca1d4456e4dad33e5630178b97, type: 3}
       propertyPath: lives
       value: 
