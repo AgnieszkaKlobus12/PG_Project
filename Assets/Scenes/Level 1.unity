@@ -28153,6 +28153,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 230811320}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: EndScreen
+      value: 
+      objectReference: {fileID: 305462091}
+    - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -33235,6 +33239,7 @@ MonoBehaviour:
   _picks:
   - {fileID: 395168792}
   - {fileID: 2072707243}
+  EndScreen: {fileID: 305462091}
 --- !u!61 &1633561984
 BoxCollider2D:
   m_ObjectHideFlags: 0
