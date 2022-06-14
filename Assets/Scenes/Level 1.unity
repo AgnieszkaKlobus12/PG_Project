@@ -5610,11 +5610,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2986222321917831792, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 3.6901
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2986222321917831792, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 165.0246
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 3072200607897183858, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
       propertyPath: m_RootOrder
@@ -19690,6 +19690,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &982256903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7200699836001839801, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
+  m_PrefabInstance: {fileID: 305462083}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &983920901
 GameObject:
   m_ObjectHideFlags: 0
@@ -25920,11 +25925,11 @@ PrefabInstance:
     - target: {fileID: 1699593814521002544, guid: d603df39ba0545f4baf1afb70930e936, type: 3}
       propertyPath: orc
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1888482147}
     - target: {fileID: 1699593814521002544, guid: d603df39ba0545f4baf1afb70930e936, type: 3}
       propertyPath: human
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 923087424}
     - target: {fileID: 1699593814521002546, guid: d603df39ba0545f4baf1afb70930e936, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -45868,6 +45873,14 @@ PrefabInstance:
       propertyPath: lives
       value: 
       objectReference: {fileID: 305462093}
+    - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
+      propertyPath: newSkill
+      value: 
+      objectReference: {fileID: 982256903}
+    - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
+      propertyPath: timeToHideView
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 9147899134087102569, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
       propertyPath: m_Name
       value: Gem

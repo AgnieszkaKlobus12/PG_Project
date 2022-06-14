@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 
 public class GemScript : MonoBehaviour
 {
     public GameObject orc, human;
+    public GameObject newSkill;
+    public float timeToHideView;
     public bool[] correct;
     public GameObject win;
     public GameObject lives;
     private int _nextIndex;
     private PlayerActions _playerActions;
     protected SpriteRenderer _spriteRenderer;
+    private TextMeshProUGUI _text;
     private Vector3 _finalPosition;
     protected bool _showing;
     protected List<int> order;
@@ -25,6 +30,7 @@ public class GemScript : MonoBehaviour
         _finalPosition = transform.position;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
+        _text = newSkill.GetComponentInChildren<Image>().GetComponentInChildren<TextMeshProUGUI>();
         transform.position += Vector3.up * 2;
     }
 
@@ -106,10 +112,14 @@ public class GemScript : MonoBehaviour
             case "Level 2":
                 orc.GetComponent<PlayerController>().UnlockAttack();
                 human.GetComponent<PlayerController>().UnlockAttack();
+                _text.SetText("Klofalaekjarkjaftur - press SPACE to attack.\nJohn - press ENTER to attack.");
+                StartCoroutine(ShowNewSkillView());
                 break;
             case "Level 1":
                 orc.GetComponent<PlayerController>().UnlockJump();
                 human.GetComponent<PlayerController>().UnlockJump();
+                _text.SetText("Klofalaekjarkjaftur - press W to jump.\nJohn - press PgUp to jump.");
+                StartCoroutine(ShowNewSkillView());
                 break;
         }
         _showing = true;
@@ -119,6 +129,14 @@ public class GemScript : MonoBehaviour
     public void ToMenu()
     {
         SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+    }
+
+    IEnumerator ShowNewSkillView()
+    {
+        newSkill.SetActive(true);
+        yield return new WaitForSeconds(timeToHideView);
+        newSkill.SetActive(false);
+        gameObject.SetActive(false);
     }
     
 }
