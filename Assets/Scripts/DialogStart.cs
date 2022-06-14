@@ -33,6 +33,10 @@ public class DialogStart : MonoBehaviour
     private void Start()
     {
         _completed = false;
+        _orc = GameObject.Find("Orc").GetComponent<PlayerController>();
+        _human = GameObject.Find("Human").GetComponent<PlayerController>();
+        _speaker = speakerObject.GetComponent<TextMeshProUGUI>();
+        _text = textGameObject.GetComponent<TextMeshProUGUI>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -41,10 +45,6 @@ public class DialogStart : MonoBehaviour
         {
             _idx = 0;
             _waitingForChoice = false;
-            _orc = GameObject.Find("Orc").GetComponent<PlayerController>();
-            _human = GameObject.Find("Human").GetComponent<PlayerController>();
-            _speaker = speakerObject.GetComponent<TextMeshProUGUI>();
-            _text = textGameObject.GetComponent<TextMeshProUGUI>();
             _orc.PlayerActions.Singleplayer.NextText.performed += ctx => NextText();
             _orc.PlayerActions.Multiplayer.NextText.performed += ctx => NextText();
             _orc.MovementEnabled = false;
@@ -67,7 +67,6 @@ public class DialogStart : MonoBehaviour
     {
         if (_started && !_waitingForChoice)
         {
-            dialogCamera.SetActive(true);
             if (texts[_idx] == "End")
             {
                 _orc.MovementEnabled = true;
@@ -77,6 +76,7 @@ public class DialogStart : MonoBehaviour
                 dialogCamera.SetActive(false);
                 mainCamera.orthographicSize = _originalCameraSize;
                 _completed = true;
+                gameObject.GetComponent<DialogStart>().enabled = false;
             }
             else if (texts[_idx] == "Choice")
             {
@@ -99,9 +99,8 @@ public class DialogStart : MonoBehaviour
             }
             else if (texts[_idx] == "Life--")
             {
-                _orc.Die();
-                _human.Die();
-                NextText();
+                _orc.Die(false);
+                _human.Die(false);
             }
             else
             {
