@@ -130,6 +130,7 @@ MonoBehaviour:
   maxAttackScale: 4.55
   minAttackScale: 0.94
   finalGem: {fileID: 8042207726384074146, guid: 6900f001b8dcb444b8ece105568a49af, type: 3}
+  targetStart: {fileID: 0}
 --- !u!61 &4458918412850863028
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1123,6 +1124,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0011179141, y: 0}
+  m_Offset: {x: 0.0020172538, y: 0}
   serializedVersion: 2
-  m_Radius: 0.050131384
+  m_Radius: 0.045183383
