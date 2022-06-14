@@ -47,7 +47,11 @@ public class DialogStart : MonoBehaviour
             _orc.PlayerActions.Singleplayer.NextText.performed += ctx => NextText();
             _orc.PlayerActions.Multiplayer.NextText.performed += ctx => NextText();
             _orc.MovementEnabled = false;
+            _orc.JumpEnabled = false;
+            _orc.AttackEnabled = false;
             _human.MovementEnabled = false;
+            _human.JumpEnabled = false;
+            _human.AttackEnabled = false;
             _orc.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
             _human.GetComponent<Rigidbody2D>().velocity =  new Vector2(0,0);
             _human.GetComponent<Rigidbody2D>().isKinematic = true;
@@ -68,7 +72,11 @@ public class DialogStart : MonoBehaviour
             if (texts[_idx] == "End")
             {
                 _orc.MovementEnabled = true;
+                _orc.JumpEnabled = true;
+                _orc.AttackEnabled = true;
                 _human.MovementEnabled = true;
+                _human.JumpEnabled = true;
+                _human.AttackEnabled = true;
                 _human.GetComponent<Rigidbody2D>().isKinematic = false;
                 _orc.GetComponent<Rigidbody2D>().isKinematic = false;
                 dialogCamera.SetActive(false);
@@ -100,6 +108,11 @@ public class DialogStart : MonoBehaviour
             {
                 _orc.Die(false);
                 _human.Die(false);
+            }
+            else if (texts[_idx] == "Life++")
+            {
+                _orc.AddLife();
+                _human.AddLife();
             }
             else
             {

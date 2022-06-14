@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7973130323176375182}
-  - component: {fileID: 714582673271707984}
+  - component: {fileID: 6814820287971954044}
   m_Layer: 0
   m_Name: Attack Area
   m_TagString: UserAttack
@@ -31,8 +31,8 @@ Transform:
   m_Father: {fileID: 8450918419152095388}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &714582673271707984
-CircleCollider2D:
+--- !u!70 &6814820287971954044
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -44,9 +44,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.27335715, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.77335715
+  m_Offset: {x: -0.0000076130723, y: 0.13692904}
+  m_Size: {x: 2.1431434, y: 1.0375873}
+  m_Direction: 1
 --- !u!1 &8450918417446108707
 GameObject:
   m_ObjectHideFlags: 0

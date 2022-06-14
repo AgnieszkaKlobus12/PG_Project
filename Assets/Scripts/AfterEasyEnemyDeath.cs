@@ -6,4 +6,9 @@ public class AfterEasyEnemyDeath : StateMachineBehaviour
     {
         Destroy(animator.gameObject);
     }
+
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        animator.gameObject.GetComponent<Collider2D>().enabled = false;
+    }
 }
