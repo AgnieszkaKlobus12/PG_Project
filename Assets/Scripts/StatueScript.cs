@@ -13,6 +13,7 @@ public class StatueScript : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private bool _perm;
     public BoxCollider2D leftCollider, rightCollider;
+    private Sprite inactiveSprite;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class StatueScript : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Settings = new Settings();
         _completed = false;
+        inactiveSprite = _spriteRenderer.sprite;
         StartCoroutine(turn());
     }
 
@@ -29,9 +31,8 @@ public class StatueScript : MonoBehaviour
         {
             gem.GetComponent<GemScript>().Completed();
             _completed = true;
-            gameObject.GetComponent<SpriteRenderer>().sprite = activeSprite;
-            if (Settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer" ||
-                Settings.GetMode(PlayerPrefs.GetInt("Slot")) == "empty" &&
+            _spriteRenderer.sprite = activeSprite;
+            if (Settings.GetMode(PlayerPrefs.GetInt("Slot")) != "multiplayer" &&
                 (other.CompareTag("Player") || other.CompareTag("Human")))
             {
                 _perm = true;
@@ -48,6 +49,7 @@ public class StatueScript : MonoBehaviour
     {
         if (_completed && !_perm)
         {
+            _spriteRenderer.sprite = inactiveSprite;
             _completed = false;
             gem.GetComponent<GemScript>().Failed();
         }
