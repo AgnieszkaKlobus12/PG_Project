@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem _chargedAttackSystem;
     private CircleCollider2D _chargedAttackCollider;
     public int mode;
-    
+
     [Header("Ground Check")] public float groundOverlapHeight;
     public LayerMask groundMask;
     public float disableGCTime;
@@ -279,7 +279,15 @@ public class PlayerController : MonoBehaviour
     {
         _health++;
         Debug.Log(_health);
-        lives[_health-1].GetComponent<SpriteRenderer>().enabled = true;
+        lives[_health - 1].GetComponent<SpriteRenderer>().enabled = true;
+        if (gameObject.CompareTag("Human"))
+        {
+            _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), _health);
+        }
+        else
+        {
+            _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _health);
+        }
     }
 
     public void Die(bool back = true)
@@ -305,6 +313,7 @@ public class PlayerController : MonoBehaviour
             _orc.GetComponent<Rigidbody2D>().position = _lastRespawn;
             _human.GetComponent<Rigidbody2D>().position = _lastRespawn;
         }
+
         _health -= 1;
         if (gameObject.CompareTag("Player"))
         {
@@ -314,6 +323,7 @@ public class PlayerController : MonoBehaviour
         {
             _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _health);
         }
+
         lives[_health].GetComponent<SpriteRenderer>().enabled = false;
         setAnimation("Idle");
         _dieEnabled = true;
@@ -582,6 +592,10 @@ public class PlayerController : MonoBehaviour
                 _attackEnabled = false;
                 _doubleJumpEnabled = false;
                 _chargedAttackEnabled = false;
+                if (GameObject.Find("Gem").GetComponent<GemScript>()._showing)
+                {
+                    _attackEnabled = true;
+                }
                 break;
             case "Level 1":
                 _jumpEnabled = false;
