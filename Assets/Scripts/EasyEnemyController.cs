@@ -16,7 +16,7 @@ public class EasyEnemyController : MonoBehaviour
         {
             _animator.SetInteger("Action", 2);
         }
-        if (col.CompareTag("Player") || col.CompareTag("Human"))
+        else if ((col.CompareTag("Player") || col.CompareTag("Human")) && col.GetComponent<Animator>() != null)
         {
             var playerAct = col.GetComponent<Animator>().GetInteger("Anim");
             if (playerAct == 0 || playerAct == 1)

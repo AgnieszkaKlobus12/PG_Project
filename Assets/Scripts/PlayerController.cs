@@ -43,7 +43,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
     public float disableGCTime;
 
-    [Header("Lives")] private int _health;
+    [Header("Lives")] 
+    public int _health;
     public GameObject[] lives;
 
     private Settings _settings;
@@ -115,12 +116,8 @@ public class PlayerController : MonoBehaviour
 
     void OnEnable()
     {
-        if (gameObject.CompareTag("Human"))
-        {
-            _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), _health);
-            _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _orc.GetComponent<PlayerController>()._health);
-            _settings.SetLevel(PlayerPrefs.GetInt("Slot"), SceneManager.GetActiveScene().name);
-        }
+
+        _settings.SetLevel(PlayerPrefs.GetInt("Slot"), SceneManager.GetActiveScene().name);
 
         if (_settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer")
         {
