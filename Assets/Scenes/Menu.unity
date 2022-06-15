@@ -18495,7 +18495,7 @@ MonoBehaviour:
     saved.
 
 
-    To advance a cutscene press the left mouse key.'
+    To advance a cutscene press the left mouse key. Press ESC to pause.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ab99bf3fd7e026f4d9d73111539e8c6b, type: 2}
   m_sharedMaterial: {fileID: 9160574012165216006, guid: ab99bf3fd7e026f4d9d73111539e8c6b, type: 2}
