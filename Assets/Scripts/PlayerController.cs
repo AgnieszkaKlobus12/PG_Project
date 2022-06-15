@@ -122,10 +122,6 @@ public class PlayerController : MonoBehaviour
             _settings.SetLevel(PlayerPrefs.GetInt("Slot"), SceneManager.GetActiveScene().name);
         }
 
-        _chargedAttackEnabled = false;
-        _jumpEnabled = false;
-        _attackEnabled = false;
-        _doubleJumpEnabled = false;
         if (_settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer")
         {
             PlayerActions.Multiplayer.Enable();
@@ -277,18 +273,21 @@ public class PlayerController : MonoBehaviour
 
     public void AddLife()
     {
-        _health++;
-        Debug.Log(_health);
-        lives[_health - 1].GetComponent<SpriteRenderer>().enabled = true;
-        if (gameObject.CompareTag("Human"))
+        if (_health < 4)
         {
-            _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), _health);
-        }
-        else
-        {
-            _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _health);
+            _health++;
+            lives[_health - 1].GetComponent<SpriteRenderer>().enabled = true;
+            if (gameObject.CompareTag("Human"))
+            {
+                _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), _health);
+            }
+            else
+            {
+                _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _health);
+            }
         }
     }
+
 
     public void Die(bool back = true)
     {
@@ -506,6 +505,7 @@ public class PlayerController : MonoBehaviour
 
     public void UnlockAttack()
     {
+        PlayerPrefs.SetInt("Attack", 0);
         _attackEnabled = true;
     }
 
@@ -556,6 +556,7 @@ public class PlayerController : MonoBehaviour
     {
         get => _jumpEnabled;
         set => _jumpEnabled = value;
+         
     }
 
     public bool AttackEnabled
@@ -592,12 +593,13 @@ public class PlayerController : MonoBehaviour
                 _attackEnabled = false;
                 _doubleJumpEnabled = false;
                 _chargedAttackEnabled = false;
-                if (GameObject.Find("Gem").GetComponent<GemScript>()._showing)
+                if (PlayerPrefs.GetInt("Attack") == 0)
                 {
                     _attackEnabled = true;
                 }
                 break;
             case "Level 1":
+                PlayerPrefs.SetInt("Attack", 1);
                 _jumpEnabled = false;
                 _attackEnabled = false;
                 _doubleJumpEnabled = false;
