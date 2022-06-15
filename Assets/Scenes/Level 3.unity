@@ -8958,6 +8958,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 859193633}
     - target: {fileID: 3692499159733222348, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
+      propertyPath: lives.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692499159733222348, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: lives.Array.data[0]
       value: 
       objectReference: {fileID: 859193631}
@@ -8969,6 +8973,10 @@ PrefabInstance:
       propertyPath: lives.Array.data[2]
       value: 
       objectReference: {fileID: 859193625}
+    - target: {fileID: 3692499159733222348, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
+      propertyPath: lives.Array.data[3]
+      value: 
+      objectReference: {fileID: 859193636}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
 --- !u!1 &141737354
@@ -53644,6 +53652,16 @@ GameObject:
 --- !u!1 &859193635 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1114181354832977306, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
+  m_PrefabInstance: {fileID: 859193624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &859193636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8067076350744986431, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
+  m_PrefabInstance: {fileID: 859193624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &859193637 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8453052786909197990, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
   m_PrefabInstance: {fileID: 859193624}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &859193656
@@ -99226,6 +99244,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 859193633}
     - target: {fileID: 8450918418774010409, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
+      propertyPath: lives.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450918418774010409, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: lives.Array.data[0]
       value: 
       objectReference: {fileID: 859193629}
@@ -99237,6 +99259,10 @@ PrefabInstance:
       propertyPath: lives.Array.data[2]
       value: 
       objectReference: {fileID: 859193627}
+    - target: {fileID: 8450918418774010409, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
+      propertyPath: lives.Array.data[3]
+      value: 
+      objectReference: {fileID: 859193637}
     - target: {fileID: 8450918419152095388, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: m_RootOrder
       value: 3

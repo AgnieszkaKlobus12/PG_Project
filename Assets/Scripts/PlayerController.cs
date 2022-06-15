@@ -81,14 +81,11 @@ public class PlayerController : MonoBehaviour
             ? _settings.GetOrcLives(PlayerPrefs.GetInt("Slot"))
             : _settings.GetHumanLives(PlayerPrefs.GetInt("Slot"));
         if (_health == 0)
-        {
             _health = 3;
-        }
-
         for (var i = _health; i < lives.Length; i++)
-        {
             lives[i].GetComponent<SpriteRenderer>().enabled = false;
-        }
+        if (_health == 4)
+            lives[3].GetComponent<SpriteRenderer>().enabled = true;
     }
 
     private void Start()

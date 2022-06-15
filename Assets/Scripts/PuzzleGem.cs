@@ -20,7 +20,6 @@ public class PuzzleGem : MonoBehaviour
     {
         if ((other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Human")) && !_completed)
         {
-            Debug.Log("triggered " + number);
             if (other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2)
             {
                 StartCoroutine(Complete());
