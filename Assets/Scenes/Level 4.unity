@@ -25276,7 +25276,7 @@ PrefabInstance:
       objectReference: {fileID: 1233071711}
     - target: {fileID: 7869940402804944444, guid: cbe9baca1d4456e4dad33e5630178b97, type: 3}
       propertyPath: timeToHideView
-      value: 1.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7869940402804944444, guid: cbe9baca1d4456e4dad33e5630178b97, type: 3}
       propertyPath: objects.Array.data[0]

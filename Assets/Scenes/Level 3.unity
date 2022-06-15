@@ -130074,7 +130074,7 @@ PrefabInstance:
       objectReference: {fileID: 2119538243}
     - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
       propertyPath: timeToHideView
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9147899134087102564, guid: 53cd0984c0bb29549ab0d14d9efc0f5d, type: 3}
       propertyPath: correct.Array.size

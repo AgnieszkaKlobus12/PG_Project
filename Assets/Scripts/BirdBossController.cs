@@ -160,8 +160,9 @@ public class BirdBossController : MonoBehaviour
         {
             _animator.SetInteger("Action", 2);
             _active = false;
+            Destroy(gameObject);
         }
-
+        
         yield return new WaitForSeconds(1.5f);
         _fight = true;
     }
