@@ -142,5 +142,10 @@ public class GemScript : MonoBehaviour
         newSkill.SetActive(false);
         gameObject.SetActive(false);
     }
+
+    public bool isShowing()
+    {
+        return _showing;
+    }
     
 }
