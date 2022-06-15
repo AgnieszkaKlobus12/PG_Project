@@ -43,8 +43,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundMask;
     public float disableGCTime;
 
-    [Header("Lives")] 
-    public int _health;
+    [Header("Lives")] public int _health;
     public GameObject[] lives;
 
     private Settings _settings;
@@ -81,7 +80,18 @@ public class PlayerController : MonoBehaviour
             ? _settings.GetOrcLives(PlayerPrefs.GetInt("Slot"))
             : _settings.GetHumanLives(PlayerPrefs.GetInt("Slot"));
         if (_health == 0)
+        {
             _health = 3;
+            if (gameObject.CompareTag("Player"))
+            {
+                _human.GetComponent<PlayerController>()._health = 3;
+            }
+            else
+            {
+                _orc.GetComponent<PlayerController>()._health = 3;
+            }
+        }
+
         for (var i = _health; i < lives.Length; i++)
             lives[i].GetComponent<SpriteRenderer>().enabled = false;
         if (_health == 4)
@@ -113,7 +123,6 @@ public class PlayerController : MonoBehaviour
 
     void OnEnable()
     {
-
         _settings.SetLevel(PlayerPrefs.GetInt("Slot"), SceneManager.GetActiveScene().name);
 
         if (_settings.GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer")
@@ -550,7 +559,6 @@ public class PlayerController : MonoBehaviour
     {
         get => _jumpEnabled;
         set => _jumpEnabled = value;
-         
     }
 
     public bool AttackEnabled
@@ -591,6 +599,7 @@ public class PlayerController : MonoBehaviour
                 {
                     _attackEnabled = true;
                 }
+
                 break;
             case "Level 1":
                 PlayerPrefs.SetInt("Attack", 1);
