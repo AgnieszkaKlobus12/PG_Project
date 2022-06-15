@@ -1,10 +1,10 @@
 3
 0
 0
-3
+1
 0
 0
-Level 1
+Level 3
 empty
 empty
 singleplayer
