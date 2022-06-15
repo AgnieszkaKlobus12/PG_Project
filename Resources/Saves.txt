@@ -1,12 +1,12 @@
-2
-3
-3
-3
-3
-3
-Level 1
-Level 1
+0
+0
+0
+0
+0
+0
 empty
-singleplayer
-multiplayer
+empty
+empty
+empty
+empty
 empty
