@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
         for (var i = _health; i < lives.Length; i++)
         {
-            lives[i].GetComponent<SpriteRenderer>().sprite = null;
+            lives[i].GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
@@ -275,6 +275,7 @@ public class PlayerController : MonoBehaviour
     public void AddLife()
     {
         _health++;
+        Debug.Log(_health);
         lives[_health-1].GetComponent<SpriteRenderer>().enabled = true;
     }
 
