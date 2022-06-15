@@ -6070,6 +6070,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6480383042246598520, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
   m_PrefabInstance: {fileID: 305462083}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &305462097 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1114181354832977306, guid: 7cab7514a059aa7459f57f3973fff2e7, type: 3}
+  m_PrefabInstance: {fileID: 305462083}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &320202791
 GameObject:
   m_ObjectHideFlags: 0
@@ -18254,6 +18259,10 @@ PrefabInstance:
       propertyPath: lose
       value: 
       objectReference: {fileID: 305462092}
+    - target: {fileID: 3692499159733222348, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
+      propertyPath: pause
+      value: 
+      objectReference: {fileID: 305462097}
     - target: {fileID: 3692499159733222348, guid: c3d3866c1ef2de54e84bb067a2e5d545, type: 3}
       propertyPath: livesObj
       value: 
@@ -39731,6 +39740,10 @@ PrefabInstance:
       propertyPath: lose
       value: 
       objectReference: {fileID: 305462092}
+    - target: {fileID: 8450918418774010409, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
+      propertyPath: pause
+      value: 
+      objectReference: {fileID: 305462097}
     - target: {fileID: 8450918418774010409, guid: 1313c700b7120d14b85da9905b3c55c2, type: 3}
       propertyPath: livesObj
       value: 

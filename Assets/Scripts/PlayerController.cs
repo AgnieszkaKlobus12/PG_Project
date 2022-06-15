@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     public GameObject[] lives;
 
     private Settings _settings;
+    public GameObject pause;
 
     private void Awake()
     {
@@ -67,6 +68,8 @@ public class PlayerController : MonoBehaviour
         PlayerActions.Multiplayer.OrcJump.performed += ctx => Jump();
         PlayerActions.Singleplayer.Jump.performed += ctx => Jump();
         PlayerActions.Multiplayer.HumanJump.performed += ctx => Jump();
+        PlayerActions.Multiplayer.Pause.performed += ctx => Pause();
+        PlayerActions.Singleplayer.Pause.performed += ctx => Pause();
         PlayerActions.Multiplayer.OrcFire.performed += Attack;
         PlayerActions.Singleplayer.Fire.performed += Attack;
         PlayerActions.Multiplayer.HumanFire.performed += Attack;
@@ -322,6 +325,15 @@ public class PlayerController : MonoBehaviour
             PlayerActions.Multiplayer.Disable();
             PlayerActions.UI.Enable();
         }
+    }
+
+    private void Pause()
+    {
+        Time.timeScale = 0;
+        pause.SetActive(true);
+        PlayerActions.Singleplayer.Disable();
+        PlayerActions.Multiplayer.Disable();
+        PlayerActions.UI.Enable();
     }
 
     private void Jump()

@@ -107,6 +107,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9988cd8-9f76-48c5-bad6-5cd2eed013c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -338,6 +347,17 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse;Gamepad"",
                     ""action"": ""NextText"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""868a5b76-bfd6-4fc3-9641-a93bb4e8689c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -907,6 +927,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""363a86c2-4310-4b31-9b95-8f156b70909e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1063,6 +1092,17 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""NextText"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9981a62a-8bf3-42e9-9092-b4a20fe4b1d8"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse;Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1141,6 +1181,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Multiplayer_OrcCharged = m_Multiplayer.FindAction("OrcCharged", throwIfNotFound: true);
         m_Multiplayer_HumanCharged = m_Multiplayer.FindAction("HumanCharged", throwIfNotFound: true);
         m_Multiplayer_NextText = m_Multiplayer.FindAction("NextText", throwIfNotFound: true);
+        m_Multiplayer_Pause = m_Multiplayer.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1160,6 +1201,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_Singleplayer_Fire = m_Singleplayer.FindAction("Fire", throwIfNotFound: true);
         m_Singleplayer_Jump = m_Singleplayer.FindAction("Jump", throwIfNotFound: true);
         m_Singleplayer_Charged = m_Singleplayer.FindAction("Charged", throwIfNotFound: true);
+        m_Singleplayer_Pause = m_Singleplayer.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1228,6 +1270,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Multiplayer_OrcCharged;
     private readonly InputAction m_Multiplayer_HumanCharged;
     private readonly InputAction m_Multiplayer_NextText;
+    private readonly InputAction m_Multiplayer_Pause;
     public struct MultiplayerActions
     {
         private @PlayerActions m_Wrapper;
@@ -1241,6 +1284,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @OrcCharged => m_Wrapper.m_Multiplayer_OrcCharged;
         public InputAction @HumanCharged => m_Wrapper.m_Multiplayer_HumanCharged;
         public InputAction @NextText => m_Wrapper.m_Multiplayer_NextText;
+        public InputAction @Pause => m_Wrapper.m_Multiplayer_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Multiplayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1277,6 +1321,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @NextText.started -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnNextText;
                 @NextText.performed -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnNextText;
                 @NextText.canceled -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnNextText;
+                @Pause.started -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_MultiplayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_MultiplayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1308,6 +1355,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @NextText.started += instance.OnNextText;
                 @NextText.performed += instance.OnNextText;
                 @NextText.canceled += instance.OnNextText;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -1426,6 +1476,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Singleplayer_Fire;
     private readonly InputAction m_Singleplayer_Jump;
     private readonly InputAction m_Singleplayer_Charged;
+    private readonly InputAction m_Singleplayer_Pause;
     public struct SingleplayerActions
     {
         private @PlayerActions m_Wrapper;
@@ -1435,6 +1486,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_Singleplayer_Fire;
         public InputAction @Jump => m_Wrapper.m_Singleplayer_Jump;
         public InputAction @Charged => m_Wrapper.m_Singleplayer_Charged;
+        public InputAction @Pause => m_Wrapper.m_Singleplayer_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Singleplayer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1459,6 +1511,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Charged.started -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnCharged;
                 @Charged.performed -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnCharged;
                 @Charged.canceled -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnCharged;
+                @Pause.started -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_SingleplayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_SingleplayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1478,6 +1533,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Charged.started += instance.OnCharged;
                 @Charged.performed += instance.OnCharged;
                 @Charged.canceled += instance.OnCharged;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -1538,6 +1596,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnOrcCharged(InputAction.CallbackContext context);
         void OnHumanCharged(InputAction.CallbackContext context);
         void OnNextText(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1559,5 +1618,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCharged(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
