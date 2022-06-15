@@ -4,26 +4,28 @@ using UnityEngine;
 public class WizardBoss : MonoBehaviour
 {
     public float moveSpeed;
-    private Animator _animator;
+    public float maxAttackScale;
+    public float minAttackScale;
+    public float boundXLeft;
+    public float boundXRight;
+    
     public GameObject allLives;
+    public GameObject[] lives;
+    public GameObject attackFog;
+    public GameObject finalGem;
+    public GameObject targetStart;
+    
+    private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private bool _attack;
     private bool _active;
-    public GameObject[] lives;
     private int _idx;
-    public GameObject attackFog;
-    public float boundXLeft;
-    public float boundXRight;
     private bool _goRight;
     private bool _canDie;
-    public float maxAttackScale;
-    public float minAttackScale;
     private bool _attackExpanding;
-    public GameObject finalGem;
-    public GameObject targetStart;
     private bool _startedFight;
 
-    void Start()
+    private void Start()
     {
         _idx = lives.Length - 1;
         _attack = true;
