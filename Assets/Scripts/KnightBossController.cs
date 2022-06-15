@@ -6,28 +6,28 @@ public class KnightBossController : MonoBehaviour
     public float moveSpeed;
     public LayerMask groundMask;
     public float groundOverlapHeight;
+    public float attackDistance;
+    public float followDistance;
+    public GameObject allLives;
+    public GameObject attackObj;
+    public GameObject[] lives;
+    public GameObject smokeParticle;
+    public GameObject targetStart;
+    
     private CapsuleCollider2D _collider;
     private Animator _animator;
-    public GameObject allLives;
     private GameObject _target;
-    public float attackDistance;
     private SpriteRenderer _spriteRenderer;
     private GameObject _orc;
-    public GameObject attackObj;
     private GameObject _human;
-    public float distance;
     private bool _fight;
     private bool _die;
     private bool _active;
-    public GameObject stayJohn;
-    public GameObject[] lives;
     private int _idx;
     private Rigidbody2D _rigidbody2D;
-    public GameObject smokeParticle;
-    public GameObject targetStart;
     private bool _startedFight;
 
-    void Start()
+    private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _collider = GetComponent<CapsuleCollider2D>();
@@ -100,14 +100,14 @@ public class KnightBossController : MonoBehaviour
                     }
                 }
 
-                if (Vector2.Distance(transform.position, _human.transform.position) < distance)
+                if (Vector2.Distance(transform.position, _human.transform.position) < followDistance)
                 {
                     _target = _human;
                     _active = true;
                     _spriteRenderer.flipX = transform.position.x < _target.transform.position.x;
 
                 }
-                else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
+                else if (Vector2.Distance(transform.position, _orc.transform.position) < followDistance)
                 {
                     _target = _orc;
                     _active = true;
@@ -168,7 +168,6 @@ public class KnightBossController : MonoBehaviour
             _spriteRenderer.enabled = false;
             smokeParticle.GetComponent<ParticleSystem>().Play();
             _active = false;
-            Destroy(stayJohn);
             GameObject.Find("Human").isStatic = false;
             yield return new WaitForSeconds(4f);
             Destroy(gameObject);

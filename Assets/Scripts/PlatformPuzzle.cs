@@ -8,6 +8,7 @@ public class PlatformPuzzle : MonoBehaviour
     public float change;
     public int number;
     public GameObject gem;
+    
     private bool _hasPlayer;
     private long _lastTime;
 
@@ -27,6 +28,7 @@ public class PlatformPuzzle : MonoBehaviour
         {
             gem.GetComponent<GemScript>().Failed(number);
         }
+
         if (gameObject.transform.position.y > minY && !_hasPlayer &&
             DateTimeOffset.Now.ToUnixTimeMilliseconds() - _lastTime > 1000 &&
             new Settings().GetMode(PlayerPrefs.GetInt("Slot")) == "multiplayer")

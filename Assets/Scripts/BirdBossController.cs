@@ -1,32 +1,32 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class BirdBossController : MonoBehaviour
 {
     public float moveSpeed;
-    private Animator _animator;
     public GameObject allLives;
-    private GameObject _target;
     public GameObject targetStart;
+    public float distance;
+    public LayerMask groundMask;
+    public float groundOverlapHeight;
+    public GameObject[] lives;
+        
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _collider;
     private GameObject _orc;
     private GameObject _human;
-    public float distance;
-    public LayerMask groundMask;
-    public float groundOverlapHeight;
     private bool _fight;
     private bool _active;
     private bool _startedFight;
-    public GameObject[] lives;
     private int _idx;
-    public bool friendly;
+    private Animator _animator;
+    private GameObject _target;
+    public bool Friendly { get; set; }
 
-    void Start()
+    private void Start()
     {
-        friendly = true;
+        Friendly = true;
         _idx = lives.Length - 1;
         allLives.SetActive(false);
         _fight = true;
@@ -47,7 +47,7 @@ public class BirdBossController : MonoBehaviour
         {
             _active = !gameObject.GetComponent<DialogStart>().enabled;
         }
-        else if (!friendly)
+        else if (!Friendly)
         {
             if (!_startedFight)
             {

@@ -1,13 +1,13 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class PuzzleGem : MonoBehaviour
 {
     public GameObject gem;
-    private bool _completed;
     public int number;
+    
     private Animator _animator;
+    private bool _completed;
 
     private void Start()
     {

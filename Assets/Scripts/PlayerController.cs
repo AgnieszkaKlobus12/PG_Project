@@ -7,47 +7,53 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     private Animator _animator;
-    public string player;
     private GameObject _orc;
     private GameObject _human;
-    private bool _movementEnabled;
-    public PlayerActions PlayerActions;
+
     private bool _groundCheckEnabled = true;
     private bool _jumping;
-    private bool _jumpEnabled;
     private bool _doubleJumpEnabled;
-    public GameObject attackArea;
     private bool _chargedAttackEnabled;
     private int _jumps;
     private bool _attackEnabled;
+    private bool _dieEnabled;
+    
+    public bool MovementEnabled { get; set; }
+    public bool JumpEnabled { get; set; }
+
+    public GameObject pause;
     public GameObject lose;
     public GameObject livesObj;
-    private bool _dieEnabled;
-    private Rigidbody2D _rigidbody;
-    private CapsuleCollider2D _collider;
-    public float initialGravityScale;
-    private Vector2 _boxCenter;
-    private Vector2 _boxSize;
-    private WaitForSeconds _wait;
-    private SpriteRenderer _spriteRenderer;
+    public GameObject attackArea;
+    public GameObject chargedAttack;
+    public PlayerActions PlayerActions;
+
+    public string player;
+    public int mode;
+
+    [Header("Movements")] 
+    public float groundOverlapHeight;
+    public LayerMask groundMask;
+    public float disableGCTime;
     public float speed;
     public float jumpPower;
     public float jumpFallGravityMultiplier;
-    private Vector2 _lastRespawn;
-    public GameObject chargedAttack;
-    private ParticleSystem _chargedAttackSystem;
-    private CircleCollider2D _chargedAttackCollider;
-    public int mode;
-
-    [Header("Ground Check")] public float groundOverlapHeight;
-    public LayerMask groundMask;
-    public float disableGCTime;
-
-    [Header("Lives")] public int _health;
+    public float initialGravityScale;
+    
+    [Header("Lives")] 
+    public int health;
     public GameObject[] lives;
 
+    private Rigidbody2D _rigidbody;
+    private CapsuleCollider2D _collider;
+    private Vector2 _boxCenter;
+    private Vector2 _boxSize;
+    private SpriteRenderer _spriteRenderer;
+    private ParticleSystem _chargedAttackSystem;
+    private CircleCollider2D _chargedAttackCollider;
+    private Vector2 _lastRespawn;
     private Settings _settings;
-    public GameObject pause;
+
 
     private void Awake()
     {
@@ -62,7 +68,6 @@ public class PlayerController : MonoBehaviour
         _chargedAttackCollider = chargedAttack.GetComponent<CircleCollider2D>();
         _collider = GetComponent<CapsuleCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _wait = new WaitForSeconds(disableGCTime);
         _animator = GetComponentInChildren<Animator>();
         _animator.SetFloat("X", 0f);
         PlayerActions.Multiplayer.OrcJump.performed += ctx => Jump();
@@ -76,39 +81,39 @@ public class PlayerController : MonoBehaviour
         PlayerActions.Multiplayer.HumanCharged.performed += ChargedAttack;
         PlayerActions.Multiplayer.OrcCharged.performed += ChargedAttack;
         PlayerActions.Singleplayer.Charged.performed += ChargedAttack;
-        _health = gameObject.CompareTag("Player")
+        health = gameObject.CompareTag("Player")
             ? _settings.GetOrcLives(PlayerPrefs.GetInt("Slot"))
             : _settings.GetHumanLives(PlayerPrefs.GetInt("Slot"));
-        if (_health == 0)
+        if (health == 0)
         {
-            _health = 3;
+            health = 3;
             if (gameObject.CompareTag("Player"))
             {
-                _human.GetComponent<PlayerController>()._health = 3;
+                _human.GetComponent<PlayerController>().health = 3;
             }
             else
             {
-                _orc.GetComponent<PlayerController>()._health = 3;
+                _orc.GetComponent<PlayerController>().health = 3;
             }
         }
 
-        for (var i = _health; i < lives.Length; i++)
+        for (var i = health; i < lives.Length; i++)
             lives[i].GetComponent<SpriteRenderer>().enabled = false;
-        if (_health == 4)
+        if (health == 4)
             lives[3].GetComponent<SpriteRenderer>().enabled = true;
     }
 
     private void Start()
     {
         _lastRespawn = gameObject.transform.position;
-        _movementEnabled = true;
-        setAnimation("Idle");
+        MovementEnabled = true;
+        SetAnimation("Idle");
     }
 
-    void Update()
+    private void Update()
     {
         HandleGravity();
-        if (_movementEnabled)
+        if (MovementEnabled)
         {
             if (player == "Orc")
             {
@@ -121,7 +126,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         _settings.SetLevel(PlayerPrefs.GetInt("Slot"), SceneManager.GetActiveScene().name);
 
@@ -139,14 +144,14 @@ public class PlayerController : MonoBehaviour
         EnableMovements();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         mode = 0;
         PlayerActions.Singleplayer.Disable();
         PlayerActions.Multiplayer.Disable();
     }
 
-    void OrcMove()
+    private void OrcMove()
     {
         var moveInput = mode == 1
             ? PlayerActions.Singleplayer.Move.ReadValue<Vector2>()
@@ -155,21 +160,21 @@ public class PlayerController : MonoBehaviour
         _rigidbody.velocity = new Vector2(moveInput.x * speed, _rigidbody.velocity.y);
         if (moveInput.x > 0)
         {
-            setAnimation("Walk");
+            SetAnimation("Walk");
             _spriteRenderer.flipX = false;
         }
         else if (moveInput.x < 0)
         {
-            setAnimation("Walk");
+            SetAnimation("Walk");
             _spriteRenderer.flipX = true;
         }
         else
         {
-            setAnimation("Idle");
+            SetAnimation("Idle");
         }
     }
 
-    void HumanMove()
+    private void HumanMove()
     {
         if (mode == 2)
         {
@@ -196,17 +201,17 @@ public class PlayerController : MonoBehaviour
 
         if (_rigidbody.velocity.x > 0)
         {
-            setAnimation("Walk");
+            SetAnimation("Walk");
             _spriteRenderer.flipX = false;
         }
         else if (_rigidbody.velocity.x < 0)
         {
-            setAnimation("Walk");
+            SetAnimation("Walk");
             _spriteRenderer.flipX = true;
         }
         else
         {
-            setAnimation("Idle");
+            SetAnimation("Idle");
         }
     }
 
@@ -276,17 +281,17 @@ public class PlayerController : MonoBehaviour
 
     public void AddLife()
     {
-        if (_health < 4)
+        if (health < 4)
         {
-            _health++;
-            lives[_health - 1].GetComponent<SpriteRenderer>().enabled = true;
+            health++;
+            lives[health - 1].GetComponent<SpriteRenderer>().enabled = true;
             if (gameObject.CompareTag("Human"))
             {
-                _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), _health);
+                _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), health);
             }
             else
             {
-                _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _health);
+                _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), health);
             }
         }
     }
@@ -294,19 +299,17 @@ public class PlayerController : MonoBehaviour
 
     public void Die(bool back = true)
     {
-        if (_dieEnabled)
-        {
-            _dieEnabled = false;
-            _movementEnabled = false;
-            _attackEnabled = false;
-            _jumpEnabled = false;
-            setAnimation("Die");
-            _rigidbody.velocity = new Vector2(0, 0);
-            StartCoroutine(AfterDie(back));
-        }
+        if (!_dieEnabled) return;
+        _dieEnabled = false;
+        MovementEnabled = false;
+        _attackEnabled = false;
+        JumpEnabled = false;
+        SetAnimation("Die");
+        _rigidbody.velocity = new Vector2(0, 0);
+        StartCoroutine(AfterDie(back));
     }
 
-    IEnumerator AfterDie(bool back = true)
+    private IEnumerator AfterDie(bool back = true)
     {
         yield return new WaitForSeconds(2f);
         EnableMovements();
@@ -316,20 +319,20 @@ public class PlayerController : MonoBehaviour
             _human.GetComponent<Rigidbody2D>().position = _lastRespawn;
         }
 
-        _health -= 1;
+        health -= 1;
         if (gameObject.CompareTag("Player"))
         {
-            _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), _health);
+            _settings.SetHumanLives(PlayerPrefs.GetInt("Slot"), health);
         }
         else
         {
-            _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), _health);
+            _settings.SetOrcLives(PlayerPrefs.GetInt("Slot"), health);
         }
 
-        lives[_health].GetComponent<SpriteRenderer>().enabled = false;
-        setAnimation("Idle");
+        lives[health].GetComponent<SpriteRenderer>().enabled = false;
+        SetAnimation("Idle");
         _dieEnabled = true;
-        if (_health == 0)
+        if (health == 0)
         {
             livesObj.SetActive(false);
             lose.SetActive(true);
@@ -364,12 +367,12 @@ public class PlayerController : MonoBehaviour
 
     private void PerformJump()
     {
-        if ((_jumps < 1 || _jumps > 0 && _doubleJumpEnabled && _jumps < 2) && _movementEnabled &&
-            _jumpEnabled)
+        if ((_jumps < 1 || _jumps > 0 && _doubleJumpEnabled && _jumps < 2) && MovementEnabled &&
+            JumpEnabled)
         {
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, jumpPower);
             _jumping = true;
-            setAnimation("Jump");
+            SetAnimation("Jump");
             _jumps++;
             StartCoroutine(EnableGroundCheckAfterJump());
         }
@@ -377,57 +380,53 @@ public class PlayerController : MonoBehaviour
 
     private void Attack(InputAction.CallbackContext context)
     {
-        if (_attackEnabled)
+        if (!_attackEnabled) return;
+        if ((PlayerActions.Multiplayer.OrcFire.triggered || PlayerActions.Singleplayer.Fire.triggered) &&
+            player == "Orc")
         {
-            if ((PlayerActions.Multiplayer.OrcFire.triggered || PlayerActions.Singleplayer.Fire.triggered) &&
-                player == "Orc")
-            {
-                PerformAttack();
-            }
-            else if (player == "Human" && PlayerActions.Multiplayer.enabled &&
-                     PlayerActions.Multiplayer.HumanFire.triggered)
-            {
-                PerformAttack();
-            }
+            PerformAttack();
+        }
+        else if (player == "Human" && PlayerActions.Multiplayer.enabled &&
+                 PlayerActions.Multiplayer.HumanFire.triggered)
+        {
+            PerformAttack();
         }
     }
 
     private void PerformChargedAttack()
     {
-        _movementEnabled = false;
+        MovementEnabled = false;
         _attackEnabled = false;
         chargedAttack.tag = "Player";
         _chargedAttackSystem.transform.localPosition =
             _spriteRenderer.flipX ? new Vector3(-3f, 0f) : new Vector3(3f, 0f);
         _chargedAttackCollider.enabled = true;
         _chargedAttackSystem.Play();
-        setAnimation("ChargedAttack");
+        SetAnimation("ChargedAttack");
         StartCoroutine(EnableAttack());
     }
 
     private void ChargedAttack(InputAction.CallbackContext context)
     {
-        if (_chargedAttackEnabled && _attackEnabled)
+        if (!_chargedAttackEnabled || !_attackEnabled) return;
+        if ((PlayerActions.Multiplayer.OrcCharged.triggered || PlayerActions.Singleplayer.Charged.triggered) &&
+            player == "Orc")
         {
-            if ((PlayerActions.Multiplayer.OrcCharged.triggered || PlayerActions.Singleplayer.Charged.triggered) &&
-                player == "Orc")
-            {
-                PerformChargedAttack();
-            }
-            else if (player == "Human" && PlayerActions.Multiplayer.enabled &&
-                     PlayerActions.Multiplayer.HumanCharged.triggered)
-            {
-                PerformChargedAttack();
-            }
+            PerformChargedAttack();
+        }
+        else if (player == "Human" && PlayerActions.Multiplayer.enabled &&
+                 PlayerActions.Multiplayer.HumanCharged.triggered)
+        {
+            PerformChargedAttack();
         }
     }
 
     private void PerformAttack()
     {
-        _movementEnabled = false;
+        MovementEnabled = false;
         _attackEnabled = false;
         _chargedAttackSystem.Stop();
-        setAnimation("Attack");
+        SetAnimation("Attack");
         attackArea.SetActive(true);
         StartCoroutine(EnableAttack());
     }
@@ -436,23 +435,23 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
         _attackEnabled = true;
-        _movementEnabled = true;
+        MovementEnabled = true;
         attackArea.SetActive((false));
         _chargedAttackCollider.enabled = false;
         chargedAttack.tag = "Player";
-        setAnimation("Idle");
+        SetAnimation("Idle");
     }
 
     private IEnumerator EnableGroundCheckAfterJump()
     {
         _groundCheckEnabled = false;
-        yield return _wait;
+        yield return new WaitForSeconds(disableGCTime);
         _groundCheckEnabled = true;
     }
 
-    private void setAnimation(string name)
+    private void SetAnimation(string animationClip)
     {
-        switch (name)
+        switch (animationClip)
         {
             case "Attack":
                 if (_animator.GetInteger("Anim") != 0)
@@ -501,7 +500,6 @@ public class PlayerController : MonoBehaviour
                 {
                     _animator.SetInteger("Anim", 6);
                 }
-
                 break;
         }
     }
@@ -514,12 +512,12 @@ public class PlayerController : MonoBehaviour
 
     public void UnlockJump()
     {
-        _jumpEnabled = true;
+        JumpEnabled = true;
     }
 
     public void UnlockDoubleJump()
     {
-        _jumpEnabled = true;
+        JumpEnabled = true;
         _doubleJumpEnabled = true;
     }
 
@@ -527,38 +525,6 @@ public class PlayerController : MonoBehaviour
     {
         _chargedAttackEnabled = true;
         _attackEnabled = true;
-    }
-
-    public bool IsJumpEnabled()
-    {
-        return _jumpEnabled;
-    }
-
-    public bool IsDoubleJumpEnabled()
-    {
-        return _doubleJumpEnabled;
-    }
-
-    public bool IsChargedAttackEnabled()
-    {
-        return _chargedAttackEnabled;
-    }
-
-    public bool IsAttackEnabled()
-    {
-        return _attackEnabled;
-    }
-
-    public bool MovementEnabled
-    {
-        get => _movementEnabled;
-        set => _movementEnabled = value;
-    }
-
-    public bool JumpEnabled
-    {
-        get => _jumpEnabled;
-        set => _jumpEnabled = value;
     }
 
     public bool AttackEnabled
@@ -569,29 +535,29 @@ public class PlayerController : MonoBehaviour
 
     public void EnableMovements()
     {
-        _movementEnabled = true;
+        MovementEnabled = true;
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level 5":
-                _jumpEnabled = true;
+                JumpEnabled = true;
                 _attackEnabled = true;
                 _doubleJumpEnabled = true;
                 _chargedAttackEnabled = true;
                 break;
             case "Level 4":
-                _jumpEnabled = true;
+                JumpEnabled = true;
                 _attackEnabled = true;
                 _doubleJumpEnabled = true;
                 _chargedAttackEnabled = false;
                 break;
             case "Level 3":
-                _jumpEnabled = true;
+                JumpEnabled = true;
                 _attackEnabled = true;
                 _doubleJumpEnabled = false;
                 _chargedAttackEnabled = false;
                 break;
             case "Level 2":
-                _jumpEnabled = true;
+                JumpEnabled = true;
                 _attackEnabled = false;
                 _doubleJumpEnabled = false;
                 _chargedAttackEnabled = false;
@@ -603,7 +569,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case "Level 1":
                 PlayerPrefs.SetInt("Attack", 1);
-                _jumpEnabled = false;
+                JumpEnabled = false;
                 _attackEnabled = false;
                 _doubleJumpEnabled = false;
                 _chargedAttackEnabled = false;

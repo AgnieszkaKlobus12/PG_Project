@@ -1,5 +1,5 @@
+using System.Linq;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 
 public class GemAdvanced : GemScript
 {
@@ -11,7 +11,7 @@ public class GemAdvanced : GemScript
         if (ind < correct.Length)
         {
             correct[ind] = true;
-            order.Add(ind);
+            Order.Add(ind);
         }
     }
 
@@ -20,29 +20,30 @@ public class GemAdvanced : GemScript
         if (ind > 0)
         {
             correct[ind] = false;
-            order.Remove(ind);
+            Order.Remove(ind);
         }
     }
 
     protected override void Update()
     {
-        if (correct[correct.Length - 1] && !_showing)
+        if (correct[correct.Length - 1] && !showing)
         {
-            _spriteRenderer.enabled = true;
-            _showing = true;
+            SpriteRenderer.enabled = true;
+            showing = true;
             StartCoroutine(Show());
         }
-        if (correctOrder.Length == order.Count)
+
+        if (correctOrder.Length == Order.Count)
         {
-            if (correct[correct.Length - 1] && !_showing && CorrectOrder())
+            if (correct[correct.Length - 1] && !showing && CorrectOrder())
             {
-                _spriteRenderer.enabled = true;
-                _showing = true;
+                SpriteRenderer.enabled = true;
+                showing = true;
                 StartCoroutine(Show());
             }
             else
             {
-                foreach(GameObject obj in objects)
+                foreach (GameObject obj in objects)
                 {
                     obj.GetComponent<Animator>().enabled = false;
                 }
@@ -52,14 +53,6 @@ public class GemAdvanced : GemScript
 
     private bool CorrectOrder()
     {
-        for (int i = 0; i < order.Count; i++)
-        {
-            if (order[i] != correctOrder[i])
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return !Order.Where((t, i) => t != correctOrder[i]).Any();
     }
 }

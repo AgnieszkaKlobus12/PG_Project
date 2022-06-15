@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
-public class CompleteThirdPuzzle : MonoBehaviour
+public sealed class ThirdLevelPuzzle : MonoBehaviour
 {
     public bool[] correct;
 
@@ -10,31 +11,32 @@ public class CompleteThirdPuzzle : MonoBehaviour
     private bool _completed;
     private bool _finished;
 
-    private Vector3 waterToLowerFinal;
-    private Vector3 waterToHigherFinal;
+    [Header("Water Objects")] private Vector3 _waterToLowerFinal;
+    private Vector3 _waterToHigherFinal;
     public GameObject waterToLower;
     public GameObject waterToHigher;
 
-    void Awake()
+    private void Awake()
     {
         _completed = false;
         _nextIndex = 0;
         _finished = false;
         _finalPosition = transform.position - Vector3.up * 0.15f;
         transform.position += Vector3.up * 0.15f;
-        waterToLowerFinal = waterToLower.transform.position;
-        waterToHigherFinal = waterToHigher.transform.position;
+        _waterToLowerFinal = waterToLower.transform.position;
+        _waterToHigherFinal = waterToHigher.transform.position;
         waterToHigher.transform.position -= Vector3.up * 0.41f;
         waterToLower.transform.position += Vector3.up * 0.75f;
     }
 
-    void Update()
+    private void Update()
     {
         if (AllCorrects() && !_completed)
         {
             _completed = true;
             StartCoroutine(Show());
         }
+
         if (transform.position.y - _finalPosition.y <= 0.05f && _completed && !_finished)
         {
             StartCoroutine(LowerWater());
@@ -55,7 +57,7 @@ public class CompleteThirdPuzzle : MonoBehaviour
     private IEnumerator LowerWater()
     {
         _finished = true;
-        while (waterToLower.transform.position.y - waterToLowerFinal.y >= 0.05f)
+        while (waterToLower.transform.position.y - _waterToLowerFinal.y >= 0.05f)
         {
             waterToLower.transform.position -= Vector3.up * 0.02f;
             yield return new WaitForSeconds(0.3f);
@@ -66,7 +68,7 @@ public class CompleteThirdPuzzle : MonoBehaviour
     private IEnumerator HigherWater()
     {
         _finished = true;
-        while (waterToHigherFinal.y - waterToHigher.transform.position.y >= 0.05f)
+        while (_waterToHigherFinal.y - waterToHigher.transform.position.y >= 0.05f)
         {
             waterToHigher.transform.position += Vector3.up * 0.02f;
             yield return new WaitForSeconds(0.3f);
@@ -74,26 +76,21 @@ public class CompleteThirdPuzzle : MonoBehaviour
         }
     }
 
-    public virtual void Completed(int ind = -1)
+    public void Completed(int ind = -1)
     {
         if (ind == -1)
         {
             ind = _nextIndex++;
         }
+
         if (ind < correct.Length)
         {
             correct[ind] = true;
         }
     }
-    
+
     private bool AllCorrects()
     {
-        foreach (var c in correct)
-        {
-            if (!c) return false;
-        }
-
-        return true;
+        return correct.All(c => c);
     }
-    
 }

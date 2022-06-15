@@ -20,7 +20,8 @@ public class StatueThirdLevel : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("UserAttack") || other.gameObject.GetComponent<Animator>().GetInteger("Anim") == 0 && !_completed)
+        if (other.CompareTag("UserAttack") ||
+            other.gameObject.GetComponent<Animator>().GetInteger("Anim") == 0 && !_completed)
         {
             if (target.CompareTag("Gem"))
             {
@@ -28,8 +29,9 @@ public class StatueThirdLevel : MonoBehaviour
             }
             else
             {
-                target.GetComponent<CompleteThirdPuzzle>().Completed(nr);
+                target.GetComponent<ThirdLevelPuzzle>().Completed(nr);
             }
+
             _completed = true;
             gameObject.GetComponent<SpriteRenderer>().sprite = activeSprite;
         }

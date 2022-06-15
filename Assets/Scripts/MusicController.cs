@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,9 +22,8 @@ public class MusicController : MonoBehaviour
         PlayerPrefs.SetFloat("MusicVolume", slider.value);
     }
 
-    void OnApplicationQuit()
+    private void OnApplicationQuit()
     {
         PlayerPrefs.DeleteKey("MusicVolume");
     }
-
 }

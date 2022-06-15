@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PauzeScript : MonoBehaviour
+public class PauseScript : MonoBehaviour
 {
     public void OnGOBack()
     {

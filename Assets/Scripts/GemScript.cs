@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -11,47 +12,42 @@ public class GemScript : MonoBehaviour
     public GameObject newSkill;
     public float timeToHideView;
     public bool[] correct;
-    public GameObject win;
     public GameObject lives;
+    public bool showing;
+    
     private int _nextIndex;
     private PlayerActions _playerActions;
-    protected SpriteRenderer _spriteRenderer;
+    protected SpriteRenderer SpriteRenderer;
     private TextMeshProUGUI _text;
     private Vector3 _finalPosition;
-    public bool _showing;
-    protected List<int> order;
+    protected List<int> Order;
 
-    void Awake()
+    private void Awake()
     {
         _playerActions = new PlayerActions();
-        order = new List<int>();
+        Order = new List<int>();
         _nextIndex = 0;
-        _showing = false;
+        showing = false;
         _finalPosition = transform.position;
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.enabled = false;
+        SpriteRenderer = GetComponent<SpriteRenderer>();
+        SpriteRenderer.enabled = false;
         _text = newSkill.GetComponentInChildren<Image>().GetComponentInChildren<TextMeshProUGUI>();
         transform.position += Vector3.up * 2;
     }
 
     protected virtual void Update()
     {
-        if (correct.Length == 0 || AllCorrects() && !_showing)
+        if (correct.Length == 0 || AllCorrects() && !showing)
         {
-            _spriteRenderer.enabled = true;
-            _showing = true;
+            SpriteRenderer.enabled = true;
+            showing = true;
             StartCoroutine(Show());
         }
     }
 
     private bool AllCorrects()
     {
-        foreach (var c in correct)
-        {
-            if (!c) return false;
-        }
-
-        return true;
+        return correct.All(c => c);
     }
 
     protected IEnumerator Show()
@@ -91,7 +87,7 @@ public class GemScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!_showing || (!other.CompareTag("Player") && !other.CompareTag("Human"))) return;
+        if (!showing || (!other.CompareTag("Player") && !other.CompareTag("Human"))) return;
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level 5":
@@ -126,8 +122,8 @@ public class GemScript : MonoBehaviour
                 StartCoroutine(ShowNewSkillView());
                 break;
         }
-        _showing = true;
-        _spriteRenderer.enabled = false;
+        showing = true;
+        SpriteRenderer.enabled = false;
     }
 
     public void ToMenu()
@@ -135,7 +131,7 @@ public class GemScript : MonoBehaviour
         SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 
-    IEnumerator ShowNewSkillView()
+    private IEnumerator ShowNewSkillView()
     {
         newSkill.SetActive(true);
         yield return new WaitForSeconds(timeToHideView);
@@ -145,7 +141,7 @@ public class GemScript : MonoBehaviour
 
     public bool isShowing()
     {
-        return _showing;
+        return showing;
     }
     
 }

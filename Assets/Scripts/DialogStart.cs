@@ -110,13 +110,13 @@ public class DialogStart : MonoBehaviour
             }
             else if (texts[_idx] == "Fight")
             {
-                GameObject.Find("MrScaryBird").GetComponent<BirdBossController>().friendly = false;
+                GameObject.Find("MrScaryBird").GetComponent<BirdBossController>().Friendly = false;
                 _idx++;
                 End();
             }
             else if (texts[_idx] == "Friendly")
             {
-                GameObject.Find("MrScaryBird").GetComponent<BirdBossController>().friendly = true;
+                GameObject.Find("MrScaryBird").GetComponent<BirdBossController>().Friendly = true;
                 _idx++;
                 End();
             }

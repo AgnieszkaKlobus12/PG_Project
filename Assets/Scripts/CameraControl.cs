@@ -16,7 +16,7 @@ public class CameraControl : MonoBehaviour
         _settings = new Settings();
     }
 
-    void Update()
+    private void OnPreRender()
     {
         if (Math.Abs(Math.Abs(_orc.transform.position.x) - Math.Abs(_human.transform.position.x)) >
             (2f * _camera.orthographicSize * _camera.aspect) - 0.3f)

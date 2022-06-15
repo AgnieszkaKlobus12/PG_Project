@@ -5,24 +5,25 @@ public class StatueScript : MonoBehaviour
 {
     public float secondsTillTurn;
     public bool flipX;
-    public GameObject gem;
     public int rotationIdx;
     public Sprite activeSprite;
+    public GameObject gem;
+    public BoxCollider2D leftCollider, rightCollider;
+    
     private bool _completed;
-    private Settings Settings;
+    private Settings _settings;
     private SpriteRenderer _spriteRenderer;
     private bool _perm;
-    public BoxCollider2D leftCollider, rightCollider;
-    private Sprite inactiveSprite;
+    private Sprite _inactiveSprite;
 
-    void Start()
+    private void Start()
     {
         _perm = false;
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        Settings = new Settings();
+        _settings = new Settings();
         _completed = false;
-        inactiveSprite = _spriteRenderer.sprite;
-        StartCoroutine(turn());
+        _inactiveSprite = _spriteRenderer.sprite;
+        StartCoroutine(Turn());
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -32,7 +33,7 @@ public class StatueScript : MonoBehaviour
             gem.GetComponent<GemScript>().Completed();
             _completed = true;
             _spriteRenderer.sprite = activeSprite;
-            if (Settings.GetMode(PlayerPrefs.GetInt("Slot")) != "multiplayer" &&
+            if (_settings.GetMode(PlayerPrefs.GetInt("Slot")) != "multiplayer" &&
                 (other.CompareTag("Player") || other.CompareTag("Human")))
             {
                 _perm = true;
@@ -47,15 +48,13 @@ public class StatueScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (_completed && !_perm)
-        {
-            _spriteRenderer.sprite = inactiveSprite;
-            _completed = false;
-            gem.GetComponent<GemScript>().Failed();
-        }
+        if (!_completed || _perm) return;
+        _spriteRenderer.sprite = _inactiveSprite;
+        _completed = false;
+        gem.GetComponent<GemScript>().Failed();
     }
 
-    IEnumerator turn()
+    private IEnumerator Turn()
     {
         yield return new WaitForSeconds(secondsTillTurn);
         rotationIdx = (rotationIdx + 1) % 2;
@@ -87,6 +86,6 @@ public class StatueScript : MonoBehaviour
             }
         }
 
-        StartCoroutine(turn());
+        StartCoroutine(Turn());
     }
 }

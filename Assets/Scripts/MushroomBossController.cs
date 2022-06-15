@@ -4,24 +4,25 @@ using UnityEngine;
 public class MushroomBossController : MonoBehaviour
 {
     public float moveSpeed;
-    private Animator _animator;
+    public float followDistance;
     public GameObject allLives;
+    public GameObject[] lives;
+    public GameObject targetStart;
+
+    public GameObject leftEnd;
+    public GameObject rightEnd;
+
+    private Animator _animator;
     private GameObject _target;
-    private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     private GameObject _orc;
     private GameObject _human;
-    public float distance;
     private bool _fight;
     private bool _active;
-    public GameObject[] lives;
-    public GameObject targetStart;
     private bool _startedFight;
     private int _idx;
-    public GameObject DontGoThere;
-    public GameObject DontGoThere2;
 
-    void Start()
+    private void Start()
     {
         _startedFight = false;
         _idx = lives.Length - 1;
@@ -29,7 +30,6 @@ public class MushroomBossController : MonoBehaviour
         _active = false;
         _animator = GetComponent<Animator>();
         _target = null;
-        _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _orc = GameObject.Find("Orc");
         _human = GameObject.Find("Human");
@@ -64,11 +64,11 @@ public class MushroomBossController : MonoBehaviour
             }
             else
             {
-                if (Vector2.Distance(transform.position, _human.transform.position) < distance)
+                if (Vector2.Distance(transform.position, _human.transform.position) < followDistance)
                 {
                     _target = _human;
                 }
-                else if (Vector2.Distance(transform.position, _orc.transform.position) < distance)
+                else if (Vector2.Distance(transform.position, _orc.transform.position) < followDistance)
                 {
                     _target = _orc;
                 }
@@ -77,8 +77,8 @@ public class MushroomBossController : MonoBehaviour
                     _target = null;
                 }
 
-                if (_target != null && transform.position.x < DontGoThere.transform.position.x &&
-                    transform.position.x > DontGoThere2.transform.position.x)
+                if (_target != null && transform.position.x < leftEnd.transform.position.x &&
+                    transform.position.x > rightEnd.transform.position.x)
                 {
                     allLives.SetActive(true);
                     transform.position = Vector2.MoveTowards(transform.position,
@@ -88,6 +88,7 @@ public class MushroomBossController : MonoBehaviour
                     {
                         _animator.SetInteger("Action", 3);
                     }
+
                     _spriteRenderer.flipX = _target.transform.position.x <= transform.position.x;
                 }
                 else
