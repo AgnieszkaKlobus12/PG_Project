@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2355817284220640174}
   - component: {fileID: 9001159899189507339}
   - component: {fileID: 6442887260433671291}
+  - component: {fileID: 8160660083280793536}
   m_Layer: 0
   m_Name: CutsceneStart
   m_TagString: Untagged
@@ -60,6 +61,7 @@ MonoBehaviour:
   borders: {fileID: 0}
   responsePick: {fileID: 0}
   _picks: []
+  EndScreen: {fileID: 0}
 --- !u!61 &6442887260433671291
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -85,4 +87,30 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!61 &8160660083280793536
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4461811995488390294}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.6186514, y: -0.31748977}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.2373028, y: 0.36502045}
   m_EdgeRadius: 0

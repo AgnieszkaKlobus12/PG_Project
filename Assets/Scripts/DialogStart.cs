@@ -57,10 +57,8 @@ public class DialogStart : MonoBehaviour
             _human.MovementEnabled = false;
             _human.JumpEnabled = false;
             _human.AttackEnabled = false;
-            _orc.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            _human.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            _human.GetComponent<Rigidbody2D>().isKinematic = true;
-            _orc.GetComponent<Rigidbody2D>().isKinematic = true;
+            _orc.GetComponent<Rigidbody2D>().velocity = new Vector2(0, _orc.GetComponent<Rigidbody2D>().velocity.y);
+            _human.GetComponent<Rigidbody2D>().velocity = new Vector2(0, _human.GetComponent<Rigidbody2D>().velocity.y);
             _orc.GetComponent<Animator>().SetInteger("Anim", 6);
             _human.GetComponent<Animator>().SetInteger("Anim", 6);
             _started = true;
