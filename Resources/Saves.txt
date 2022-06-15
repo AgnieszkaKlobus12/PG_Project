@@ -1,10 +1,10 @@
-1
 0
 0
 0
 0
 0
-Level 5
+0
+empty
 empty
 empty
 empty
