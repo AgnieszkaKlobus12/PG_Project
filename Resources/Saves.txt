@@ -4,7 +4,7 @@
 1
 0
 0
-Level 3
+Level 2
 empty
 empty
 singleplayer
