@@ -88,6 +88,7 @@ public class MushroomBossController : MonoBehaviour
                     {
                         _animator.SetInteger("Action", 3);
                     }
+                    _spriteRenderer.flipX = _target.transform.position.x <= transform.position.x;
                 }
                 else
                 {
@@ -96,8 +97,7 @@ public class MushroomBossController : MonoBehaviour
                         _animator.SetInteger("Action", 0);
                     }
                 }
-
-                _spriteRenderer.flipX = _target.transform.position.x <= transform.position.x;
+                
             }
         }
     }
