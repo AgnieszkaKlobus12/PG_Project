@@ -158,4 +158,9 @@ public class Menu : MonoBehaviour
         else
             _settings.SetMode(PlayerPrefs.GetInt("Slot"), "multiplayer");
     }
+    
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
