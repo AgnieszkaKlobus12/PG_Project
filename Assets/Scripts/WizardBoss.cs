@@ -133,6 +133,7 @@ public class WizardBoss : MonoBehaviour
 
     private IEnumerator Attack()
     {
+        attackFog.tag = "Attack";
         yield return new WaitForSeconds(0.1f);
         if (_attack)
         {
@@ -169,6 +170,7 @@ public class WizardBoss : MonoBehaviour
 
     private IEnumerator Die()
     {
+        attackFog.tag = "Ground";
         _canDie = false;
         attackFog.SetActive(false);
         _attack = false;
@@ -183,11 +185,10 @@ public class WizardBoss : MonoBehaviour
             yield return new WaitForSeconds(3f);
             Destroy(gameObject);
         }
-
         yield return new WaitForSeconds(2f);
+        _canDie = true;
         _attack = true;
         attackFog.SetActive(true);
         StartCoroutine(Attack());
-        _canDie = true;
     }
 }
