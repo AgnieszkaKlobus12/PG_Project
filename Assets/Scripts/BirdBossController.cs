@@ -162,7 +162,6 @@ public class BirdBossController : MonoBehaviour
             _active = false;
             Destroy(gameObject);
         }
-        
         yield return new WaitForSeconds(1.5f);
         _fight = true;
     }
