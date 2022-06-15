@@ -624,6 +624,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 4902129320117289034}
     m_Modifications:
     - target: {fileID: 1699593814521002544, guid: d603df39ba0545f4baf1afb70930e936, type: 3}
+      propertyPath: gem
+      value: 
+      objectReference: {fileID: 1007677784}
+    - target: {fileID: 1699593814521002544, guid: d603df39ba0545f4baf1afb70930e936, type: 3}
       propertyPath: orc
       value: 
       objectReference: {fileID: 110131289}

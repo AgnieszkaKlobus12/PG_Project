@@ -1,12 +1,13 @@
-3
 0
 0
-1
 0
 0
-Level 2
+0
+0
 empty
 empty
-singleplayer
+empty
+empty
+empty
 empty
 empty
