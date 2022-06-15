@@ -109,7 +109,8 @@ public class WizardBoss : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("UserAttack"))
+        if (other.CompareTag("UserAttack") || (other.CompareTag("Player") || other.CompareTag("Human")) &&
+            other.GetComponent<Animator>() == null)
         {
             if (!_attack || !_active || !_startedFight) return;
             StartCoroutine(Die());
@@ -118,7 +119,7 @@ public class WizardBoss : MonoBehaviour
         {
             if (!_attack || !_active || !_startedFight) return;
             if ((other.gameObject.GetComponent<Animator>() == null ||
-                other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2) && _canDie)
+                 other.gameObject.GetComponent<Animator>().GetInteger("Anim") < 2) && _canDie)
             {
                 StartCoroutine(Die());
             }
