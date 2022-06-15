@@ -18,7 +18,7 @@ public class GemScript : MonoBehaviour
     protected SpriteRenderer _spriteRenderer;
     private TextMeshProUGUI _text;
     private Vector3 _finalPosition;
-    protected bool _showing;
+    public bool _showing;
     protected List<int> order;
 
     void Awake()
