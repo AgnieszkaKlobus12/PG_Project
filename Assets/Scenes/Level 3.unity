@@ -118104,6 +118104,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CutsceneStart
       objectReference: {fileID: 0}
+    - target: {fileID: 8160660083280793536, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: m_Size.y
+      value: 0.21505088
+      objectReference: {fileID: 0}
+    - target: {fileID: 8160660083280793536, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.39247456
+      objectReference: {fileID: 0}
     - target: {fileID: 9001159899189507339, guid: 5bb251662f1a9874d920db53aab05d25, type: 3}
       propertyPath: slider
       value: 
@@ -130593,3 +130601,29 @@ MonoBehaviour:
   responsePick: {fileID: 1320603597}
   _picks: []
   EndScreen: {fileID: 859193632}
+--- !u!61 &7894472622863089588
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894472622863089586}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -2.0150967, y: -2.3394346}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3, y: 3}
+    newSize: {x: 3, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 11.63615, y: 2.0062542}
+  m_EdgeRadius: 0
