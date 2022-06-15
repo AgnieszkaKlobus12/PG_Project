@@ -17092,6 +17092,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 6052563171725452573, guid: 59ba067520cb5434d8a4f968e9ed09f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6052563173592688765, guid: 59ba067520cb5434d8a4f968e9ed09f2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6052563173592688765, guid: 59ba067520cb5434d8a4f968e9ed09f2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6052563173592688765, guid: 59ba067520cb5434d8a4f968e9ed09f2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6052563173592688765, guid: 59ba067520cb5434d8a4f968e9ed09f2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6052563173737739947, guid: 59ba067520cb5434d8a4f968e9ed09f2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6052563173737739947, guid: 59ba067520cb5434d8a4f968e9ed09f2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6052563173737739947, guid: 59ba067520cb5434d8a4f968e9ed09f2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6052563173737739947, guid: 59ba067520cb5434d8a4f968e9ed09f2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59ba067520cb5434d8a4f968e9ed09f2, type: 3}
 --- !u!4 &714949800 stripped
