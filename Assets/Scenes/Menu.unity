@@ -8672,7 +8672,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1644274003}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: PickSlot
+        m_MethodName: OnSlot
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

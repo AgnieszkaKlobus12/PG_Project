@@ -84,23 +84,24 @@ public class PlayerController : MonoBehaviour
         health = gameObject.CompareTag("Player")
             ? _settings.GetOrcLives(PlayerPrefs.GetInt("Slot"))
             : _settings.GetHumanLives(PlayerPrefs.GetInt("Slot"));
-        if (health == 0)
-        {
-            health = 3;
-            if (gameObject.CompareTag("Player"))
-            {
-                _human.GetComponent<PlayerController>().health = 3;
-            }
-            else
-            {
-                _orc.GetComponent<PlayerController>().health = 3;
-            }
-        }
 
         for (var i = health; i < lives.Length; i++)
             lives[i].GetComponent<SpriteRenderer>().enabled = false;
         if (health == 4)
             lives[3].GetComponent<SpriteRenderer>().enabled = true;
+        
+        if (health == 0)
+        {
+            health = 3;
+            if (gameObject.CompareTag("Player"))
+            {
+                _human.GetComponent<PlayerController>().Lives(3);
+            }
+            else
+            {
+                _orc.GetComponent<PlayerController>().Lives(3);
+            }
+        }
     }
 
     private void Start()
@@ -108,6 +109,23 @@ public class PlayerController : MonoBehaviour
         _lastRespawn = gameObject.transform.position;
         MovementEnabled = true;
         SetAnimation("Idle");
+    }
+
+    public void Lives(int newLives)
+    {
+        health = newLives;
+        if (gameObject.CompareTag("Player"))
+        {
+            _human.GetComponent<PlayerController>().health = 3;
+        }
+        else
+        {
+            _orc.GetComponent<PlayerController>().health = 3;
+        }
+        for (var i = health; i < lives.Length; i++)
+            lives[i].GetComponent<SpriteRenderer>().enabled = false;
+        if (health == 4)
+            lives[3].GetComponent<SpriteRenderer>().enabled = true;
     }
 
     private void Update()
